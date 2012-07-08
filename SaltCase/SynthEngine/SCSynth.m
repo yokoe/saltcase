@@ -2,17 +2,19 @@
 
 const UInt32 kSCBufferPacketLength = 1024;
 const UInt32 kSCNumberOfBuffers = 3;
+const float kSCSamplingFrameRate = 44100.0f;
 
 @interface SCSynth() {
     AudioQueueRef audioQueueObject;
 }
 @property (assign) UInt32 bufferPacketLength;
 @property float* renderBuffer;
+@property UInt32 renderedPackets;
 - (void)render;
 @end
 
 @implementation SCSynth
-@synthesize bufferPacketLength, renderBuffer;
+@synthesize bufferPacketLength, renderBuffer, renderedPackets;
 static void outputCallback(void *                  inUserData,
                            AudioQueueRef           inAQ,
                            AudioQueueBufferRef     inBuffer)
@@ -42,6 +44,10 @@ static void outputCallback(void *                  inUserData,
     
     inBuffer->mAudioDataByteSize = numBytes;
     AudioQueueEnqueueBuffer(inAQ, inBuffer, 0, NULL);
+    
+    player.renderedPackets += numPackets;
+    
+    NSLog(@"Rendered packets: %d (%.1f)", player.renderedPackets, player.timeElapsed);
 }
 
 - (void)render {
@@ -67,10 +73,11 @@ static void outputCallback(void *                  inUserData,
 -(void)prepareAudioQueues{
     renderBuffer = (float*)malloc(sizeof(float) * bufferPacketLength * 2);
     for (int i = 0; i < bufferPacketLength; i++) renderBuffer[i] = 0.0f;
+    self.renderedPackets = 0;
     
     // 16bit Stereo 44100Hz
     AudioStreamBasicDescription audioFormat;
-    audioFormat.mSampleRate			= 44100.0;
+    audioFormat.mSampleRate			= kSCSamplingFrameRate;
     audioFormat.mFormatID			= kAudioFormatLinearPCM;
     audioFormat.mFormatFlags		= kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
     audioFormat.mFramesPerPacket	= 1;
@@ -105,5 +112,9 @@ static void outputCallback(void *                  inUserData,
 {
     free(renderBuffer);
     AudioQueueDispose(audioQueueObject, YES);
+}
+
+- (NSTimeInterval)timeElapsed {
+    return self.renderedPackets / kSCSamplingFrameRate;
 }
 @end
