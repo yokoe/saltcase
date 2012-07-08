@@ -10,6 +10,9 @@
 
 @class SCDocument;
 
-@interface SCCompositionController : NSObject
+@interface SCCompositionController : NSObject <NSToolbarDelegate>
 @property (weak) IBOutlet SCDocument *composition;
+@property (weak) IBOutlet NSToolbarItem *playButton;
+@property (weak) IBOutlet NSToolbarItem *stopButton;
+
 @end

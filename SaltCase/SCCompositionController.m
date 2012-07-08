@@ -12,6 +12,19 @@
 
 @implementation SCCompositionController
 @synthesize composition;
+@synthesize playButton;
+@synthesize stopButton;
+
+- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem {
+    if (theItem == playButton) {
+        return ([SCAppController sharedInstance].currentPlayingComposition == nil);
+    }
+    if (theItem == stopButton) {
+        return ([SCAppController sharedInstance].currentPlayingComposition != nil);
+    }
+    return NO;
+}
+
 - (IBAction)playComposition:(id)sender {
     if ([[SCAppController sharedInstance] playComposition:composition]) {
         NSLog(@"Started playing %@", composition);
