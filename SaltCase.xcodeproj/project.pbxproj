@@ -1,0 +1,481 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		196B168515A93CDF008E59D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B168415A93CDF008E59D0 /* Cocoa.framework */; };
+		196B168F15A93CDF008E59D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 196B168D15A93CDF008E59D0 /* InfoPlist.strings */; };
+		196B169115A93CDF008E59D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 196B169015A93CDF008E59D0 /* main.m */; };
+		196B169515A93CE0008E59D0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 196B169315A93CE0008E59D0 /* Credits.rtf */; };
+		196B169815A93CE0008E59D0 /* SCDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 196B169715A93CE0008E59D0 /* SCDocument.m */; };
+		196B169B15A93CE0008E59D0 /* SCDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196B169915A93CE0008E59D0 /* SCDocument.xib */; };
+		196B169E15A93CE0008E59D0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196B169C15A93CE0008E59D0 /* MainMenu.xib */; };
+		196B16A115A93CE0008E59D0 /* SCDocument.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 196B169F15A93CE0008E59D0 /* SCDocument.xcdatamodeld */; };
+		196B16A915A93CE0008E59D0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B16A815A93CE0008E59D0 /* SenTestingKit.framework */; };
+		196B16AA15A93CE0008E59D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B168415A93CDF008E59D0 /* Cocoa.framework */; };
+		196B16B215A93CE0008E59D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 196B16B015A93CE0008E59D0 /* InfoPlist.strings */; };
+		196B16B515A93CE0008E59D0 /* SaltCaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 196B16B415A93CE0008E59D0 /* SaltCaseTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		196B16AB15A93CE0008E59D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 196B167715A93CDF008E59D0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 196B167F15A93CDF008E59D0;
+			remoteInfo = SaltCase;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		196B168015A93CDF008E59D0 /* SaltCase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaltCase.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		196B168415A93CDF008E59D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		196B168715A93CDF008E59D0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		196B168815A93CDF008E59D0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		196B168915A93CDF008E59D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		196B168C15A93CDF008E59D0 /* SaltCase-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SaltCase-Info.plist"; sourceTree = "<group>"; };
+		196B168E15A93CDF008E59D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		196B169015A93CDF008E59D0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		196B169215A93CDF008E59D0 /* SaltCase-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SaltCase-Prefix.pch"; sourceTree = "<group>"; };
+		196B169415A93CE0008E59D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		196B169615A93CE0008E59D0 /* SCDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCDocument.h; sourceTree = "<group>"; };
+		196B169715A93CE0008E59D0 /* SCDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCDocument.m; sourceTree = "<group>"; };
+		196B169A15A93CE0008E59D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SCDocument.xib; sourceTree = "<group>"; };
+		196B169D15A93CE0008E59D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		196B16A015A93CE0008E59D0 /* SCDocument.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SCDocument.xcdatamodel; sourceTree = "<group>"; };
+		196B16A715A93CE0008E59D0 /* SaltCaseTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaltCaseTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		196B16A815A93CE0008E59D0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		196B16AF15A93CE0008E59D0 /* SaltCaseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SaltCaseTests-Info.plist"; sourceTree = "<group>"; };
+		196B16B115A93CE0008E59D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		196B16B315A93CE0008E59D0 /* SaltCaseTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaltCaseTests.h; sourceTree = "<group>"; };
+		196B16B415A93CE0008E59D0 /* SaltCaseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaltCaseTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		196B167D15A93CDF008E59D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				196B168515A93CDF008E59D0 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		196B16A315A93CE0008E59D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				196B16A915A93CE0008E59D0 /* SenTestingKit.framework in Frameworks */,
+				196B16AA15A93CE0008E59D0 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		196B167515A93CDF008E59D0 = {
+			isa = PBXGroup;
+			children = (
+				196B168A15A93CDF008E59D0 /* SaltCase */,
+				196B16AD15A93CE0008E59D0 /* SaltCaseTests */,
+				196B168315A93CDF008E59D0 /* Frameworks */,
+				196B168115A93CDF008E59D0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		196B168115A93CDF008E59D0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				196B168015A93CDF008E59D0 /* SaltCase.app */,
+				196B16A715A93CE0008E59D0 /* SaltCaseTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		196B168315A93CDF008E59D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				196B168415A93CDF008E59D0 /* Cocoa.framework */,
+				196B16A815A93CE0008E59D0 /* SenTestingKit.framework */,
+				196B168615A93CDF008E59D0 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		196B168615A93CDF008E59D0 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				196B168715A93CDF008E59D0 /* AppKit.framework */,
+				196B168815A93CDF008E59D0 /* CoreData.framework */,
+				196B168915A93CDF008E59D0 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		196B168A15A93CDF008E59D0 /* SaltCase */ = {
+			isa = PBXGroup;
+			children = (
+				196B169615A93CE0008E59D0 /* SCDocument.h */,
+				196B169715A93CE0008E59D0 /* SCDocument.m */,
+				196B169915A93CE0008E59D0 /* SCDocument.xib */,
+				196B169C15A93CE0008E59D0 /* MainMenu.xib */,
+				196B169F15A93CE0008E59D0 /* SCDocument.xcdatamodeld */,
+				196B168B15A93CDF008E59D0 /* Supporting Files */,
+			);
+			path = SaltCase;
+			sourceTree = "<group>";
+		};
+		196B168B15A93CDF008E59D0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				196B168C15A93CDF008E59D0 /* SaltCase-Info.plist */,
+				196B168D15A93CDF008E59D0 /* InfoPlist.strings */,
+				196B169015A93CDF008E59D0 /* main.m */,
+				196B169215A93CDF008E59D0 /* SaltCase-Prefix.pch */,
+				196B169315A93CE0008E59D0 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		196B16AD15A93CE0008E59D0 /* SaltCaseTests */ = {
+			isa = PBXGroup;
+			children = (
+				196B16B315A93CE0008E59D0 /* SaltCaseTests.h */,
+				196B16B415A93CE0008E59D0 /* SaltCaseTests.m */,
+				196B16AE15A93CE0008E59D0 /* Supporting Files */,
+			);
+			path = SaltCaseTests;
+			sourceTree = "<group>";
+		};
+		196B16AE15A93CE0008E59D0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				196B16AF15A93CE0008E59D0 /* SaltCaseTests-Info.plist */,
+				196B16B015A93CE0008E59D0 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		196B167F15A93CDF008E59D0 /* SaltCase */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 196B16B815A93CE0008E59D0 /* Build configuration list for PBXNativeTarget "SaltCase" */;
+			buildPhases = (
+				196B167C15A93CDF008E59D0 /* Sources */,
+				196B167D15A93CDF008E59D0 /* Frameworks */,
+				196B167E15A93CDF008E59D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SaltCase;
+			productName = SaltCase;
+			productReference = 196B168015A93CDF008E59D0 /* SaltCase.app */;
+			productType = "com.apple.product-type.application";
+		};
+		196B16A615A93CE0008E59D0 /* SaltCaseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 196B16BB15A93CE0008E59D0 /* Build configuration list for PBXNativeTarget "SaltCaseTests" */;
+			buildPhases = (
+				196B16A215A93CE0008E59D0 /* Sources */,
+				196B16A315A93CE0008E59D0 /* Frameworks */,
+				196B16A415A93CE0008E59D0 /* Resources */,
+				196B16A515A93CE0008E59D0 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				196B16AC15A93CE0008E59D0 /* PBXTargetDependency */,
+			);
+			name = SaltCaseTests;
+			productName = SaltCaseTests;
+			productReference = 196B16A715A93CE0008E59D0 /* SaltCaseTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		196B167715A93CDF008E59D0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SC;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Pankaku Inc.";
+			};
+			buildConfigurationList = 196B167A15A93CDF008E59D0 /* Build configuration list for PBXProject "SaltCase" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 196B167515A93CDF008E59D0;
+			productRefGroup = 196B168115A93CDF008E59D0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				196B167F15A93CDF008E59D0 /* SaltCase */,
+				196B16A615A93CE0008E59D0 /* SaltCaseTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		196B167E15A93CDF008E59D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				196B168F15A93CDF008E59D0 /* InfoPlist.strings in Resources */,
+				196B169515A93CE0008E59D0 /* Credits.rtf in Resources */,
+				196B169B15A93CE0008E59D0 /* SCDocument.xib in Resources */,
+				196B169E15A93CE0008E59D0 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		196B16A415A93CE0008E59D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				196B16B215A93CE0008E59D0 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		196B16A515A93CE0008E59D0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		196B167C15A93CDF008E59D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				196B169115A93CDF008E59D0 /* main.m in Sources */,
+				196B169815A93CE0008E59D0 /* SCDocument.m in Sources */,
+				196B16A115A93CE0008E59D0 /* SCDocument.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		196B16A215A93CE0008E59D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				196B16B515A93CE0008E59D0 /* SaltCaseTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		196B16AC15A93CE0008E59D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 196B167F15A93CDF008E59D0 /* SaltCase */;
+			targetProxy = 196B16AB15A93CE0008E59D0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		196B168D15A93CDF008E59D0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				196B168E15A93CDF008E59D0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		196B169315A93CE0008E59D0 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				196B169415A93CE0008E59D0 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		196B169915A93CE0008E59D0 /* SCDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				196B169A15A93CE0008E59D0 /* en */,
+			);
+			name = SCDocument.xib;
+			sourceTree = "<group>";
+		};
+		196B169C15A93CE0008E59D0 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				196B169D15A93CE0008E59D0 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		196B16B015A93CE0008E59D0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				196B16B115A93CE0008E59D0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		196B16B615A93CE0008E59D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		196B16B715A93CE0008E59D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		196B16B915A93CE0008E59D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SaltCase/SaltCase-Prefix.pch";
+				INFOPLIST_FILE = "SaltCase/SaltCase-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		196B16BA15A93CE0008E59D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SaltCase/SaltCase-Prefix.pch";
+				INFOPLIST_FILE = "SaltCase/SaltCase-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		196B16BC15A93CE0008E59D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SaltCase.app/Contents/MacOS/SaltCase";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SaltCase/SaltCase-Prefix.pch";
+				INFOPLIST_FILE = "SaltCaseTests/SaltCaseTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		196B16BD15A93CE0008E59D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SaltCase.app/Contents/MacOS/SaltCase";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SaltCase/SaltCase-Prefix.pch";
+				INFOPLIST_FILE = "SaltCaseTests/SaltCaseTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		196B167A15A93CDF008E59D0 /* Build configuration list for PBXProject "SaltCase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				196B16B615A93CE0008E59D0 /* Debug */,
+				196B16B715A93CE0008E59D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		196B16B815A93CE0008E59D0 /* Build configuration list for PBXNativeTarget "SaltCase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				196B16B915A93CE0008E59D0 /* Debug */,
+				196B16BA15A93CE0008E59D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		196B16BB15A93CE0008E59D0 /* Build configuration list for PBXNativeTarget "SaltCaseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				196B16BC15A93CE0008E59D0 /* Debug */,
+				196B16BD15A93CE0008E59D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		196B169F15A93CE0008E59D0 /* SCDocument.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				196B16A015A93CE0008E59D0 /* SCDocument.xcdatamodel */,
+			);
+			currentVersion = 196B16A015A93CE0008E59D0 /* SCDocument.xcdatamodel */;
+			path = SCDocument.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 196B167715A93CDF008E59D0 /* Project object */;
+}
