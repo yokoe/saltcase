@@ -10,11 +10,28 @@
 #import "SCAppController.h"
 
 #import "SCDocument.h"
+#import "SCSynth.h"
 
 @implementation SCCompositionController
 @synthesize composition;
 @synthesize playButton;
 @synthesize stopButton;
+@synthesize timeLabel;
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [[NSNotificationCenter defaultCenter] addObserverForName:SCBufferUpdateNotification object:nil queue:[NSOperationQueue new] usingBlock:^(NSNotification *note) {
+        if ([SCAppController sharedInstance].currentPlayingComposition == composition) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [timeLabel setStringValue:[NSString stringWithFormat:@"Time: %.1f", ((SCSynth*)note.object).timeElapsed]];
+            });
+        }
+    }];
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem {
     if (theItem == playButton) {

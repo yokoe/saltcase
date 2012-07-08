@@ -6,3 +6,4 @@
     #import <Cocoa/Cocoa.h>
 #endif
 
+#define SCBufferUpdateNotification @"SCBufferUpdateNotification"
