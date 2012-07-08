@@ -37,4 +37,12 @@
     return YES;
 }
 
+- (void)close {
+    // Stop playing before closing the composition.
+    if ([SCAppController sharedInstance].currentPlayingComposition == self) {
+        [[SCAppController sharedInstance] stopComposition:self];
+    }
+    
+    [super close];
+}
 @end
