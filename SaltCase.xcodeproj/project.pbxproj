@@ -21,6 +21,7 @@
 		196B16B515A93CE0008E59D0 /* SaltCaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 196B16B415A93CE0008E59D0 /* SaltCaseTests.m */; };
 		19E1748615A93F260045A3C3 /* ToolbarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19E1748515A93F260045A3C3 /* ToolbarButton.png */; };
 		19E1748A15A93FDB0045A3C3 /* SCCompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E1748915A93FDB0045A3C3 /* SCCompositionController.m */; };
+		19E1748D15A946950045A3C3 /* SCAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E1748C15A946950045A3C3 /* SCAppController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +57,10 @@
 		196B16B315A93CE0008E59D0 /* SaltCaseTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaltCaseTests.h; sourceTree = "<group>"; };
 		196B16B415A93CE0008E59D0 /* SaltCaseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaltCaseTests.m; sourceTree = "<group>"; };
 		19E1748515A93F260045A3C3 /* ToolbarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarButton.png; sourceTree = "<group>"; };
-		19E1748815A93FDB0045A3C3 /* SCCompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SCCompositionController.h; sourceTree = "<group>"; };
+		19E1748815A93FDB0045A3C3 /* SCCompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCompositionController.h; sourceTree = "<group>"; };
 		19E1748915A93FDB0045A3C3 /* SCCompositionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCompositionController.m; sourceTree = "<group>"; };
+		19E1748B15A946950045A3C3 /* SCAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAppController.h; sourceTree = "<group>"; };
+		19E1748C15A946950045A3C3 /* SCAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAppController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,8 @@
 				196B168B15A93CDF008E59D0 /* Supporting Files */,
 				19E1748815A93FDB0045A3C3 /* SCCompositionController.h */,
 				19E1748915A93FDB0045A3C3 /* SCCompositionController.m */,
+				19E1748B15A946950045A3C3 /* SCAppController.h */,
+				19E1748C15A946950045A3C3 /* SCAppController.m */,
 			);
 			path = SaltCase;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				196B169815A93CE0008E59D0 /* SCDocument.m in Sources */,
 				196B16A115A93CE0008E59D0 /* SCDocument.xcdatamodeld in Sources */,
 				19E1748A15A93FDB0045A3C3 /* SCCompositionController.m in Sources */,
+				19E1748D15A946950045A3C3 /* SCAppController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

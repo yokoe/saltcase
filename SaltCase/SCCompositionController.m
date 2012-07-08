@@ -13,9 +13,13 @@
 @implementation SCCompositionController
 @synthesize composition;
 - (IBAction)playComposition:(id)sender {
-    NSLog(@"Play %@", composition);
+    if ([[SCAppController sharedInstance] playComposition:composition]) {
+        NSLog(@"Started playing %@", composition);
+    } else {
+        NSLog(@"Failed to start playing %@.\nCurrently playing: %@", composition, [SCAppController sharedInstance].currentPlayingComposition);
+    }
 }
 - (IBAction)stopComposition:(id)sender {
-    NSLog(@"Stop %@", composition);
+    [[SCAppController sharedInstance] stopComposition:composition];
 }
 @end
