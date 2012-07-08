@@ -7,6 +7,7 @@
 //
 
 #import "SCCompositionController.h"
+#import "SCAppController.h"
 
 #import "SCDocument.h"
 

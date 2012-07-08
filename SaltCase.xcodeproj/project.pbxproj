@@ -19,6 +19,9 @@
 		196B16AA15A93CE0008E59D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B168415A93CDF008E59D0 /* Cocoa.framework */; };
 		196B16B215A93CE0008E59D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 196B16B015A93CE0008E59D0 /* InfoPlist.strings */; };
 		196B16B515A93CE0008E59D0 /* SaltCaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 196B16B415A93CE0008E59D0 /* SaltCaseTests.m */; };
+		1992DC5E15A9733900AC074F /* SCSynth.m in Sources */ = {isa = PBXBuildFile; fileRef = 1992DC5D15A9733900AC074F /* SCSynth.m */; };
+		1992DC5F15A9733900AC074F /* SCSynth.m in Sources */ = {isa = PBXBuildFile; fileRef = 1992DC5D15A9733900AC074F /* SCSynth.m */; };
+		1992DC6115A9736F00AC074F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1992DC6015A9736F00AC074F /* AudioToolbox.framework */; };
 		19E1748615A93F260045A3C3 /* ToolbarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19E1748515A93F260045A3C3 /* ToolbarButton.png */; };
 		19E1748A15A93FDB0045A3C3 /* SCCompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E1748915A93FDB0045A3C3 /* SCCompositionController.m */; };
 		19E1748D15A946950045A3C3 /* SCAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E1748C15A946950045A3C3 /* SCAppController.m */; };
@@ -56,6 +59,10 @@
 		196B16B115A93CE0008E59D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		196B16B315A93CE0008E59D0 /* SaltCaseTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaltCaseTests.h; sourceTree = "<group>"; };
 		196B16B415A93CE0008E59D0 /* SaltCaseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaltCaseTests.m; sourceTree = "<group>"; };
+		19764F0C15A957EF006A4CE1 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		1992DC5C15A9733900AC074F /* SCSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSynth.h; sourceTree = "<group>"; };
+		1992DC5D15A9733900AC074F /* SCSynth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSynth.m; sourceTree = "<group>"; };
+		1992DC6015A9736F00AC074F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		19E1748515A93F260045A3C3 /* ToolbarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarButton.png; sourceTree = "<group>"; };
 		19E1748815A93FDB0045A3C3 /* SCCompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCompositionController.h; sourceTree = "<group>"; };
 		19E1748915A93FDB0045A3C3 /* SCCompositionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCompositionController.m; sourceTree = "<group>"; };
@@ -68,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1992DC6115A9736F00AC074F /* AudioToolbox.framework in Frameworks */,
 				196B168515A93CDF008E59D0 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +95,9 @@
 		196B167515A93CDF008E59D0 = {
 			isa = PBXGroup;
 			children = (
+				1992DC6015A9736F00AC074F /* AudioToolbox.framework */,
+				1992DC5A15A9732500AC074F /* SynthEngine */,
+				19764F0C15A957EF006A4CE1 /* AudioUnit.framework */,
 				196B168A15A93CDF008E59D0 /* SaltCase */,
 				196B16AD15A93CE0008E59D0 /* SaltCaseTests */,
 				196B168315A93CDF008E59D0 /* Frameworks */,
@@ -170,6 +181,16 @@
 				196B16B015A93CE0008E59D0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1992DC5A15A9732500AC074F /* SynthEngine */ = {
+			isa = PBXGroup;
+			children = (
+				1992DC5C15A9733900AC074F /* SCSynth.h */,
+				1992DC5D15A9733900AC074F /* SCSynth.m */,
+			);
+			name = SynthEngine;
+			path = SaltCase/SynthEngine;
 			sourceTree = "<group>";
 		};
 		19E1748315A93F260045A3C3 /* Resources */ = {
@@ -304,6 +325,7 @@
 				196B16A115A93CE0008E59D0 /* SCDocument.xcdatamodeld in Sources */,
 				19E1748A15A93FDB0045A3C3 /* SCCompositionController.m in Sources */,
 				19E1748D15A946950045A3C3 /* SCAppController.m in Sources */,
+				1992DC5E15A9733900AC074F /* SCSynth.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				196B16B515A93CE0008E59D0 /* SaltCaseTests.m in Sources */,
+				1992DC5F15A9733900AC074F /* SCSynth.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

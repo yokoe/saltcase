@@ -7,6 +7,7 @@
 //
 
 #import "SCDocument.h"
+#import "SCAppController.h"
 
 @implementation SCDocument
 
