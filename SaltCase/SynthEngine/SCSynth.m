@@ -21,9 +21,7 @@ const float kSCSamplingFrameRate = 44100.0f;
 
 @implementation SCSynth
 @synthesize bufferPacketLength, composition = composition_, renderBuffer, renderedPackets;
-static void outputCallback(void *                  inUserData,
-                           AudioQueueRef           inAQ,
-                           AudioQueueBufferRef     inBuffer)
+static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBufferRef inBuffer)
 {
     SCSynth *player =(__bridge SCSynth*)inUserData;
 	[player render];
