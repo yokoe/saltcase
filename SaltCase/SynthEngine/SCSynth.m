@@ -46,8 +46,6 @@ static void outputCallback(void *                  inUserData,
     AudioQueueEnqueueBuffer(inAQ, inBuffer, 0, NULL);
     
     player.renderedPackets += numPackets;
-    
-    NSLog(@"Rendered packets: %d (%.1f)", player.renderedPackets, player.timeElapsed);
     [[NSNotificationCenter defaultCenter] postNotificationName:SCBufferUpdateNotification object:player];
 }
 

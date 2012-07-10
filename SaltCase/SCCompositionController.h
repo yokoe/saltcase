@@ -15,5 +15,6 @@
 @property (weak) IBOutlet NSToolbarItem *playButton;
 @property (weak) IBOutlet NSToolbarItem *stopButton;
 @property (weak) IBOutlet NSTextField *timeLabel;
+@property (weak) IBOutlet NSToolbarItem *settingsButton;
 
 @end

@@ -17,6 +17,7 @@
 @synthesize playButton;
 @synthesize stopButton;
 @synthesize timeLabel;
+@synthesize settingsButton;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -34,11 +35,16 @@
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem {
+    NSLog(@"validate %@", theItem);
     if (theItem == playButton) {
         return ([SCAppController sharedInstance].currentPlayingComposition == nil);
     }
     if (theItem == stopButton) {
         return ([SCAppController sharedInstance].currentPlayingComposition != nil);
+    }
+    if (theItem == settingsButton) {
+        // Disabled while the song is playing.
+        return ([SCAppController sharedInstance].currentPlayingComposition != composition);
     }
     return NO;
 }
@@ -52,5 +58,8 @@
 }
 - (IBAction)stopComposition:(id)sender {
     [[SCAppController sharedInstance] stopComposition:composition];
+}
+- (IBAction)openSettings:(id)sender {
+    NSLog(@"Open settings");
 }
 @end
