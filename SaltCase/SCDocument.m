@@ -10,9 +10,16 @@
 #import "SCAppController.h"
 
 const float kSCDefaultTempo = 120.0f;
+const float kSCMinimumTempo = 40.0f;
+const float kSCMaximumTempo = 320.0f;
 
 @implementation SCDocument
-@synthesize tempo;
+@synthesize tempo = tempo_;
+
+- (void)setTempo:(float)tempo {
+    // Range limitation: 40.0f - 320.0f
+    tempo_ = fminf(fmaxf(kSCMinimumTempo, tempo), kSCMaximumTempo);
+}
 
 - (id)init
 {

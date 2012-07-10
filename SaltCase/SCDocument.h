@@ -9,5 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface SCDocument : NSPersistentDocument
-@property (assign) float tempo;
+@property (nonatomic, assign) float tempo;
 @end

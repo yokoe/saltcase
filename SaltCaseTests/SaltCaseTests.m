@@ -7,6 +7,7 @@
 //
 
 #import "SaltCaseTests.h"
+#import "SCDocument.h"
 
 @implementation SaltCaseTests
 
@@ -24,9 +25,18 @@
     [super tearDown];
 }
 
-- (void)testExample
+// Tempo property has a range limitation (40.0f - 320.0f)
+- (void)testCompositionTempoRangeLimitation
 {
-    STFail(@"Unit tests are not implemented yet in SaltCaseTests");
+    SCDocument* composition = [[SCDocument alloc] init];
+    composition.tempo = 120.0f;
+    STAssertEquals(composition.tempo, 120.0f, @"Tempo can be set to 120.0f");
+    composition.tempo = -50.0f;
+    STAssertFalse(composition.tempo == -50.0f, @"Negative tempo cannot be set.");
+    STAssertTrue(composition.tempo > 0.0f, @"Tempo cannot be negative.");
+    composition.tempo = 10000.0f;
+    STAssertFalse(composition.tempo == 10000.0f, @"Tremenderous tempo cannot be set.");
+    STAssertTrue(composition.tempo <= 320.0f, @"Tempo should be smaller than 320.0f");
 }
 
 @end
