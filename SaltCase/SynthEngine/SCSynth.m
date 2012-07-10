@@ -14,6 +14,7 @@ const float kSCSamplingFrameRate = 44100.0f;
 @property (nonatomic, strong) SCMetronome* metronome;
 @property float* renderBuffer;
 @property UInt32 renderedPackets;
+- (void)clearRenderBuffer;
 - (void)render;
 @end
 
@@ -53,10 +54,8 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
 
 - (void)render {
     @autoreleasepool {
-        // Clear buffer
-        for (int i = 0; i < bufferPacketLength; i++) renderBuffer[i] = 0.0f;
+        [self clearRenderBuffer];
         
-        // Metronome
         [self.metronome renderToBuffer:renderBuffer numOfPackets:bufferPacketLength player:self];
     }    
 }
@@ -70,9 +69,12 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
     }
     return self;
 }
+- (void)clearRenderBuffer {
+    for (int i = 0; i < bufferPacketLength; i++) renderBuffer[i] = 0.0f;
+}
 -(void)prepareAudioQueues{
     renderBuffer = (float*)malloc(sizeof(float) * bufferPacketLength * 2);
-    for (int i = 0; i < bufferPacketLength; i++) renderBuffer[i] = 0.0f;
+    [self clearRenderBuffer];
     self.renderedPackets = 0;
     
     // 16bit Stereo 44100Hz
