@@ -9,13 +9,17 @@
 #import "SCDocument.h"
 #import "SCAppController.h"
 
+const float kSCDefaultTempo = 120.0f;
+
 @implementation SCDocument
+@synthesize tempo;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        // Add your subclass-specific initialization here.
+        // Default composition settings.
+        self.tempo = kSCDefaultTempo;
     }
     return self;
 }

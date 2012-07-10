@@ -28,7 +28,8 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:SCBufferUpdateNotification object:nil queue:[NSOperationQueue new] usingBlock:^(NSNotification *note) {
         if ([SCAppController sharedInstance].currentPlayingComposition == composition) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [timeLabel setStringValue:[NSString stringWithFormat:@"Time: %.1f", ((SCSynth*)note.object).timeElapsed]];
+                SCSynth* player = (SCSynth*)note.object;
+                [timeLabel setStringValue:[NSString stringWithFormat:@"Time: %.1f (%d qtr.s)", player.timeElapsed, player.quarterNotesPlayed]];
             });
         }
     }];
@@ -65,13 +66,13 @@
 
 #pragma mark Settings
 - (IBAction)openSettings:(id)sender {
-    // TODO: Use tempo value of the song.
-    [tempoSlider setFloatValue:120.0f];
+    [tempoSlider setFloatValue:composition.tempo];
     [tempoLabel takeFloatValueFrom:tempoSlider];
     
     [[NSApplication sharedApplication] beginSheet:settingsSheet modalForWindow:window modalDelegate:self didEndSelector:@selector(settingsSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 - (IBAction)closeSettings:(id)sender {
+    composition.tempo = tempoSlider.floatValue;
     [[NSApplication sharedApplication] endSheet:settingsSheet];
 }
 - (void)settingsSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {

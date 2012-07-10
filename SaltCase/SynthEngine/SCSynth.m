@@ -1,5 +1,7 @@
 #import "SCSynth.h"
 
+#import "SCDocument.h"
+
 const UInt32 kSCBufferPacketLength = 1024;
 const UInt32 kSCNumberOfBuffers = 3;
 const float kSCSamplingFrameRate = 44100.0f;
@@ -14,7 +16,7 @@ const float kSCSamplingFrameRate = 44100.0f;
 @end
 
 @implementation SCSynth
-@synthesize bufferPacketLength, renderBuffer, renderedPackets;
+@synthesize bufferPacketLength, composition = composition_, renderBuffer, renderedPackets;
 static void outputCallback(void *                  inUserData,
                            AudioQueueRef           inAQ,
                            AudioQueueBufferRef     inBuffer)
@@ -98,7 +100,8 @@ static void outputCallback(void *                  inUserData,
         outputCallback((__bridge void*)self,audioQueueObject,buffers[i]);
     }
 }
-- (void)start {
+- (void)playComposition:(SCDocument*)composition {
+    self.composition = composition;
     [self prepareAudioQueues];
     AudioQueueStart(audioQueueObject, NULL);
 }
@@ -106,13 +109,17 @@ static void outputCallback(void *                  inUserData,
     AudioQueueStop(audioQueueObject, shouldStopImmediately);
 	AudioQueueDispose(audioQueueObject, YES);
     free(renderBuffer);
+    self.composition = nil;
 }
 - (void)dealloc
 {
     free(renderBuffer);
     AudioQueueDispose(audioQueueObject, YES);
 }
-
+- (UInt32)quarterNotesPlayed {
+    float packetsInQuarterNote = (60.0f / self.composition.tempo);
+    return (int)floor(self.timeElapsed / packetsInQuarterNote);
+}
 - (NSTimeInterval)timeElapsed {
     return self.renderedPackets / kSCSamplingFrameRate;
 }

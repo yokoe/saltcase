@@ -30,7 +30,7 @@
     @synchronized(self) {
         if (self.currentPlayingComposition == nil) {
             self.currentPlayingComposition = composition;
-            [self.synth start];
+            [self.synth playComposition:composition];
             return YES;
         } else { // If other composition has been played, return NO.
             return NO;
