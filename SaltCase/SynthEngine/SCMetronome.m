@@ -14,6 +14,7 @@
 @interface SCMetronome() {
     UInt32 nextPacket;
     float theta;
+    float deltaSpeed;
     float currentAmplitude;
 }
 @end
@@ -22,12 +23,15 @@
 - (void)renderToBuffer:(float*)buffer numOfPackets:(UInt32)numOfPackets player:(SCSynth*)player {
     int currentPacket = player.renderedPackets;
     
+    int packetsInterval = (60.0f / player.composition.tempo) * player.samplingFrameRate;
+    
     for (int i = 0; i < numOfPackets; i++) {
         if (nextPacket <= currentPacket) {
             currentAmplitude = 0.75f;
-            nextPacket += (60.0f / player.composition.tempo) * player.samplingFrameRate;
+            deltaSpeed = (nextPacket / packetsInterval % 4 == 0) ? 0.2f : 0.1f;
+            nextPacket += packetsInterval;
         }
-        theta += 0.075f;
+        theta += deltaSpeed;
         if (theta >= 6.28) theta -= 6.28;
         float wave = sin(theta) * currentAmplitude;
         *buffer++ = wave; // Left
