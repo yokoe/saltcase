@@ -8,6 +8,10 @@ const float kSCSamplingFrameRate = 44100.0f;
 
 @interface SCSynth() {
     AudioQueueRef audioQueueObject;
+    
+    // Metronome - TODO: will be moved later.
+    int metronomeNextPacket;
+    float metronomeClickCurrentVolume;
 }
 @property (assign) UInt32 bufferPacketLength;
 @property float* renderBuffer;
@@ -52,15 +56,28 @@ static void outputCallback(void *                  inUserData,
 }
 
 - (void)render {
-    // Test: Sine wave
+    // Test: Metronome
     static float theta = 0.0f;
-    for (int i = 0; i < bufferPacketLength; i++) {
-        theta += 0.05f;
-        if (theta >= 6.28) theta -= 6.28;
-        float wave = sin(theta) * 0.5f;
-        renderBuffer[i * 2] = wave; // Left
-        renderBuffer[i * 2 + 1] = wave; // Right
-    }
+    @autoreleasepool {
+        int currentPacket = self.renderedPackets;
+        
+        for (int i = 0; i < bufferPacketLength; i++) {
+            if (metronomeNextPacket <= currentPacket) {
+                metronomeClickCurrentVolume = 0.75f;
+                metronomeNextPacket += (60.0f / self.composition.tempo) * kSCSamplingFrameRate;
+            }
+            theta += 0.075f;
+            if (theta >= 6.28) theta -= 6.28;
+            float wave = sin(theta) * metronomeClickCurrentVolume;
+            renderBuffer[i * 2] = wave; // Left
+            renderBuffer[i * 2 + 1] = wave; // Right
+            
+            metronomeClickCurrentVolume -= 0.001f;
+            metronomeClickCurrentVolume = fmaxf(0.0f, metronomeClickCurrentVolume);
+            
+            currentPacket++;
+        }
+    }    
 }
 
 - (id)init
@@ -100,8 +117,12 @@ static void outputCallback(void *                  inUserData,
         outputCallback((__bridge void*)self,audioQueueObject,buffers[i]);
     }
 }
+- (void)resetMetronome {
+    metronomeNextPacket = 0;
+}
 - (void)playComposition:(SCDocument*)composition {
     self.composition = composition;
+    [self resetMetronome];
     [self prepareAudioQueues];
     AudioQueueStart(audioQueueObject, NULL);
 }
@@ -121,8 +142,8 @@ static void outputCallback(void *                  inUserData,
     AudioQueueDispose(audioQueueObject, YES);
 }
 - (UInt32)quarterNotesPlayed {
-    float packetsInQuarterNote = (60.0f / self.composition.tempo);
-    return (int)floor(self.timeElapsed / packetsInQuarterNote);
+    float timeIntervalPerQuarterNote = (60.0f / self.composition.tempo);
+    return (int)floor(self.timeElapsed / timeIntervalPerQuarterNote);
 }
 - (NSTimeInterval)timeElapsed {
     return self.renderedPackets / kSCSamplingFrameRate;
