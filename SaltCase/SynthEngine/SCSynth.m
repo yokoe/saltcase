@@ -106,10 +106,14 @@ static void outputCallback(void *                  inUserData,
     AudioQueueStart(audioQueueObject, NULL);
 }
 - (void)stop:(BOOL)shouldStopImmediately {
-    AudioQueueStop(audioQueueObject, shouldStopImmediately);
-	AudioQueueDispose(audioQueueObject, YES);
-    free(renderBuffer);
-    self.composition = nil;
+    @synchronized(self) {
+        if (audioQueueObject == nil) return;
+        AudioQueueStop(audioQueueObject, shouldStopImmediately);
+        AudioQueueDispose(audioQueueObject, YES);
+        audioQueueObject = nil;
+        free(renderBuffer);
+        self.composition = nil;
+    }
 }
 - (void)dealloc
 {
