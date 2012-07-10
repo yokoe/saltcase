@@ -18,6 +18,8 @@
 @synthesize stopButton;
 @synthesize timeLabel;
 @synthesize settingsButton;
+@synthesize settingsSheet;
+@synthesize window;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -58,7 +60,15 @@
 - (IBAction)stopComposition:(id)sender {
     [[SCAppController sharedInstance] stopComposition:composition];
 }
+
+#pragma mark Settings
 - (IBAction)openSettings:(id)sender {
-    NSLog(@"Open settings");
+    [[NSApplication sharedApplication] beginSheet:settingsSheet modalForWindow:window modalDelegate:self didEndSelector:@selector(settingsSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
+}
+- (IBAction)closeSettings:(id)sender {
+    [[NSApplication sharedApplication] endSheet:settingsSheet];
+}
+- (void)settingsSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    [sheet orderOut:self];
 }
 @end
