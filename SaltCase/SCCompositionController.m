@@ -20,6 +20,8 @@
 @synthesize settingsButton;
 @synthesize settingsSheet;
 @synthesize window;
+@synthesize tempoSlider;
+@synthesize tempoLabel;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -63,6 +65,10 @@
 
 #pragma mark Settings
 - (IBAction)openSettings:(id)sender {
+    // TODO: Use tempo value of the song.
+    [tempoSlider setFloatValue:120.0f];
+    [tempoLabel takeFloatValueFrom:tempoSlider];
+    
     [[NSApplication sharedApplication] beginSheet:settingsSheet modalForWindow:window modalDelegate:self didEndSelector:@selector(settingsSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 - (IBAction)closeSettings:(id)sender {

@@ -18,5 +18,7 @@
 @property (weak) IBOutlet NSToolbarItem *settingsButton;
 @property (unsafe_unretained) IBOutlet NSPanel *settingsSheet;
 @property (unsafe_unretained) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSSlider *tempoSlider;
+@property (weak) IBOutlet NSTextField *tempoLabel;
 
 @end
