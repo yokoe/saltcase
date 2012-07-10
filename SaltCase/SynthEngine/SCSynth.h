@@ -3,9 +3,11 @@
 
 @class SCDocument;
 @interface SCSynth : NSObject
-@property (readonly) UInt32 quarterNotesPlayed;
-@property (readonly) NSTimeInterval timeElapsed;
 @property (strong) SCDocument* composition;
+@property (readonly) UInt32 quarterNotesPlayed;
+@property (readonly) UInt32 renderedPackets;
+@property (readonly) float samplingFrameRate;
+@property (readonly) NSTimeInterval timeElapsed;
 - (void)playComposition:(SCDocument*)composition;
 - (void)stop:(BOOL)shouldStopImmediately;
 @end

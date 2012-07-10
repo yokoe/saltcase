@@ -1,6 +1,7 @@
 #import "SCSynth.h"
 
 #import "SCDocument.h"
+#import "SCMetronome.h"
 
 const UInt32 kSCBufferPacketLength = 1024;
 const UInt32 kSCNumberOfBuffers = 3;
@@ -8,19 +9,16 @@ const float kSCSamplingFrameRate = 44100.0f;
 
 @interface SCSynth() {
     AudioQueueRef audioQueueObject;
-    
-    // Metronome - TODO: will be moved later.
-    int metronomeNextPacket;
-    float metronomeClickCurrentVolume;
 }
 @property (assign) UInt32 bufferPacketLength;
+@property (nonatomic, strong) SCMetronome* metronome;
 @property float* renderBuffer;
 @property UInt32 renderedPackets;
 - (void)render;
 @end
 
 @implementation SCSynth
-@synthesize bufferPacketLength, composition = composition_, renderBuffer, renderedPackets;
+@synthesize bufferPacketLength, composition = composition_, metronome, renderBuffer, renderedPackets;
 static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBufferRef inBuffer)
 {
     SCSynth *player =(__bridge SCSynth*)inUserData;
@@ -54,27 +52,12 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
 }
 
 - (void)render {
-    // Test: Metronome
-    static float theta = 0.0f;
     @autoreleasepool {
-        int currentPacket = self.renderedPackets;
+        // Clear buffer
+        for (int i = 0; i < bufferPacketLength; i++) renderBuffer[i] = 0.0f;
         
-        for (int i = 0; i < bufferPacketLength; i++) {
-            if (metronomeNextPacket <= currentPacket) {
-                metronomeClickCurrentVolume = 0.75f;
-                metronomeNextPacket += (60.0f / self.composition.tempo) * kSCSamplingFrameRate;
-            }
-            theta += 0.075f;
-            if (theta >= 6.28) theta -= 6.28;
-            float wave = sin(theta) * metronomeClickCurrentVolume;
-            renderBuffer[i * 2] = wave; // Left
-            renderBuffer[i * 2 + 1] = wave; // Right
-            
-            metronomeClickCurrentVolume -= 0.001f;
-            metronomeClickCurrentVolume = fmaxf(0.0f, metronomeClickCurrentVolume);
-            
-            currentPacket++;
-        }
+        // Metronome
+        [self.metronome renderToBuffer:renderBuffer numOfPackets:bufferPacketLength player:self];
     }    
 }
 
@@ -83,6 +66,7 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
     self = [super init];
     if (self) {
         self.bufferPacketLength = kSCBufferPacketLength;
+        self.metronome = [[SCMetronome alloc] init];
     }
     return self;
 }
@@ -115,13 +99,10 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
         outputCallback((__bridge void*)self,audioQueueObject,buffers[i]);
     }
 }
-- (void)resetMetronome {
-    metronomeNextPacket = 0;
-}
 - (void)playComposition:(SCDocument*)composition {
     @synchronized(self) {
         self.composition = composition;
-        [self resetMetronome];
+        [self.metronome reset];
         [self prepareAudioQueues];
         AudioQueueStart(audioQueueObject, NULL);
     }
@@ -147,5 +128,8 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
 }
 - (NSTimeInterval)timeElapsed {
     return self.renderedPackets / kSCSamplingFrameRate;
+}
+- (float)samplingFrameRate {
+    return kSCSamplingFrameRate;
 }
 @end
