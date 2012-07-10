@@ -35,7 +35,6 @@
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem {
-    NSLog(@"validate %@", theItem);
     if (theItem == playButton) {
         return ([SCAppController sharedInstance].currentPlayingComposition == nil);
     }
