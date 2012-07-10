@@ -121,10 +121,12 @@ static void outputCallback(void *                  inUserData,
     metronomeNextPacket = 0;
 }
 - (void)playComposition:(SCDocument*)composition {
-    self.composition = composition;
-    [self resetMetronome];
-    [self prepareAudioQueues];
-    AudioQueueStart(audioQueueObject, NULL);
+    @synchronized(self) {
+        self.composition = composition;
+        [self resetMetronome];
+        [self prepareAudioQueues];
+        AudioQueueStart(audioQueueObject, NULL);
+    }
 }
 - (void)stop:(BOOL)shouldStopImmediately {
     @synchronized(self) {
