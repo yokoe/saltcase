@@ -23,6 +23,7 @@
 		1992DC6115A9736F00AC074F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1992DC6015A9736F00AC074F /* AudioToolbox.framework */; };
 		1995A82815AC678900678A93 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1992DC6015A9736F00AC074F /* AudioToolbox.framework */; };
 		1995A82C15AC6A4000678A93 /* SCMetronome.m in Sources */ = {isa = PBXBuildFile; fileRef = 1995A82B15AC6A4000678A93 /* SCMetronome.m */; };
+		19CA67A315AD9FBE00816234 /* SCKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA67A215AD9FBE00816234 /* SCKeyboardView.m */; };
 		19E1748615A93F260045A3C3 /* ToolbarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19E1748515A93F260045A3C3 /* ToolbarButton.png */; };
 		19E1748A15A93FDB0045A3C3 /* SCCompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E1748915A93FDB0045A3C3 /* SCCompositionController.m */; };
 		19E1748D15A946950045A3C3 /* SCAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E1748C15A946950045A3C3 /* SCAppController.m */; };
@@ -65,6 +66,8 @@
 		1992DC6015A9736F00AC074F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		1995A82A15AC6A4000678A93 /* SCMetronome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMetronome.h; sourceTree = "<group>"; };
 		1995A82B15AC6A4000678A93 /* SCMetronome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMetronome.m; sourceTree = "<group>"; };
+		19CA67A115AD9FBE00816234 /* SCKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCKeyboardView.h; sourceTree = "<group>"; };
+		19CA67A215AD9FBE00816234 /* SCKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCKeyboardView.m; sourceTree = "<group>"; };
 		19E1748515A93F260045A3C3 /* ToolbarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarButton.png; sourceTree = "<group>"; };
 		19E1748815A93FDB0045A3C3 /* SCCompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCompositionController.h; sourceTree = "<group>"; };
 		19E1748915A93FDB0045A3C3 /* SCCompositionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCompositionController.m; sourceTree = "<group>"; };
@@ -140,6 +143,7 @@
 		196B168A15A93CDF008E59D0 /* SaltCase */ = {
 			isa = PBXGroup;
 			children = (
+				19CA67A015AD9F9700816234 /* UI */,
 				19E1748315A93F260045A3C3 /* Resources */,
 				196B169615A93CE0008E59D0 /* SCDocument.h */,
 				196B169715A93CE0008E59D0 /* SCDocument.m */,
@@ -195,6 +199,15 @@
 			);
 			name = SynthEngine;
 			path = SaltCase/SynthEngine;
+			sourceTree = "<group>";
+		};
+		19CA67A015AD9F9700816234 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				19CA67A115AD9FBE00816234 /* SCKeyboardView.h */,
+				19CA67A215AD9FBE00816234 /* SCKeyboardView.m */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		19E1748315A93F260045A3C3 /* Resources */ = {
@@ -330,6 +343,7 @@
 				19E1748D15A946950045A3C3 /* SCAppController.m in Sources */,
 				1992DC5E15A9733900AC074F /* SCSynth.m in Sources */,
 				1995A82C15AC6A4000678A93 /* SCMetronome.m in Sources */,
+				19CA67A315AD9FBE00816234 /* SCKeyboardView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
