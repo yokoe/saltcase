@@ -68,6 +68,7 @@
 		1995A82B15AC6A4000678A93 /* SCMetronome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMetronome.m; sourceTree = "<group>"; };
 		19CA67A115AD9FBE00816234 /* SCKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCKeyboardView.h; sourceTree = "<group>"; };
 		19CA67A215AD9FBE00816234 /* SCKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCKeyboardView.m; sourceTree = "<group>"; };
+		19CA67A415ADAFDB00816234 /* SCGlobal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCGlobal.h; sourceTree = "<group>"; };
 		19E1748515A93F260045A3C3 /* ToolbarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarButton.png; sourceTree = "<group>"; };
 		19E1748815A93FDB0045A3C3 /* SCCompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCompositionController.h; sourceTree = "<group>"; };
 		19E1748915A93FDB0045A3C3 /* SCCompositionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCompositionController.m; sourceTree = "<group>"; };
@@ -154,6 +155,7 @@
 				19E1748915A93FDB0045A3C3 /* SCCompositionController.m */,
 				19E1748B15A946950045A3C3 /* SCAppController.h */,
 				19E1748C15A946950045A3C3 /* SCAppController.m */,
+				19CA67A415ADAFDB00816234 /* SCGlobal.h */,
 			);
 			path = SaltCase;
 			sourceTree = "<group>";

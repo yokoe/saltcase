@@ -8,7 +8,19 @@
 
 #import "SCKeyboardView.h"
 
+@interface SCKeyboardView() {
+    int selectedKey;
+}
+- (void)deselectKey;
+- (void)selectKey:(int)keyNumber;
+@end
+
 @implementation SCKeyboardView
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self deselectKey];
+}
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -22,20 +34,37 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    [[NSColor blackColor] set];
-    NSRectFill(dirtyRect);
+    float y = 0.0f;
+    int i = 0;
+    while (y <= dirtyRect.size.height) {
+        if (i % 2 == 0) {
+            [[NSColor lightGrayColor] set];
+        } else {
+            [[NSColor grayColor] set];
+        }
+        NSRectFill(NSMakeRect(0.0f, y, dirtyRect.size.width, kSCNoteLineHeight));
+        i++, y += kSCNoteLineHeight;
+    }
 }
 
+- (void)deselectKey {
+    [self selectKey:-1];
+}
+- (void)selectKey:(int)keyNumber {
+    selectedKey = keyNumber;
+    NSLog(@"selectKey %d", keyNumber);
+}
+
+- (int)noteNumberAtPoint:(NSPoint)point {
+    return (int)floor(point.y / kSCNoteLineHeight);
+}
 - (void)mouseDown:(NSEvent *)theEvent {
-    NSPoint cursorAt = theEvent.locationInWindow;
-    NSLog(@"mouse down (%f, %f)", cursorAt.x, cursorAt.y);
+    [self selectKey:[self noteNumberAtPoint:theEvent.locationInWindow]];
 }
 - (void)mouseDragged:(NSEvent *)theEvent {
-    NSPoint cursorAt = theEvent.locationInWindow;
-    NSLog(@"mouse drag (%f, %f)", cursorAt.x, cursorAt.y);
+    [self selectKey:[self noteNumberAtPoint:theEvent.locationInWindow]];
 }
 - (void)mouseUp:(NSEvent *)theEvent {
-    NSPoint cursorAt = theEvent.locationInWindow;
-    NSLog(@"mouse up (%f, %f)", cursorAt.x, cursorAt.y);
+    [self deselectKey];
 }
 @end

@@ -7,3 +7,5 @@
 #endif
 
 #define SCBufferUpdateNotification @"SCBufferUpdateNotification"
+
+#import "SCGlobal.h"
