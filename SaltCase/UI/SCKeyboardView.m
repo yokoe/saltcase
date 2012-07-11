@@ -11,14 +11,25 @@
 @interface SCKeyboardView() {
     int selectedKey;
 }
+@property (nonatomic, strong) NSArray* keyNames;
 - (void)deselectKey;
 - (void)selectKey:(int)keyNumber;
 @end
 
 @implementation SCKeyboardView
+@synthesize keyNames;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    // TODO: Move to appropriate class.
+    NSDictionary* noteMappings = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NoteMap" ofType:@"plist"]];
+    NSMutableArray* names = [NSMutableArray array];
+    for (NSDictionary* note in [noteMappings objectForKey:@"Notes"]) {
+        [names addObject:[note objectForKey:@"Name"]];
+    }
+    self.keyNames = names;
+    
     [self deselectKey];
 }
 
@@ -44,7 +55,13 @@
         } else {
             [[NSColor grayColor] set];
         }
-        NSRectFill(NSMakeRect(0.0f, y, dirtyRect.size.width, kSCNoteLineHeight));
+        NSRect rect = NSMakeRect(0.0f, y, dirtyRect.size.width, kSCNoteLineHeight);
+        NSRectFill(rect);
+        
+        NSString* keyName = [self.keyNames objectAtIndex:i % self.keyNames.count];
+        [keyName drawInRect:rect withAttributes:nil];
+        NSLog(@"%@", keyName);
+        
         i++, y += kSCNoteLineHeight;
     }
 }
