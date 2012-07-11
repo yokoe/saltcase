@@ -14,7 +14,6 @@
 		196B169815A93CE0008E59D0 /* SCDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 196B169715A93CE0008E59D0 /* SCDocument.m */; };
 		196B169B15A93CE0008E59D0 /* SCDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196B169915A93CE0008E59D0 /* SCDocument.xib */; };
 		196B169E15A93CE0008E59D0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196B169C15A93CE0008E59D0 /* MainMenu.xib */; };
-		196B16A115A93CE0008E59D0 /* SCDocument.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 196B169F15A93CE0008E59D0 /* SCDocument.xcdatamodeld */; };
 		196B16A915A93CE0008E59D0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B16A815A93CE0008E59D0 /* SenTestingKit.framework */; };
 		196B16AA15A93CE0008E59D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B168415A93CDF008E59D0 /* Cocoa.framework */; };
 		196B16B215A93CE0008E59D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 196B16B015A93CE0008E59D0 /* InfoPlist.strings */; };
@@ -54,7 +53,6 @@
 		196B169715A93CE0008E59D0 /* SCDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCDocument.m; sourceTree = "<group>"; };
 		196B169A15A93CE0008E59D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SCDocument.xib; sourceTree = "<group>"; };
 		196B169D15A93CE0008E59D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		196B16A015A93CE0008E59D0 /* SCDocument.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SCDocument.xcdatamodel; sourceTree = "<group>"; };
 		196B16A715A93CE0008E59D0 /* SaltCaseTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaltCaseTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		196B16A815A93CE0008E59D0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		196B16AF15A93CE0008E59D0 /* SaltCaseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SaltCaseTests-Info.plist"; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 				196B169715A93CE0008E59D0 /* SCDocument.m */,
 				196B169915A93CE0008E59D0 /* SCDocument.xib */,
 				196B169C15A93CE0008E59D0 /* MainMenu.xib */,
-				196B169F15A93CE0008E59D0 /* SCDocument.xcdatamodeld */,
 				196B168B15A93CDF008E59D0 /* Supporting Files */,
 				19E1748815A93FDB0045A3C3 /* SCCompositionController.h */,
 				19E1748915A93FDB0045A3C3 /* SCCompositionController.m */,
@@ -329,7 +326,6 @@
 			files = (
 				196B169115A93CDF008E59D0 /* main.m in Sources */,
 				196B169815A93CE0008E59D0 /* SCDocument.m in Sources */,
-				196B16A115A93CE0008E59D0 /* SCDocument.xcdatamodeld in Sources */,
 				19E1748A15A93FDB0045A3C3 /* SCCompositionController.m in Sources */,
 				19E1748D15A946950045A3C3 /* SCAppController.m in Sources */,
 				1992DC5E15A9733900AC074F /* SCSynth.m in Sources */,
@@ -528,19 +524,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		196B169F15A93CE0008E59D0 /* SCDocument.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				196B16A015A93CE0008E59D0 /* SCDocument.xcdatamodel */,
-			);
-			currentVersion = 196B16A015A93CE0008E59D0 /* SCDocument.xcdatamodel */;
-			path = SCDocument.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 196B167715A93CDF008E59D0 /* Project object */;
 }

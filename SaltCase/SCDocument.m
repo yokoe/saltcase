@@ -49,6 +49,16 @@ const float kSCMaximumTempo = 320.0f;
     return YES;
 }
 
+- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
+{
+    return nil;
+}
+
+- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
+{
+    return NO;
+}
+
 - (void)close {
     // Stop playing before closing the composition.
     if ([SCAppController sharedInstance].currentPlayingComposition == self) {

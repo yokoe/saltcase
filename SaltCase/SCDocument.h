@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SCDocument : NSPersistentDocument
+@interface SCDocument : NSDocument
 @property (nonatomic, assign) float tempo;
 @end
