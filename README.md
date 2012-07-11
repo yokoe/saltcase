@@ -7,7 +7,8 @@ Written by [@sugarcape](http://twitter.com/sugarcape)
 
 ## Overview
 
-SaltCase is a Japanese vocal software for Mac OS X, a successor to SugarCape, which has been developed since 2009 by [@sugarcape](http://twitter.com/sugarcape).
+SaltCase is a Japanese vocal software for Mac OS X. 
+It is a successor to SugarCape, which has been developed since 2009 by [@sugarcape](http://twitter.com/sugarcape).
 
 ## Requirements
 
