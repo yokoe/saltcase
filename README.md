@@ -4,6 +4,9 @@ saltcase
 Open source Japanese vocal software
 
 
+## License
+
+MIT License
 
 Copyright (c) 2012 Sota Yokoe
 
