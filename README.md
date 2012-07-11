@@ -3,6 +3,13 @@ saltcase
 
 Open source Japanese vocal software
 
+## Overview
+
+SaltCase is a Japanese vocal software for Mac OS X.
+
+## Requirements
+
+1. OS X 10.7 Lion or later.
 
 ## License
 
