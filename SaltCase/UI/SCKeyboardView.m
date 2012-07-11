@@ -60,9 +60,7 @@
         NSRect rect = NSMakeRect(keyMargin, y + keyMargin, dirtyRect.size.width - keyMargin * 2.0f, kSCNoteLineHeight - keyMargin * 2.0f);
         NSRectFill(rect);
         
-        
         [keyName drawInRect:rect withAttributes:nil];
-        NSLog(@"%@", keyName);
         
         i++, y += kSCNoteLineHeight;
     }
