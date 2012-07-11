@@ -45,20 +45,22 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    const float keyMargin = 1.0f;
     float y = 0.0f;
     int i = 0;
     while (y <= dirtyRect.size.height) {
+        NSString* keyName = [self.keyNames objectAtIndex:i % self.keyNames.count];
         if (i == selectedKey) {
             [[NSColor whiteColor] set];
-        } else if (i % 2 == 0) {
+        } else if (keyName.length == 1) {
             [[NSColor lightGrayColor] set];
         } else {
             [[NSColor grayColor] set];
         }
-        NSRect rect = NSMakeRect(0.0f, y, dirtyRect.size.width, kSCNoteLineHeight);
+        NSRect rect = NSMakeRect(keyMargin, y + keyMargin, dirtyRect.size.width - keyMargin * 2.0f, kSCNoteLineHeight - keyMargin * 2.0f);
         NSRectFill(rect);
         
-        NSString* keyName = [self.keyNames objectAtIndex:i % self.keyNames.count];
+        
         [keyName drawInRect:rect withAttributes:nil];
         NSLog(@"%@", keyName);
         
