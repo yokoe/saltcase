@@ -37,7 +37,9 @@
     float y = 0.0f;
     int i = 0;
     while (y <= dirtyRect.size.height) {
-        if (i % 2 == 0) {
+        if (i == selectedKey) {
+            [[NSColor whiteColor] set];
+        } else if (i % 2 == 0) {
             [[NSColor lightGrayColor] set];
         } else {
             [[NSColor grayColor] set];
@@ -51,8 +53,11 @@
     [self selectKey:-1];
 }
 - (void)selectKey:(int)keyNumber {
-    selectedKey = keyNumber;
-    NSLog(@"selectKey %d", keyNumber);
+    if (selectedKey != keyNumber) {
+        selectedKey = keyNumber;
+        NSLog(@"selectKey %d", keyNumber);
+        [self setNeedsDisplay:YES];
+    }
 }
 
 - (int)noteNumberAtPoint:(NSPoint)point {
