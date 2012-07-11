@@ -26,4 +26,16 @@
     NSRectFill(dirtyRect);
 }
 
+- (void)mouseDown:(NSEvent *)theEvent {
+    NSPoint cursorAt = theEvent.locationInWindow;
+    NSLog(@"mouse down (%f, %f)", cursorAt.x, cursorAt.y);
+}
+- (void)mouseDragged:(NSEvent *)theEvent {
+    NSPoint cursorAt = theEvent.locationInWindow;
+    NSLog(@"mouse drag (%f, %f)", cursorAt.x, cursorAt.y);
+}
+- (void)mouseUp:(NSEvent *)theEvent {
+    NSPoint cursorAt = theEvent.locationInWindow;
+    NSLog(@"mouse up (%f, %f)", cursorAt.x, cursorAt.y);
+}
 @end
