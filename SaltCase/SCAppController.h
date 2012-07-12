@@ -1,10 +1,11 @@
 #import <Foundation/Foundation.h>
 #import <AudioUnit/AudioUnit.h>
 
-@class SCDocument;
+#import "SCSynth.h"
+@class SCCompositionController;
 @interface SCAppController : NSObject
-@property (strong, readonly) SCDocument* currentPlayingComposition;
+@property (strong, readonly) SCCompositionController* currentPlayingComposition;
 + (SCAppController*)sharedInstance;
-- (BOOL)playComposition:(SCDocument*)composition;
-- (void)stopComposition:(SCDocument*)composition;
+- (BOOL)playComposition:(SCCompositionController*)composition;
+- (void)stopComposition:(SCCompositionController*)composition;
 @end

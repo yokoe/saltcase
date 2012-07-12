@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class SCCompositionController;
 @interface SCDocument : NSDocument
+@property (weak) IBOutlet SCCompositionController *controller;
 @property (nonatomic, assign) float tempo;
 @end

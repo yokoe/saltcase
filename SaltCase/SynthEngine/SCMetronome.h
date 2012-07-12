@@ -10,6 +10,7 @@
 
 @class SCSynth;
 @interface SCMetronome : NSObject
+@property (assign) float tempo;
 - (void)renderToBuffer:(float*)buffer numOfPackets:(UInt32)numOfPackets player:(SCSynth*)player;
 - (void)reset;
 @end

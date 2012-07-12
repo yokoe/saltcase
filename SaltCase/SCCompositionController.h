@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SCSynth.h"
+#import "SCMetronome.h"
 @class SCDocument;
 
-@interface SCCompositionController : NSObject <NSToolbarDelegate>
+@interface SCCompositionController : NSObject <NSToolbarDelegate, SCAudioRenderer>
 @property (weak) IBOutlet SCDocument *composition;
 @property (weak) IBOutlet NSToolbarItem *playButton;
 @property (weak) IBOutlet NSToolbarItem *stopButton;
@@ -20,5 +21,5 @@
 @property (unsafe_unretained) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSSlider *tempoSlider;
 @property (weak) IBOutlet NSTextField *tempoLabel;
-
+@property (strong) SCMetronome* metronome;
 @end

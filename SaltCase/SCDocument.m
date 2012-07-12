@@ -14,6 +14,7 @@ const float kSCMinimumTempo = 40.0f;
 const float kSCMaximumTempo = 320.0f;
 
 @implementation SCDocument
+@synthesize controller;
 @synthesize tempo = tempo_;
 
 - (void)setTempo:(float)tempo {
@@ -61,10 +62,11 @@ const float kSCMaximumTempo = 320.0f;
 
 - (void)close {
     // Stop playing before closing the composition.
-    if ([SCAppController sharedInstance].currentPlayingComposition == self) {
-        [[SCAppController sharedInstance] stopComposition:self];
+    if ([SCAppController sharedInstance].currentPlayingComposition == self.controller) {
+        [[SCAppController sharedInstance] stopComposition:self.controller];
     }
     
     [super close];
 }
+
 @end

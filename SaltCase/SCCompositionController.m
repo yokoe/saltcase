@@ -22,14 +22,20 @@
 @synthesize window;
 @synthesize tempoSlider;
 @synthesize tempoLabel;
+@synthesize metronome;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.metronome = [[SCMetronome alloc] init];
     [[NSNotificationCenter defaultCenter] addObserverForName:SCBufferUpdateNotification object:nil queue:[NSOperationQueue new] usingBlock:^(NSNotification *note) {
-        if ([SCAppController sharedInstance].currentPlayingComposition == composition) {
+        if ([SCAppController sharedInstance].currentPlayingComposition == self) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 SCSynth* player = (SCSynth*)note.object;
-                [timeLabel setStringValue:[NSString stringWithFormat:@"Time: %.1f (%d qtr.s)", player.timeElapsed, player.quarterNotesPlayed]];
+                
+                float timeIntervalPerQuarterNote = (60.0f / self.composition.tempo);
+                int quarterNotes = (int)floor(player.timeElapsed / timeIntervalPerQuarterNote);
+                
+                [timeLabel setStringValue:[NSString stringWithFormat:@"Time: %.1f (%d qtr.s)", player.timeElapsed, quarterNotes]];
             });
         }
     }];
@@ -48,20 +54,25 @@
     }
     if (theItem == settingsButton) {
         // Disabled while the song is playing.
-        return ([SCAppController sharedInstance].currentPlayingComposition != composition);
+        return ([SCAppController sharedInstance].currentPlayingComposition != self);
     }
     return NO;
 }
 
+- (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {
+    [self.metronome renderToBuffer:buffer numOfPackets:numOfPackets player:sender];
+}
 - (IBAction)playComposition:(id)sender {
-    if ([[SCAppController sharedInstance] playComposition:composition]) {
+    [self.metronome reset];
+    self.metronome.tempo = composition.tempo;
+    if ([[SCAppController sharedInstance] playComposition:self]) {
         NSLog(@"Started playing %@", composition);
     } else {
         NSLog(@"Failed to start playing %@.\nCurrently playing: %@", composition, [SCAppController sharedInstance].currentPlayingComposition);
     }
 }
 - (IBAction)stopComposition:(id)sender {
-    [[SCAppController sharedInstance] stopComposition:composition];
+    [[SCAppController sharedInstance] stopComposition:self];
 }
 
 #pragma mark Settings

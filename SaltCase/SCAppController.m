@@ -1,8 +1,8 @@
 #import "SCAppController.h"
 #import "SCSynth.h"
-
+#import "SCCompositionController.h"
 @interface SCAppController()
-@property (strong) SCDocument* currentPlayingComposition;
+@property (strong) SCCompositionController* currentPlayingComposition;
 @property (strong) SCSynth* synth;
 @end
 
@@ -26,18 +26,18 @@
     return self;
 }
 
-- (BOOL)playComposition:(SCDocument*)composition {
+- (BOOL)playComposition:(SCCompositionController*)composition {
     @synchronized(self) {
         if (self.currentPlayingComposition == nil) {
             self.currentPlayingComposition = composition;
-            [self.synth playComposition:composition];
+            [self.synth playWithRenderer:composition];
             return YES;
         } else { // If other composition has been played, return NO.
             return NO;
         }
     }
 }
-- (void)stopComposition:(SCDocument*)composition {
+- (void)stopComposition:(SCCompositionController*)composition {
     self.currentPlayingComposition = nil;
     [self.synth stop:YES];
 }

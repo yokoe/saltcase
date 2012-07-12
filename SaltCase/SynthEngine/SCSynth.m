@@ -1,6 +1,5 @@
 #import "SCSynth.h"
 
-#import "SCDocument.h"
 #import "SCMetronome.h"
 
 const UInt32 kSCBufferPacketLength = 1024;
@@ -19,7 +18,7 @@ const float kSCSamplingFrameRate = 44100.0f;
 @end
 
 @implementation SCSynth
-@synthesize bufferPacketLength, composition = composition_, metronome, renderBuffer, renderedPackets;
+@synthesize bufferPacketLength, metronome, renderBuffer, renderedPackets, renderer = renderer_;
 static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBufferRef inBuffer)
 {
     SCSynth *player =(__bridge SCSynth*)inUserData;
@@ -55,8 +54,9 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
 - (void)render {
     @autoreleasepool {
         [self clearRenderBuffer];
-        
-        [self.metronome renderToBuffer:renderBuffer numOfPackets:bufferPacketLength player:self];
+        if (renderer_ && [renderer_ respondsToSelector:@selector(renderBuffer:numOfPackets:sender:)]) {
+            [renderer_ renderBuffer:renderBuffer numOfPackets:bufferPacketLength sender:self];
+        }
     }    
 }
 
@@ -70,7 +70,7 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
     return self;
 }
 - (void)clearRenderBuffer {
-    for (int i = 0; i < bufferPacketLength; i++) renderBuffer[i] = 0.0f;
+    for (int i = 0; i < bufferPacketLength * 2; i++) renderBuffer[i] = 0.0f;
 }
 -(void)prepareAudioQueues{
     renderBuffer = (float*)malloc(sizeof(float) * bufferPacketLength * 2);
@@ -101,9 +101,9 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
         outputCallback((__bridge void*)self,audioQueueObject,buffers[i]);
     }
 }
-- (void)playComposition:(SCDocument*)composition {
+- (void)playWithRenderer:(NSObject<SCAudioRenderer>*)renderer {
     @synchronized(self) {
-        self.composition = composition;
+        self.renderer = renderer;
         [self.metronome reset];
         [self prepareAudioQueues];
         AudioQueueStart(audioQueueObject, NULL);
@@ -115,18 +115,14 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
         AudioQueueStop(audioQueueObject, shouldStopImmediately);
         AudioQueueDispose(audioQueueObject, YES);
         audioQueueObject = nil;
+        self.renderer = nil;
         free(renderBuffer);
-        self.composition = nil;
     }
 }
 - (void)dealloc
 {
     free(renderBuffer);
     AudioQueueDispose(audioQueueObject, YES);
-}
-- (UInt32)quarterNotesPlayed {
-    float timeIntervalPerQuarterNote = (60.0f / self.composition.tempo);
-    return (int)floor(self.timeElapsed / timeIntervalPerQuarterNote);
 }
 - (NSTimeInterval)timeElapsed {
     return self.renderedPackets / kSCSamplingFrameRate;
