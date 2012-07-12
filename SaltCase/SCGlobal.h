@@ -11,4 +11,6 @@
 
 static const float kSCNoteLineHeight = 30.0f;
 
+static const float kSCLowestCFrequency = 130.813f;
+
 #endif

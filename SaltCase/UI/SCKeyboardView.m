@@ -11,13 +11,14 @@
 @interface SCKeyboardView() {
     int selectedKey;
 }
+@property (nonatomic, strong) NSArray* keyCofficients;
 @property (nonatomic, strong) NSArray* keyNames;
 - (void)deselectKey;
 - (void)selectKey:(int)keyNumber;
 @end
 
 @implementation SCKeyboardView
-@synthesize keyNames;
+@synthesize keyCofficients, keyNames;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -25,9 +26,12 @@
     // TODO: Move to appropriate class.
     NSDictionary* noteMappings = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NoteMap" ofType:@"plist"]];
     NSMutableArray* names = [NSMutableArray array];
+    NSMutableArray* cofficients = [NSMutableArray array];
     for (NSDictionary* note in [noteMappings objectForKey:@"Notes"]) {
         [names addObject:[note objectForKey:@"Name"]];
+        [cofficients addObject:[note objectForKey:@"Frequency"]];
     }
+    self.keyCofficients = cofficients;
     self.keyNames = names;
     
     [self deselectKey];
@@ -67,13 +71,18 @@
     }
 }
 
+// TODO: Move to appropriate class.
+- (float)frequencyOfPitch:(int)pitch {
+    int octave = (pitch / keyCofficients.count);
+    return kSCLowestCFrequency * [[keyCofficients objectAtIndex:pitch % keyCofficients.count] floatValue] * pow(2, octave);
+}
 - (void)deselectKey {
     [self selectKey:-1];
 }
 - (void)selectKey:(int)keyNumber {
     if (selectedKey != keyNumber) {
         selectedKey = keyNumber;
-        NSLog(@"selectKey %d", keyNumber);
+        NSLog(@"selectKey %d %.3f", keyNumber, [self frequencyOfPitch:keyNumber]);
         [self setNeedsDisplay:YES];
     }
 }
