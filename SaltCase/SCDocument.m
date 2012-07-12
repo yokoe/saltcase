@@ -8,6 +8,7 @@
 
 #import "SCDocument.h"
 #import "SCAppController.h"
+#import "SCCompositionController.h"
 
 const float kSCDefaultTempo = 120.0f;
 const float kSCMinimumTempo = 40.0f;

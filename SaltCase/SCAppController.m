@@ -2,7 +2,7 @@
 #import "SCSynth.h"
 #import "SCCompositionController.h"
 @interface SCAppController()
-@property (strong) SCCompositionController* currentPlayingComposition;
+@property (strong) id<SCAudioRenderer> currentlyPlaying;
 @property (strong) SCSynth* synth;
 @end
 
@@ -28,8 +28,8 @@
 
 - (BOOL)playComposition:(SCCompositionController*)composition {
     @synchronized(self) {
-        if (self.currentPlayingComposition == nil) {
-            self.currentPlayingComposition = composition;
+        if (self.currentlyPlaying == nil) {
+            self.currentlyPlaying = composition;
             [self.synth playWithRenderer:composition];
             return YES;
         } else { // If other composition has been played, return NO.
@@ -37,7 +37,7 @@
         }
     }
 }
-- (void)stopComposition:(SCCompositionController*)composition {
+- (void)stopComposition:(id<SCAudioRenderer>)composition {
     self.currentlyPlaying = nil;
     [self.synth stop:YES];
 }
