@@ -28,7 +28,7 @@
     [super awakeFromNib];
     self.metronome = [[SCMetronome alloc] init];
     [[NSNotificationCenter defaultCenter] addObserverForName:SCBufferUpdateNotification object:nil queue:[NSOperationQueue new] usingBlock:^(NSNotification *note) {
-        if ([SCAppController sharedInstance].currentPlayingComposition == self) {
+        if ([SCAppController sharedInstance].currentlyPlaying == self) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 SCSynth* player = (SCSynth*)note.object;
                 
@@ -47,14 +47,14 @@
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem {
     if (theItem == playButton) {
-        return ([SCAppController sharedInstance].currentPlayingComposition == nil);
+        return ([SCAppController sharedInstance].currentlyPlaying == nil);
     }
     if (theItem == stopButton) {
-        return ([SCAppController sharedInstance].currentPlayingComposition != nil);
+        return ([SCAppController sharedInstance].currentlyPlaying != nil);
     }
     if (theItem == settingsButton) {
         // Disabled while the song is playing.
-        return ([SCAppController sharedInstance].currentPlayingComposition != self);
+        return ([SCAppController sharedInstance].currentlyPlaying != self);
     }
     return NO;
 }
@@ -68,7 +68,7 @@
     if ([[SCAppController sharedInstance] playComposition:self]) {
         NSLog(@"Started playing %@", composition);
     } else {
-        NSLog(@"Failed to start playing %@.\nCurrently playing: %@", composition, [SCAppController sharedInstance].currentPlayingComposition);
+        NSLog(@"Failed to start playing %@.\nCurrently playing: %@", composition, [SCAppController sharedInstance].currentlyPlaying);
     }
 }
 - (IBAction)stopComposition:(id)sender {

@@ -7,7 +7,7 @@
 @end
 
 @implementation SCAppController
-@synthesize currentPlayingComposition, synth;
+@synthesize currentlyPlaying, synth;
 + (SCAppController*)sharedInstance
 {
     static dispatch_once_t once;
@@ -38,7 +38,7 @@
     }
 }
 - (void)stopComposition:(SCCompositionController*)composition {
-    self.currentPlayingComposition = nil;
+    self.currentlyPlaying = nil;
     [self.synth stop:YES];
 }
 @end

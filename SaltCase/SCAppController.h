@@ -4,7 +4,7 @@
 #import "SCSynth.h"
 @class SCCompositionController;
 @interface SCAppController : NSObject
-@property (strong, readonly) SCCompositionController* currentPlayingComposition;
+@property (strong, readonly) SCCompositionController* currentlyPlaying;
 + (SCAppController*)sharedInstance;
 - (BOOL)playComposition:(SCCompositionController*)composition;
 - (void)stopComposition:(SCCompositionController*)composition;

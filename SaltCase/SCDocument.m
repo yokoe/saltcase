@@ -62,7 +62,7 @@ const float kSCMaximumTempo = 320.0f;
 
 - (void)close {
     // Stop playing before closing the composition.
-    if ([SCAppController sharedInstance].currentPlayingComposition == self.controller) {
+    if ([SCAppController sharedInstance].currentlyPlaying == self.controller) {
         [[SCAppController sharedInstance] stopComposition:self.controller];
     }
     
