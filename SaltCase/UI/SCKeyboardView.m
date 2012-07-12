@@ -49,7 +49,8 @@
     float y = 0.0f;
     int i = 0;
     while (y <= dirtyRect.size.height) {
-        NSString* keyName = [self.keyNames objectAtIndex:i % self.keyNames.count];
+        NSString* keyName = [self.keyNames objectAtIndex:i % self.keyNames.count]; // A, B, C, C#...
+        int octave = i / self.keyNames.count;
         if (i == selectedKey) {
             [[NSColor whiteColor] set];
         } else if (keyName.length == 1) {
@@ -60,7 +61,7 @@
         NSRect rect = NSMakeRect(keyMargin, y + keyMargin, dirtyRect.size.width - keyMargin * 2.0f, kSCNoteLineHeight - keyMargin * 2.0f);
         NSRectFill(rect);
         
-        [keyName drawInRect:rect withAttributes:nil];
+        [[NSString stringWithFormat:@"%@%d", keyName, octave] drawInRect:rect withAttributes:nil];
         
         i++, y += kSCNoteLineHeight;
     }
