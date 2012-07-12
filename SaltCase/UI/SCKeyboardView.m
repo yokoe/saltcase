@@ -7,9 +7,12 @@
 //
 
 #import "SCKeyboardView.h"
+#import "SCAppController.h"
 
 @interface SCKeyboardView() {
     int selectedKey;
+    float theta;
+    double delta;
 }
 @property (nonatomic, strong) NSArray* keyCofficients;
 @property (nonatomic, strong) NSArray* keyNames;
@@ -73,17 +76,27 @@
 
 // TODO: Move to appropriate class.
 - (float)frequencyOfPitch:(int)pitch {
+    if (pitch < 0) return 0.0f;
     int octave = (pitch / keyCofficients.count);
     return kSCLowestCFrequency * [[keyCofficients objectAtIndex:pitch % keyCofficients.count] floatValue] * pow(2, octave);
 }
 - (void)deselectKey {
     [self selectKey:-1];
+    if ([SCAppController sharedInstance].currentlyPlaying == self) {
+        [[SCAppController sharedInstance] stopComposition:self];
+    }
 }
 - (void)selectKey:(int)keyNumber {
-    if (selectedKey != keyNumber) {
-        selectedKey = keyNumber;
-        NSLog(@"selectKey %d %.3f", keyNumber, [self frequencyOfPitch:keyNumber]);
-        [self setNeedsDisplay:YES];
+    // Disabled while a composition is played
+    if ([SCAppController sharedInstance].currentlyPlaying == nil || [SCAppController sharedInstance].currentlyPlaying == self) {    
+        if (selectedKey != keyNumber) {
+            selectedKey = keyNumber;
+            NSLog(@"selectKey %d %.3f", keyNumber, [self frequencyOfPitch:keyNumber]);
+            [self setNeedsDisplay:YES];
+            if ([SCAppController sharedInstance].currentlyPlaying == nil) {
+                [[SCAppController sharedInstance] playComposition:self];
+            }
+        }
     }
 }
 
@@ -98,5 +111,17 @@
 }
 - (void)mouseUp:(NSEvent *)theEvent {
     [self deselectKey];
+}
+
+- (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {
+    float pitch = [self frequencyOfPitch:selectedKey];
+    delta = fmaxf(2.0f * M_PI * pitch / sender.samplingFrameRate, 0.0f);
+    for (int i = 0; i < numOfPackets; i++) {
+        float signal = sin(theta) * 0.5f;
+        *buffer++ = signal;
+        *buffer++ = signal;
+        theta += delta;
+        if (theta >= M_PI * 2.0f) theta -= M_PI * 2.0f;
+    }
 }
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SCSynth.h"
 
-@interface SCKeyboardView : NSView
-
+// TODO: Make a renderer later.
+@interface SCKeyboardView : NSView<SCAudioRenderer>
 @end
