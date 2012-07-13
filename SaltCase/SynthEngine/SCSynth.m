@@ -38,7 +38,7 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
 		rawSignal = fmin(0.999f, rawSignal);
 		rawSignal = fmax(-0.999f,rawSignal);
         
-        SInt64 limittedSignal = (prevValue[i % 2] + rawSignal) * 16384.0f;
+        SInt16 limittedSignal = (prevValue[i % 2] + rawSignal) * 16384.0f;
         prevValue[i % 2] = rawSignal;
         
         *output++ = limittedSignal;
