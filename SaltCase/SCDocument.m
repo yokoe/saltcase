@@ -9,6 +9,7 @@
 #import "SCDocument.h"
 #import "SCAppController.h"
 #import "SCCompositionController.h"
+#import "SBJson.h"
 
 const float kSCDefaultTempo = 120.0f;
 const float kSCMinimumTempo = 40.0f;
@@ -51,9 +52,20 @@ const float kSCMaximumTempo = 320.0f;
     return YES;
 }
 
-- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
-{
-    return nil;
+- (BOOL)writeToFile:(NSString *)fileName ofType:(NSString *)type {
+    NSMutableDictionary* dictionary = [NSMutableDictionary dictionary];
+    NSMutableDictionary* header = [NSMutableDictionary dictionary];    
+    [dictionary setObject:header forKey:@"header"];
+    
+    [header setObject:[NSNumber numberWithFloat:self.tempo] forKey:@"tempo"];
+    
+    NSError* error = nil;
+    if ([[dictionary JSONRepresentation] writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:&error]) {
+        return YES;
+    } else {
+        NSLog(@"Failed to write to file.\nFileName: %@\nError: %@", fileName, error);
+        return NO;
+    }
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
