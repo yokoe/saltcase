@@ -47,10 +47,21 @@
     scrollView.documentView = [[SCPianoRoll alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 1000.f, 1000.0f)];
     keyboardScroll.documentView = [[SCKeyboardView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, keyboardScroll.contentView.frame.size.width, 1000.0f)];
     
-    // Called when user scrolled the piano roll.
+    // Synchronize scrolling between the piano roll and the keyboard view.
+    // http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/NSScrollViewGuide/Articles/SynchroScroll.html
     [[NSNotificationCenter defaultCenter] addObserverForName:NSViewBoundsDidChangeNotification object:scrollView.contentView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        float offsetY = scrollView.contentView.bounds.size.height - scrollView.contentView.bounds.origin.y;
-        NSLog(@"View bound %f", offsetY);
+        NSClipView *changedContentView = note.object;
+        NSPoint changedBoundsOrigin = changedContentView.documentVisibleRect.origin;
+        changedBoundsOrigin.x = 0.0f;
+        [keyboardScroll.contentView scrollToPoint:changedBoundsOrigin];
+        [keyboardScroll reflectScrolledClipView:keyboardScroll.contentView];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSViewBoundsDidChangeNotification object:keyboardScroll.contentView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        NSClipView *changedContentView = note.object;
+        NSPoint changedBoundsOrigin = changedContentView.documentVisibleRect.origin;
+        changedBoundsOrigin.x = scrollView.contentView.bounds.origin.x;
+        [scrollView.contentView scrollToPoint:changedBoundsOrigin];
+        [scrollView reflectScrolledClipView:scrollView.contentView];
     }];
 }
 - (void)dealloc
