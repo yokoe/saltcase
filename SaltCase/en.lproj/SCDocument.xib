@@ -340,14 +340,12 @@
 											<int key="NSvFlags">274</int>
 											<string key="NSFrameSize">{589, 540}</string>
 											<reference key="NSSuperview" ref="795161274"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="1032500306"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 										</object>
 									</array>
 									<string key="NSFrame">{{1, 1}, {589, 540}}</string>
 									<reference key="NSSuperview" ref="956162319"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="360851141"/>
 									<string key="NSReuseIdentifierKey">_NS:11</string>
 									<reference key="NSDocView" ref="360851141"/>
@@ -367,7 +365,7 @@
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{575, 1}, {15, 534}}</string>
 									<reference key="NSSuperview" ref="956162319"/>
-									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:15</string>
 									<reference key="NSTarget" ref="956162319"/>
 									<string key="NSAction">_doScroller:</string>
@@ -379,7 +377,6 @@
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{1, 526}, {583, 15}}</string>
 									<reference key="NSSuperview" ref="956162319"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="58127935"/>
 									<string key="NSReuseIdentifierKey">_NS:26</string>
 									<int key="NSsFlags">1</int>
@@ -390,7 +387,6 @@
 							</array>
 							<string key="NSFrame">{{128, -12}, {591, 542}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="795161274"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<int key="NSsFlags">133170</int>
@@ -403,7 +399,6 @@
 							<int key="NSvFlags">284</int>
 							<string key="NSFrameSize">{129, 529}</string>
 							<reference key="NSSuperview" ref="568628114"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="956162319"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSClassName">SCKeyboardView</string>
@@ -411,7 +406,6 @@
 					</array>
 					<string key="NSFrameSize">{718, 529}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="162646490"/>
 					<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				</object>
@@ -681,6 +675,14 @@
 						<reference key="destination" ref="564513733"/>
 					</object>
 					<int key="connectionID">100085</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">scrollView</string>
+						<reference key="source" ref="218606778"/>
+						<reference key="destination" ref="956162319"/>
+					</object>
+					<int key="connectionID">100301</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -977,96 +979,9 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100299</int>
+			<int key="maxID">100301</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">SCCompositionController</string>
-					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="composition">SCDocument</string>
-						<string key="playButton">NSToolbarItem</string>
-						<string key="settingsButton">NSToolbarItem</string>
-						<string key="settingsSheet">NSPanel</string>
-						<string key="stopButton">NSToolbarItem</string>
-						<string key="tempoLabel">NSTextField</string>
-						<string key="tempoSlider">NSSlider</string>
-						<string key="timeLabel">NSTextField</string>
-						<string key="window">NSWindow</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="composition">
-							<string key="name">composition</string>
-							<string key="candidateClassName">SCDocument</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="playButton">
-							<string key="name">playButton</string>
-							<string key="candidateClassName">NSToolbarItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="settingsButton">
-							<string key="name">settingsButton</string>
-							<string key="candidateClassName">NSToolbarItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="settingsSheet">
-							<string key="name">settingsSheet</string>
-							<string key="candidateClassName">NSPanel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="stopButton">
-							<string key="name">stopButton</string>
-							<string key="candidateClassName">NSToolbarItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tempoLabel">
-							<string key="name">tempoLabel</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tempoSlider">
-							<string key="name">tempoSlider</string>
-							<string key="candidateClassName">NSSlider</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="timeLabel">
-							<string key="name">timeLabel</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="window">
-							<string key="name">window</string>
-							<string key="candidateClassName">NSWindow</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SCCompositionController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SCDocument</string>
-					<string key="superclassName">NSDocument</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">controller</string>
-						<string key="NS.object.0">SCCompositionController</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">controller</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">controller</string>
-							<string key="candidateClassName">SCCompositionController</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SCDocument.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SCKeyboardView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SCKeyboardView.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

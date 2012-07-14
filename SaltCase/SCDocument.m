@@ -18,10 +18,16 @@ const float kSCMaximumTempo = 320.0f;
 @implementation SCDocument
 @synthesize controller;
 @synthesize tempo = tempo_;
+@synthesize bars = bars_;
 
 - (void)setTempo:(float)tempo {
     // Range limitation: 40.0f - 320.0f
     tempo_ = fminf(fmaxf(kSCMinimumTempo, tempo), kSCMaximumTempo);
+}
+
+// For debugging.
+- (UInt32)bars {
+    return 4;
 }
 
 - (id)init
@@ -68,9 +74,34 @@ const float kSCMaximumTempo = 320.0f;
     }
 }
 
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
-{
-    return NO;
+- (BOOL)readFromFile:(NSString *)fileName ofType:(NSString *)type {
+    NSError* error = nil;
+    NSString* jsonString = [NSString stringWithContentsOfFile:fileName encoding:NSUTF8StringEncoding error:&error];
+    if (!error) {
+        if (jsonString) {
+            NSDictionary* dictionary = [jsonString JSONValue];
+            if (dictionary) {
+                NSDictionary* header = [dictionary objectForKey:@"header"];
+                if (header) {
+                    NSNumber* tempoValue = [header objectForKey:@"tempo"];
+                    if (tempoValue) self.tempo = tempoValue.floatValue;
+                    return YES;
+                } else {
+                    NSLog(@"Header section not found.\n%@", jsonString);
+                    return NO;
+                }
+            } else {
+                NSLog(@"JSON parse error.");
+                return NO;
+            }
+        } else {
+            NSLog(@"JSON string is nil.");
+            return NO;
+        }
+    } else {
+        NSLog(@"Failed to read from file.\nFileName: %@\nError: %@", fileName, error);
+        return NO;
+    }
 }
 
 - (void)close {

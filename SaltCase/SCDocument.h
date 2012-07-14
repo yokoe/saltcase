@@ -12,4 +12,5 @@
 @interface SCDocument : NSDocument
 @property (weak) IBOutlet SCCompositionController *controller;
 @property (nonatomic, assign) float tempo;
+@property (nonatomic, assign) UInt32 bars;
 @end

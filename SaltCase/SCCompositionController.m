@@ -11,6 +11,7 @@
 
 #import "SCDocument.h"
 #import "SCSynth.h"
+#import "SCPianoRoll.h"
 
 @implementation SCCompositionController
 @synthesize composition;
@@ -22,6 +23,7 @@
 @synthesize window;
 @synthesize tempoSlider;
 @synthesize tempoLabel;
+@synthesize scrollView;
 @synthesize metronome;
 
 - (void)awakeFromNib {
@@ -39,6 +41,8 @@
             });
         }
     }];
+    
+    scrollView.documentView = [[SCPianoRoll alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 1000.f, 1000.0f)];
 }
 - (void)dealloc
 {

@@ -21,5 +21,6 @@
 @property (unsafe_unretained) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSSlider *tempoSlider;
 @property (weak) IBOutlet NSTextField *tempoLabel;
+@property (weak) IBOutlet NSScrollView *scrollView;
 @property (strong) SCMetronome* metronome;
 @end
