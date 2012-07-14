@@ -95,7 +95,7 @@
 }
 
 - (int)noteNumberAtPoint:(NSPoint)point {
-    return (int)floor(point.y / kSCNoteLineHeight);
+    return (int)floor([self convertPoint:point fromView:nil].y / kSCNoteLineHeight);
 }
 - (void)mouseDown:(NSEvent *)theEvent {
     [self selectKey:[self noteNumberAtPoint:theEvent.locationInWindow]];
