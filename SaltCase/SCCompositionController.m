@@ -11,6 +11,7 @@
 
 #import "SCDocument.h"
 #import "SCSynth.h"
+#import "SCKeyboardView.h"
 #import "SCPianoRoll.h"
 
 @implementation SCCompositionController
@@ -24,6 +25,7 @@
 @synthesize tempoSlider;
 @synthesize tempoLabel;
 @synthesize scrollView;
+@synthesize keyboardScroll;
 @synthesize metronome;
 
 - (void)awakeFromNib {
@@ -43,6 +45,13 @@
     }];
     
     scrollView.documentView = [[SCPianoRoll alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 1000.f, 1000.0f)];
+    keyboardScroll.documentView = [[SCKeyboardView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, keyboardScroll.contentView.frame.size.width, 1000.0f)];
+    
+    // Called when user scrolled the piano roll.
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSViewBoundsDidChangeNotification object:scrollView.contentView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        float offsetY = scrollView.contentView.bounds.size.height - scrollView.contentView.bounds.origin.y;
+        NSLog(@"View bound %f", offsetY);
+    }];
 }
 - (void)dealloc
 {

@@ -23,28 +23,22 @@
 @implementation SCKeyboardView
 @synthesize keyCofficients, keyNames;
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    // TODO: Move to appropriate class.
-    NSDictionary* noteMappings = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NoteMap" ofType:@"plist"]];
-    NSMutableArray* names = [NSMutableArray array];
-    NSMutableArray* cofficients = [NSMutableArray array];
-    for (NSDictionary* note in [noteMappings objectForKey:@"Notes"]) {
-        [names addObject:[note objectForKey:@"Name"]];
-        [cofficients addObject:[note objectForKey:@"Frequency"]];
-    }
-    self.keyCofficients = cofficients;
-    self.keyNames = names;
-    
-    [self deselectKey];
-}
-
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
+        // TODO: Move to appropriate class.
+        NSDictionary* noteMappings = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NoteMap" ofType:@"plist"]];
+        NSMutableArray* names = [NSMutableArray array];
+        NSMutableArray* cofficients = [NSMutableArray array];
+        for (NSDictionary* note in [noteMappings objectForKey:@"Notes"]) {
+            [names addObject:[note objectForKey:@"Name"]];
+            [cofficients addObject:[note objectForKey:@"Frequency"]];
+        }
+        self.keyCofficients = cofficients;
+        self.keyNames = names;
+        
+        [self deselectKey];
     }
     
     return self;
@@ -55,7 +49,7 @@
     const float keyMargin = 1.0f;
     float y = 0.0f;
     int i = 0;
-    while (y <= dirtyRect.size.height) {
+    while (y <= self.frame.size.height) {
         NSString* keyName = [self.keyNames objectAtIndex:i % self.keyNames.count]; // A, B, C, C#...
         int octave = i / self.keyNames.count;
         if (i == selectedKey) {

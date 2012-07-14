@@ -22,5 +22,6 @@
 @property (weak) IBOutlet NSSlider *tempoSlider;
 @property (weak) IBOutlet NSTextField *tempoLabel;
 @property (weak) IBOutlet NSScrollView *scrollView;
+@property (weak) IBOutlet NSScrollView *keyboardScroll;
 @property (strong) SCMetronome* metronome;
 @end
