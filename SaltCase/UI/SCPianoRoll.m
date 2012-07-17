@@ -50,5 +50,9 @@
 - (void)mouseUp:(NSEvent *)theEvent {
     NSPoint cursorAt = [self pointOfEvent:theEvent];
     NSLog(@"mouseUp at (%f, %d)", [self beatPositionAtPoint:cursorAt], [self pitchNumberAtPoint:cursorAt]);
+    
+    // For UI testing.
+    NSButton* button = [[NSButton alloc] initWithFrame:NSMakeRect(cursorAt.x, cursorAt.y, 50.0f, 50.0f)];
+    [self addSubview:button];
 }
 @end
