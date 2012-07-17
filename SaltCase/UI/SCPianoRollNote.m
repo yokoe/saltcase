@@ -27,4 +27,7 @@
     return self;
 }
 
+- (void)mouseDown:(NSEvent *)theEvent {
+}
+
 @end
