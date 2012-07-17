@@ -37,6 +37,9 @@
 		1948352C15B59BB0003D90E8 /* SCCompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352515B59BB0003D90E8 /* SCCompositionController.m */; };
 		1948352D15B59BB0003D90E8 /* SCDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352815B59BB0003D90E8 /* SCDocument.m */; };
 		1948352E15B59BB0003D90E8 /* SCDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352815B59BB0003D90E8 /* SCDocument.m */; };
+		1948353115B5AB60003D90E8 /* SCPianoRollNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948353015B5AB5F003D90E8 /* SCPianoRollNote.m */; };
+		1948353215B5AB60003D90E8 /* SCPianoRollNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948353015B5AB5F003D90E8 /* SCPianoRollNote.m */; };
+		1948353415B5AC7C003D90E8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1948353315B5AC7C003D90E8 /* QuartzCore.framework */; };
 		196B168515A93CDF008E59D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B168415A93CDF008E59D0 /* Cocoa.framework */; };
 		196B168F15A93CDF008E59D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 196B168D15A93CDF008E59D0 /* InfoPlist.strings */; };
 		196B169115A93CDF008E59D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 196B169015A93CDF008E59D0 /* main.m */; };
@@ -102,6 +105,9 @@
 		1948352515B59BB0003D90E8 /* SCCompositionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCompositionController.m; sourceTree = "<group>"; };
 		1948352715B59BB0003D90E8 /* SCDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDocument.h; sourceTree = "<group>"; };
 		1948352815B59BB0003D90E8 /* SCDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDocument.m; sourceTree = "<group>"; };
+		1948352F15B5AB5F003D90E8 /* SCPianoRollNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPianoRollNote.h; sourceTree = "<group>"; };
+		1948353015B5AB5F003D90E8 /* SCPianoRollNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPianoRollNote.m; sourceTree = "<group>"; };
+		1948353315B5AC7C003D90E8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		196B168015A93CDF008E59D0 /* SaltCase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaltCase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		196B168415A93CDF008E59D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		196B168715A93CDF008E59D0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -140,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1948353415B5AC7C003D90E8 /* QuartzCore.framework in Frameworks */,
 				1992DC6115A9736F00AC074F /* AudioToolbox.framework in Frameworks */,
 				196B168515A93CDF008E59D0 /* Cocoa.framework in Frameworks */,
 			);
@@ -221,6 +228,7 @@
 		196B167515A93CDF008E59D0 = {
 			isa = PBXGroup;
 			children = (
+				1948353315B5AC7C003D90E8 /* QuartzCore.framework */,
 				191B040C15B05826007BA3AE /* Vendor */,
 				1992DC6015A9736F00AC074F /* AudioToolbox.framework */,
 				1992DC5A15A9732500AC074F /* SynthEngine */,
@@ -327,6 +335,8 @@
 				19CA67A215AD9FBE00816234 /* SCKeyboardView.m */,
 				19D6790A15B1118800A51E9A /* SCPianoRoll.h */,
 				19D6790B15B1118800A51E9A /* SCPianoRoll.m */,
+				1948352F15B5AB5F003D90E8 /* SCPianoRollNote.h */,
+				1948353015B5AB5F003D90E8 /* SCPianoRollNote.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -480,6 +490,7 @@
 				1948352915B59BB0003D90E8 /* SCAppController.m in Sources */,
 				1948352B15B59BB0003D90E8 /* SCCompositionController.m in Sources */,
 				1948352D15B59BB0003D90E8 /* SCDocument.m in Sources */,
+				1948353115B5AB60003D90E8 /* SCPianoRollNote.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +516,7 @@
 				1948352A15B59BB0003D90E8 /* SCAppController.m in Sources */,
 				1948352C15B59BB0003D90E8 /* SCCompositionController.m in Sources */,
 				1948352E15B59BB0003D90E8 /* SCDocument.m in Sources */,
+				1948353215B5AB60003D90E8 /* SCPianoRollNote.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

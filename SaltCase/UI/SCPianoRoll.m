@@ -7,9 +7,10 @@
 //
 
 #import "SCPianoRoll.h"
+#import "SCPianoRollNote.h"
 
 @interface SCPianoRoll()
-@property (weak) NSView* selectedNote;
+@property (weak) SCPianoRollNote* selectedNote;
 @end
 
 @implementation SCPianoRoll
@@ -56,9 +57,9 @@
     NSPoint cursorAt = [self pointOfEvent:theEvent];
     
     float y = [self pitchNumberAtPoint:cursorAt] * kSCNoteLineHeight;
-    NSButton* button = [[NSButton alloc] initWithFrame:NSMakeRect(cursorAt.x, y, 50.0f, kSCNoteLineHeight)];
-    [self addSubview:button];
-    self.selectedNote = button;
+    SCPianoRollNote* note = [[SCPianoRollNote alloc] initWithFrame:NSMakeRect(cursorAt.x, y, 50.0f, kSCNoteLineHeight)];
+    [self addSubview:note];
+    self.selectedNote = note;
 }
 - (void)mouseDragged:(NSEvent *)theEvent {
     [self moveSelectedNoteTo:[self pointOfEvent:theEvent]];
