@@ -29,19 +29,26 @@
 }
 
 #pragma mark Mouse events
+- (double)beatPositionAtPoint:(NSPoint)point {
+    return point.x / kSCPianoRollHorizontalGridInterval;
+}
+- (UInt32)pitchNumberAtPoint:(NSPoint)point {
+    int pitchNumber = (int)floor(point.y / kSCNoteLineHeight);
+    return pitchNumber >= 0 ? pitchNumber : 0;
+}
 - (NSPoint)pointOfEvent:(NSEvent*)event {
     return [self convertPoint:event.locationInWindow fromView:nil];
 }
 - (void)mouseDown:(NSEvent *)theEvent {
     NSPoint cursorAt = [self pointOfEvent:theEvent];
-    NSLog(@"mouseDown at (%f, %f)", cursorAt.x, cursorAt.y);
+    NSLog(@"mouseDown at (%f, %d)", [self beatPositionAtPoint:cursorAt], [self pitchNumberAtPoint:cursorAt]);
 }
 - (void)mouseDragged:(NSEvent *)theEvent {
     NSPoint cursorAt = [self pointOfEvent:theEvent];
-    NSLog(@"mouseDragged at (%f, %f)", cursorAt.x, cursorAt.y);
+    NSLog(@"mouseDragged at (%f, %d)", [self beatPositionAtPoint:cursorAt], [self pitchNumberAtPoint:cursorAt]);
 }
 - (void)mouseUp:(NSEvent *)theEvent {
     NSPoint cursorAt = [self pointOfEvent:theEvent];
-    NSLog(@"mouseUp at (%f, %f)", cursorAt.x, cursorAt.y);
+    NSLog(@"mouseUp at (%f, %d)", [self beatPositionAtPoint:cursorAt], [self pitchNumberAtPoint:cursorAt]);
 }
 @end
