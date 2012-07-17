@@ -52,7 +52,8 @@
     NSLog(@"mouseUp at (%f, %d)", [self beatPositionAtPoint:cursorAt], [self pitchNumberAtPoint:cursorAt]);
     
     // For UI testing.
-    NSButton* button = [[NSButton alloc] initWithFrame:NSMakeRect(cursorAt.x, cursorAt.y, 50.0f, 50.0f)];
+    float y = [self pitchNumberAtPoint:cursorAt] * kSCNoteLineHeight;
+    NSButton* button = [[NSButton alloc] initWithFrame:NSMakeRect(cursorAt.x, y, 50.0f, kSCNoteLineHeight)];
     [self addSubview:button];
 }
 @end
