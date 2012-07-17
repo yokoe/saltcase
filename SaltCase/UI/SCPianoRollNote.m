@@ -14,11 +14,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        CALayer *layer = [CALayer layer];
-        layer.backgroundColor = CGColorCreateGenericRGB(0.0f, 0.0f, 0.0f, 0.5f);
-        layer.cornerRadius = 10.0f;
+        self.layer = [CALayer layer];
+        self.layer.backgroundColor = CGColorCreateGenericRGB(0.0f, 0.0f, 0.0f, 0.5f);
+        self.layer.cornerRadius = 10.0f;
+        self.layer.shadowOpacity = 0.5f;
+        self.layer.shadowOffset = CGSizeMake(0.0f, -5.0f);
+        self.layer.shadowColor = CGColorCreateGenericRGB(1.0f, 0.0f, 0.0f, 1.0f);
+
         self.wantsLayer = YES;
-        self.layer = layer;
     }
     
     return self;

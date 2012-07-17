@@ -16,6 +16,15 @@
 @implementation SCPianoRoll
 @synthesize selectedNote;
 
+- (id)initWithFrame:(NSRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.wantsLayer = YES;
+    }
+    return self;
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     [[NSColor grayColor] set];
