@@ -31,11 +31,16 @@
 		191B043C15B05826007BA3AE /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B042415B05826007BA3AE /* SBJsonUTF8Stream.m */; };
 		191B043D15B05826007BA3AE /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B042615B05826007BA3AE /* SBJsonWriter.m */; };
 		191B043E15B05826007BA3AE /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B042615B05826007BA3AE /* SBJsonWriter.m */; };
+		1948352915B59BB0003D90E8 /* SCAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352315B59BB0003D90E8 /* SCAppController.m */; };
+		1948352A15B59BB0003D90E8 /* SCAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352315B59BB0003D90E8 /* SCAppController.m */; };
+		1948352B15B59BB0003D90E8 /* SCCompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352515B59BB0003D90E8 /* SCCompositionController.m */; };
+		1948352C15B59BB0003D90E8 /* SCCompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352515B59BB0003D90E8 /* SCCompositionController.m */; };
+		1948352D15B59BB0003D90E8 /* SCDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352815B59BB0003D90E8 /* SCDocument.m */; };
+		1948352E15B59BB0003D90E8 /* SCDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352815B59BB0003D90E8 /* SCDocument.m */; };
 		196B168515A93CDF008E59D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B168415A93CDF008E59D0 /* Cocoa.framework */; };
 		196B168F15A93CDF008E59D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 196B168D15A93CDF008E59D0 /* InfoPlist.strings */; };
 		196B169115A93CDF008E59D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 196B169015A93CDF008E59D0 /* main.m */; };
 		196B169515A93CE0008E59D0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 196B169315A93CE0008E59D0 /* Credits.rtf */; };
-		196B169815A93CE0008E59D0 /* SCDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 196B169715A93CE0008E59D0 /* SCDocument.m */; };
 		196B169B15A93CE0008E59D0 /* SCDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196B169915A93CE0008E59D0 /* SCDocument.xib */; };
 		196B169E15A93CE0008E59D0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196B169C15A93CE0008E59D0 /* MainMenu.xib */; };
 		196B16A915A93CE0008E59D0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B16A815A93CE0008E59D0 /* SenTestingKit.framework */; };
@@ -53,8 +58,6 @@
 		19D6790C15B1118800A51E9A /* SCPianoRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D6790B15B1118800A51E9A /* SCPianoRoll.m */; };
 		19D6790D15B1118800A51E9A /* SCPianoRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D6790B15B1118800A51E9A /* SCPianoRoll.m */; };
 		19E1748615A93F260045A3C3 /* ToolbarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19E1748515A93F260045A3C3 /* ToolbarButton.png */; };
-		19E1748A15A93FDB0045A3C3 /* SCCompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E1748915A93FDB0045A3C3 /* SCCompositionController.m */; };
-		19E1748D15A946950045A3C3 /* SCAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E1748C15A946950045A3C3 /* SCAppController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,12 @@
 		191B042415B05826007BA3AE /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		191B042515B05826007BA3AE /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		191B042615B05826007BA3AE /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		1948352215B59BB0003D90E8 /* SCAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAppController.h; sourceTree = "<group>"; };
+		1948352315B59BB0003D90E8 /* SCAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAppController.m; sourceTree = "<group>"; };
+		1948352415B59BB0003D90E8 /* SCCompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCompositionController.h; sourceTree = "<group>"; };
+		1948352515B59BB0003D90E8 /* SCCompositionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCompositionController.m; sourceTree = "<group>"; };
+		1948352715B59BB0003D90E8 /* SCDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDocument.h; sourceTree = "<group>"; };
+		1948352815B59BB0003D90E8 /* SCDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDocument.m; sourceTree = "<group>"; };
 		196B168015A93CDF008E59D0 /* SaltCase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaltCase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		196B168415A93CDF008E59D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		196B168715A93CDF008E59D0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -103,8 +112,6 @@
 		196B169015A93CDF008E59D0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		196B169215A93CDF008E59D0 /* SaltCase-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SaltCase-Prefix.pch"; sourceTree = "<group>"; };
 		196B169415A93CE0008E59D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		196B169615A93CE0008E59D0 /* SCDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCDocument.h; sourceTree = "<group>"; };
-		196B169715A93CE0008E59D0 /* SCDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCDocument.m; sourceTree = "<group>"; };
 		196B169A15A93CE0008E59D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SCDocument.xib; sourceTree = "<group>"; };
 		196B169D15A93CE0008E59D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		196B16A715A93CE0008E59D0 /* SaltCaseTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaltCaseTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,10 +133,6 @@
 		19D6790A15B1118800A51E9A /* SCPianoRoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPianoRoll.h; sourceTree = "<group>"; };
 		19D6790B15B1118800A51E9A /* SCPianoRoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPianoRoll.m; sourceTree = "<group>"; };
 		19E1748515A93F260045A3C3 /* ToolbarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarButton.png; sourceTree = "<group>"; };
-		19E1748815A93FDB0045A3C3 /* SCCompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCompositionController.h; sourceTree = "<group>"; };
-		19E1748915A93FDB0045A3C3 /* SCCompositionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCompositionController.m; sourceTree = "<group>"; };
-		19E1748B15A946950045A3C3 /* SCAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAppController.h; sourceTree = "<group>"; };
-		19E1748C15A946950045A3C3 /* SCAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAppController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,26 @@
 			path = SBJson;
 			sourceTree = "<group>";
 		};
+		1948352115B59BB0003D90E8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1948352215B59BB0003D90E8 /* SCAppController.h */,
+				1948352315B59BB0003D90E8 /* SCAppController.m */,
+				1948352415B59BB0003D90E8 /* SCCompositionController.h */,
+				1948352515B59BB0003D90E8 /* SCCompositionController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1948352615B59BB0003D90E8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1948352715B59BB0003D90E8 /* SCDocument.h */,
+				1948352815B59BB0003D90E8 /* SCDocument.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		196B167515A93CDF008E59D0 = {
 			isa = PBXGroup;
 			children = (
@@ -241,17 +264,13 @@
 		196B168A15A93CDF008E59D0 /* SaltCase */ = {
 			isa = PBXGroup;
 			children = (
+				1948352115B59BB0003D90E8 /* Controllers */,
+				1948352615B59BB0003D90E8 /* Models */,
 				19CA67A015AD9F9700816234 /* UI */,
 				19E1748315A93F260045A3C3 /* Resources */,
-				196B169615A93CE0008E59D0 /* SCDocument.h */,
-				196B169715A93CE0008E59D0 /* SCDocument.m */,
 				196B169915A93CE0008E59D0 /* SCDocument.xib */,
 				196B169C15A93CE0008E59D0 /* MainMenu.xib */,
 				196B168B15A93CDF008E59D0 /* Supporting Files */,
-				19E1748815A93FDB0045A3C3 /* SCCompositionController.h */,
-				19E1748915A93FDB0045A3C3 /* SCCompositionController.m */,
-				19E1748B15A946950045A3C3 /* SCAppController.h */,
-				19E1748C15A946950045A3C3 /* SCAppController.m */,
 				19CA67A415ADAFDB00816234 /* SCGlobal.h */,
 			);
 			path = SaltCase;
@@ -442,9 +461,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				196B169115A93CDF008E59D0 /* main.m in Sources */,
-				196B169815A93CE0008E59D0 /* SCDocument.m in Sources */,
-				19E1748A15A93FDB0045A3C3 /* SCCompositionController.m in Sources */,
-				19E1748D15A946950045A3C3 /* SCAppController.m in Sources */,
 				1992DC5E15A9733900AC074F /* SCSynth.m in Sources */,
 				1995A82C15AC6A4000678A93 /* SCMetronome.m in Sources */,
 				19CA67A315AD9FBE00816234 /* SCKeyboardView.m in Sources */,
@@ -461,6 +477,9 @@
 				191B043B15B05826007BA3AE /* SBJsonUTF8Stream.m in Sources */,
 				191B043D15B05826007BA3AE /* SBJsonWriter.m in Sources */,
 				19D6790C15B1118800A51E9A /* SCPianoRoll.m in Sources */,
+				1948352915B59BB0003D90E8 /* SCAppController.m in Sources */,
+				1948352B15B59BB0003D90E8 /* SCCompositionController.m in Sources */,
+				1948352D15B59BB0003D90E8 /* SCDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +502,9 @@
 				191B043C15B05826007BA3AE /* SBJsonUTF8Stream.m in Sources */,
 				191B043E15B05826007BA3AE /* SBJsonWriter.m in Sources */,
 				19D6790D15B1118800A51E9A /* SCPianoRoll.m in Sources */,
+				1948352A15B59BB0003D90E8 /* SCAppController.m in Sources */,
+				1948352C15B59BB0003D90E8 /* SCCompositionController.m in Sources */,
+				1948352E15B59BB0003D90E8 /* SCDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
