@@ -8,7 +8,12 @@
 
 #import "SCPianoRoll.h"
 
+@interface SCPianoRoll()
+@property (weak) NSView* selectedNote;
+@end
+
 @implementation SCPianoRoll
+@synthesize selectedNote;
 
 - (void)drawRect:(NSRect)dirtyRect
 {
@@ -42,18 +47,23 @@
 - (void)mouseDown:(NSEvent *)theEvent {
     NSPoint cursorAt = [self pointOfEvent:theEvent];
     NSLog(@"mouseDown at (%f, %d)", [self beatPositionAtPoint:cursorAt], [self pitchNumberAtPoint:cursorAt]);
-}
-- (void)mouseDragged:(NSEvent *)theEvent {
-    NSPoint cursorAt = [self pointOfEvent:theEvent];
-    NSLog(@"mouseDragged at (%f, %d)", [self beatPositionAtPoint:cursorAt], [self pitchNumberAtPoint:cursorAt]);
-}
-- (void)mouseUp:(NSEvent *)theEvent {
-    NSPoint cursorAt = [self pointOfEvent:theEvent];
-    NSLog(@"mouseUp at (%f, %d)", [self beatPositionAtPoint:cursorAt], [self pitchNumberAtPoint:cursorAt]);
     
-    // For UI testing.
     float y = [self pitchNumberAtPoint:cursorAt] * kSCNoteLineHeight;
     NSButton* button = [[NSButton alloc] initWithFrame:NSMakeRect(cursorAt.x, y, 50.0f, kSCNoteLineHeight)];
     [self addSubview:button];
+    self.selectedNote = button;
+}
+- (void)moveSelectedNoteTo:(NSPoint)cursorAt {
+    if (self.selectedNote) {
+        float y = [self pitchNumberAtPoint:cursorAt] * kSCNoteLineHeight;
+        self.selectedNote.frame = NSMakeRect(cursorAt.x, y, self.selectedNote.frame.size.width, kSCNoteLineHeight);
+    }
+}
+- (void)mouseDragged:(NSEvent *)theEvent {
+    [self moveSelectedNoteTo:[self pointOfEvent:theEvent]];
+}
+- (void)mouseUp:(NSEvent *)theEvent {
+    [self moveSelectedNoteTo:[self pointOfEvent:theEvent]];
+    self.selectedNote = nil;
 }
 @end
