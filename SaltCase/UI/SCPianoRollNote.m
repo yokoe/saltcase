@@ -27,7 +27,20 @@
     return self;
 }
 
-- (void)mouseDown:(NSEvent *)theEvent {
+- (NSPoint)pointOfEvent:(NSEvent*)event {
+    return [self convertPoint:event.locationInWindow fromView:nil];
 }
-
+#pragma mark Mouse events
+- (void)mouseDown:(NSEvent *)theEvent {
+    NSPoint cursorAt = [self pointOfEvent:theEvent];
+    NSLog(@"mouseDown at (%f, %f)", cursorAt.x, cursorAt.y);
+}
+- (void)mouseDragged:(NSEvent *)theEvent {
+    NSPoint cursorAt = [self pointOfEvent:theEvent];
+    NSLog(@"mouseDragged at (%f, %f)", cursorAt.x, cursorAt.y);
+}
+- (void)mouseUp:(NSEvent *)theEvent {
+    NSPoint cursorAt = [self pointOfEvent:theEvent];
+    NSLog(@"mouseUp at (%f, %f)", cursorAt.x, cursorAt.y);
+}
 @end
