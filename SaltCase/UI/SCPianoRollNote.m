@@ -8,9 +8,15 @@
 
 #import "SCPianoRollNote.h"
 
+typedef enum {
+    SCPianoRollNoteEditingModeMove,
+    SCPianoRollNoteEditingModeStretch,
+} SCPianoRollNoteEditingMode;
+
 @interface SCPianoRollNote() {
     NSPoint dragStartedAt;
     CGRect originalFrame;
+    SCPianoRollNoteEditingMode editMode;
 }
 @end
 
@@ -40,13 +46,28 @@
 - (void)mouseDown:(NSEvent *)theEvent {
     dragStartedAt = theEvent.locationInWindow;
     originalFrame = self.frame;
+    
+    NSPoint cursorAt = [self pointOfEvent:theEvent];
+    if (cursorAt.x <= self.frame.size.width / 2) {
+        editMode = SCPianoRollNoteEditingModeMove;
+    } else {
+        editMode = SCPianoRollNoteEditingModeStretch;
+    }
 }
 - (void)mouseDragged:(NSEvent *)theEvent {
     NSPoint location = theEvent.locationInWindow;
     NSPoint move = NSMakePoint(location.x - dragStartedAt.x, location.y - dragStartedAt.y);
-    float newY = (int)floor((originalFrame.origin.y + move.y) / kSCNoteLineHeight) * kSCNoteLineHeight;
-    newY = fmaxf(0.0f, newY);
-    self.frame = CGRectMake(originalFrame.origin.x + move.x, newY, originalFrame.size.width, originalFrame.size.height);
+    
+    if (editMode == SCPianoRollNoteEditingModeMove) {
+        float newY = (int)floor((originalFrame.origin.y + move.y) / kSCNoteLineHeight) * kSCNoteLineHeight;
+        newY = fmaxf(0.0f, newY);
+        self.frame = CGRectMake(originalFrame.origin.x + move.x, newY, originalFrame.size.width, originalFrame.size.height);
+    } else {
+        float newWidth = originalFrame.size.width + move.x;
+        const float minimumWidth = 20.0f; // TODO: This value should be variable.
+        newWidth = fmaxf(newWidth, minimumWidth);
+        self.frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y, newWidth, originalFrame.size.height);
+    }
     NSLog(@"mouseDragged at (%f, %f)", move.x, move.y);
 }
 - (void)mouseUp:(NSEvent *)theEvent {
