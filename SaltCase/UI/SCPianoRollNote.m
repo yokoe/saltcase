@@ -44,7 +44,9 @@
 - (void)mouseDragged:(NSEvent *)theEvent {
     NSPoint location = theEvent.locationInWindow;
     NSPoint move = NSMakePoint(location.x - dragStartedAt.x, location.y - dragStartedAt.y);
-    self.frame = CGRectMake(originalFrame.origin.x + move.x, originalFrame.origin.y + move.y, originalFrame.size.width, originalFrame.size.height);
+    float newY = (int)floor((originalFrame.origin.y + move.y) / kSCNoteLineHeight) * kSCNoteLineHeight;
+    newY = fmaxf(0.0f, newY);
+    self.frame = CGRectMake(originalFrame.origin.x + move.x, newY, originalFrame.size.width, originalFrame.size.height);
     NSLog(@"mouseDragged at (%f, %f)", move.x, move.y);
 }
 - (void)mouseUp:(NSEvent *)theEvent {
