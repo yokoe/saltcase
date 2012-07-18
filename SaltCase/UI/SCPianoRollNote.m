@@ -8,6 +8,9 @@
 
 #import "SCPianoRollNote.h"
 
+const float kSCPianoRollNoteTextFieldMarginLeft = 10.0f;
+const float kSCPianoRollNoteTextFieldMarginY = 5.0f;
+
 typedef enum {
     SCPianoRollNoteEditingModeMove,
     SCPianoRollNoteEditingModeStretch,
@@ -34,6 +37,18 @@ typedef enum {
         self.layer.shadowColor = CGColorCreateGenericRGB(1.0f, 0.0f, 0.0f, 1.0f);
 
         self.wantsLayer = YES;
+        
+        NSTextField* textField = [[NSTextField alloc] initWithFrame:CGRectMake(kSCPianoRollNoteTextFieldMarginLeft, kSCPianoRollNoteTextFieldMarginY, 30.0f, self.frame.size.height- kSCPianoRollNoteTextFieldMarginY * 2)];
+        textField.backgroundColor = [NSColor clearColor];
+        textField.textColor = [NSColor whiteColor];
+        textField.wantsLayer = YES;
+        textField.layer.cornerRadius = 5.0f;
+        textField.layer.shadowColor = CGColorCreateGenericRGB(1.0f, 1.0f, 1.0f, 0.5f);
+        textField.layer.shadowOpacity = 1.0f;
+        textField.layer.backgroundColor = CGColorCreateGenericRGB(1.0f, 1.0f, 1.0f, 0.25f);
+        textField.layer.borderWidth = 0.0f;
+        [textField setBezeled:NO];
+        [self addSubview:textField];
     }
     
     return self;
