@@ -8,6 +8,12 @@
 
 #import "SCPianoRollNote.h"
 
+@interface SCPianoRollNote() {
+    NSPoint dragStartedAt;
+    CGRect originalFrame;
+}
+@end
+
 @implementation SCPianoRollNote
 
 - (id)initWithFrame:(NSRect)frame
@@ -32,12 +38,14 @@
 }
 #pragma mark Mouse events
 - (void)mouseDown:(NSEvent *)theEvent {
-    NSPoint cursorAt = [self pointOfEvent:theEvent];
-    NSLog(@"mouseDown at (%f, %f)", cursorAt.x, cursorAt.y);
+    dragStartedAt = theEvent.locationInWindow;
+    originalFrame = self.frame;
 }
 - (void)mouseDragged:(NSEvent *)theEvent {
-    NSPoint cursorAt = [self pointOfEvent:theEvent];
-    NSLog(@"mouseDragged at (%f, %f)", cursorAt.x, cursorAt.y);
+    NSPoint location = theEvent.locationInWindow;
+    NSPoint move = NSMakePoint(location.x - dragStartedAt.x, location.y - dragStartedAt.y);
+    self.frame = CGRectMake(originalFrame.origin.x + move.x, originalFrame.origin.y + move.y, originalFrame.size.width, originalFrame.size.height);
+    NSLog(@"mouseDragged at (%f, %f)", move.x, move.y);
 }
 - (void)mouseUp:(NSEvent *)theEvent {
     NSPoint cursorAt = [self pointOfEvent:theEvent];
