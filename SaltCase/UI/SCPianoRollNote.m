@@ -30,7 +30,7 @@ typedef enum {
     self = [super initWithFrame:frame];
     if (self) {
         self.layer = [CALayer layer];
-        self.layer.backgroundColor = CGColorCreateGenericRGB(0.0f, 0.0f, 0.0f, 0.5f);
+        self.layer.backgroundColor = CGColorCreateGenericRGB(0.0f, 0.0f, 0.0f, 0.75f);
         self.layer.cornerRadius = 10.0f;
         self.layer.shadowOpacity = 0.5f;
         self.layer.shadowOffset = CGSizeMake(0.0f, -5.0f);
@@ -48,6 +48,11 @@ typedef enum {
         textField.layer.backgroundColor = CGColorCreateGenericRGB(1.0f, 1.0f, 1.0f, 0.25f);
         textField.layer.borderWidth = 0.0f;
         [textField setBezeled:NO];
+        
+        // Set the default character
+        NSDictionary* defaultEntries = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DefaultSettings" ofType:@"plist"]];
+        textField.stringValue = [defaultEntries objectForKey:@"DefaultCharacter"];
+        
         [self addSubview:textField];
     }
     
