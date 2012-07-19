@@ -24,6 +24,7 @@ typedef enum {
 @end
 
 @implementation SCPianoRollNote
+@synthesize delegate;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -88,10 +89,13 @@ typedef enum {
         newWidth = fmaxf(newWidth, minimumWidth);
         self.frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y, newWidth, originalFrame.size.height);
     }
-    NSLog(@"mouseDragged at (%f, %f)", move.x, move.y);
+//    NSLog(@"mouseDragged at (%f, %f)", move.x, move.y);
 }
 - (void)mouseUp:(NSEvent *)theEvent {
-    NSPoint cursorAt = [self pointOfEvent:theEvent];
-    NSLog(@"mouseUp at (%f, %f)", cursorAt.x, cursorAt.y);
+//    NSPoint cursorAt = [self pointOfEvent:theEvent];
+//    NSLog(@"mouseUp at (%f, %f)", cursorAt.x, cursorAt.y);
+    if ([self.delegate respondsToSelector:@selector(noteDidUpdate:)]) {
+        [self.delegate noteDidUpdate:self];
+    }
 }
 @end

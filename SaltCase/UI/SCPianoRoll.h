@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SCPianoRoll : NSView
+@protocol SCPianoRollNoteDelegate;
+@interface SCPianoRoll : NSView<SCPianoRollNoteDelegate>
 
 @end

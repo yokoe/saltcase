@@ -8,6 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SCPianoRollNote : NSView
+@class SCPianoRollNote;
+@protocol SCPianoRollNoteDelegate <NSObject>
+- (void)noteDidUpdate:(SCPianoRollNote*)note;
+@end
 
+@interface SCPianoRollNote : NSView
+@property (weak) id<SCPianoRollNoteDelegate> delegate;
 @end

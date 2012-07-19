@@ -60,6 +60,11 @@
     }
 }
 
+#pragma mark SCPianoRollNoteDelegate
+- (void)noteDidUpdate:(SCPianoRollNote *)note {
+    NSLog(@"did update %@", note);
+}
+
 #pragma mark Mouse events
 
 - (void)mouseDown:(NSEvent *)theEvent {
@@ -67,6 +72,7 @@
     
     float y = [self pitchNumberAtPoint:cursorAt] * kSCNoteLineHeight;
     SCPianoRollNote* note = [[SCPianoRollNote alloc] initWithFrame:NSMakeRect(cursorAt.x, y, 50.0f, kSCNoteLineHeight)];
+    note.delegate = self;
     [self addSubview:note];
     self.selectedNote = note;
 }
