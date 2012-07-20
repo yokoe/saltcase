@@ -21,6 +21,7 @@ typedef enum {
     NSPoint dragStartedAt;
     CGRect originalFrame;
     SCPianoRollNoteEditingMode editMode;
+    NSButton* deleteButton;
 }
 @end
 
@@ -58,13 +59,29 @@ typedef enum {
         [self addSubview:textField];
         
         
-        NSButton* deleteButton = [[NSButton alloc] initWithFrame:CGRectMake(frame.size.width - kSCPianoRollNoteCloseButtonSize * 0.5f, frame.size.height - kSCPianoRollNoteCloseButtonSize * 0.5f, kSCPianoRollNoteCloseButtonSize, kSCPianoRollNoteCloseButtonSize)];
+        deleteButton = [[NSButton alloc] initWithFrame:CGRectMake(frame.size.width - kSCPianoRollNoteCloseButtonSize * 0.5f, frame.size.height - kSCPianoRollNoteCloseButtonSize * 0.5f, kSCPianoRollNoteCloseButtonSize, kSCPianoRollNoteCloseButtonSize)];
         deleteButton.autoresizingMask = NSViewMinXMargin;
+        [deleteButton setTarget:self];
+        [deleteButton setAction:@selector(delete:)];
         [self addSubview:deleteButton];
     }
     
     return self;
 }
+
+// Make delete button clickable.
+- (NSView*)hitTest:(NSPoint)aPoint {
+    if ([super hitTest:aPoint]) return [super hitTest:aPoint];
+    
+    NSPoint convertedPoint = [self convertPoint:aPoint fromView:self.superview];
+    if (NSPointInRect(convertedPoint, deleteButton.frame)) return deleteButton;
+    
+    return nil;
+}
+- (void)delete:(id)sender{
+    NSLog(@"delete");
+}
+
 - (NSPoint)pointOfEvent:(NSEvent*)event {
     return [self convertPoint:event.locationInWindow fromView:nil];
 }
