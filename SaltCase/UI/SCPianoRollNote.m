@@ -12,6 +12,46 @@ const float kSCPianoRollNoteTextFieldMarginLeft = 10.0f;
 const float kSCPianoRollNoteTextFieldMarginY = 5.0f;
 const float kSCPianoRollNoteCloseButtonSize = 20.0f;
 
+@interface SCPianoRollNoteDeleteButton : NSButton
+@end
+@implementation SCPianoRollNoteDeleteButton
+- (id)initWithFrame:(NSRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setBordered:NO];
+        self.wantsLayer = YES;
+        self.layer.borderColor = CGColorCreateGenericRGB(0.0f, 0.0f, 0.0f, 0.5f);
+        self.layer.borderWidth = 2.0f;
+        self.layer.cornerRadius = kSCPianoRollNoteCloseButtonSize * 0.5f;
+        self.layer.shadowOpacity = 1.0f;
+        self.layer.shadowOffset = CGSizeMake(0.0f, -5.0f);
+    }
+    return self;
+}
+- (void)drawRect:(NSRect)dirtyRect {
+    [[NSColor grayColor] set];
+    
+    NSBezierPath* bgPath = [NSBezierPath bezierPathWithOvalInRect:dirtyRect];
+    [bgPath fill];
+    
+    const float size = self.frame.size.width * 0.2f;
+    NSPoint center = NSMakePoint(self.frame.size.width * 0.5f, self.frame.size.height * 0.5f);
+    
+    NSBezierPath* line = [NSBezierPath new];
+    [[NSColor whiteColor] set];
+    [line setLineWidth:2.0f];
+    
+    [line moveToPoint:NSMakePoint(center.x - size, center.y - size)];
+    [line lineToPoint:NSMakePoint(center.x + size, center.y + size)];
+    [line stroke];
+    [line moveToPoint:NSMakePoint(center.x + size, center.y - size)];
+    [line lineToPoint:NSMakePoint(center.x - size, center.y + size)];
+    [line stroke];
+}
+@end
+
+
 typedef enum {
     SCPianoRollNoteEditingModeMove,
     SCPianoRollNoteEditingModeStretch,
@@ -21,7 +61,7 @@ typedef enum {
     NSPoint dragStartedAt;
     CGRect originalFrame;
     SCPianoRollNoteEditingMode editMode;
-    NSButton* deleteButton;
+    SCPianoRollNoteDeleteButton* deleteButton;
 }
 @end
 
@@ -59,7 +99,7 @@ typedef enum {
         [self addSubview:textField];
         
         
-        deleteButton = [[NSButton alloc] initWithFrame:CGRectMake(frame.size.width - kSCPianoRollNoteCloseButtonSize * 0.5f, frame.size.height - kSCPianoRollNoteCloseButtonSize * 0.5f, kSCPianoRollNoteCloseButtonSize, kSCPianoRollNoteCloseButtonSize)];
+        deleteButton = [[SCPianoRollNoteDeleteButton alloc] initWithFrame:CGRectMake(frame.size.width - kSCPianoRollNoteCloseButtonSize * 0.5f, frame.size.height - kSCPianoRollNoteCloseButtonSize * 0.5f, kSCPianoRollNoteCloseButtonSize, kSCPianoRollNoteCloseButtonSize)];
         deleteButton.autoresizingMask = NSViewMinXMargin;
         [deleteButton setTarget:self];
         [deleteButton setAction:@selector(delete:)];
