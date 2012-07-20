@@ -11,6 +11,7 @@
 @class SCPianoRollNote;
 @protocol SCPianoRollNoteDelegate <NSObject>
 - (void)noteDidUpdate:(SCPianoRollNote*)note;
+- (void)noteToBeRemoved:(SCPianoRollNote*)note;
 @end
 
 @interface SCPianoRollNote : NSView

@@ -79,7 +79,9 @@ typedef enum {
     return nil;
 }
 - (void)delete:(id)sender{
-    NSLog(@"delete");
+    if ([self.delegate respondsToSelector:@selector(noteToBeRemoved:)]) {
+        [self.delegate noteToBeRemoved:self];
+    }
 }
 
 - (NSPoint)pointOfEvent:(NSEvent*)event {

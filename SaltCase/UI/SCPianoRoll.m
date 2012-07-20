@@ -67,6 +67,10 @@
     NSLog(@"did update %@", note);
     NSLog(@"notes: %@", self.notes);
 }
+- (void)noteToBeRemoved:(SCPianoRollNote *)note {
+    [note removeFromSuperview];
+    [notes removeObject:note];
+}
 
 #pragma mark Mouse events
 
