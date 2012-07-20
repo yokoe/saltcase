@@ -24,8 +24,8 @@ const float kSCPianoRollNoteCloseButtonSize = 20.0f;
         self.layer.borderColor = CGColorCreateGenericRGB(0.0f, 0.0f, 0.0f, 0.5f);
         self.layer.borderWidth = 2.0f;
         self.layer.cornerRadius = kSCPianoRollNoteCloseButtonSize * 0.5f;
-        self.layer.shadowOpacity = 1.0f;
-        self.layer.shadowOffset = CGSizeMake(0.0f, -5.0f);
+        self.layer.shadowOpacity = 0.5f;
+        self.layer.shadowOffset = CGSizeMake(0.0f, -2.0f);
     }
     return self;
 }
