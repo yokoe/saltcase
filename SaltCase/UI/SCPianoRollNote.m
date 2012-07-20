@@ -10,6 +10,7 @@
 
 const float kSCPianoRollNoteTextFieldMarginLeft = 10.0f;
 const float kSCPianoRollNoteTextFieldMarginY = 5.0f;
+const float kSCPianoRollNoteCloseButtonSize = 20.0f;
 
 typedef enum {
     SCPianoRollNoteEditingModeMove,
@@ -55,11 +56,15 @@ typedef enum {
         textField.stringValue = [defaultEntries objectForKey:@"DefaultCharacter"];
         
         [self addSubview:textField];
+        
+        
+        NSButton* deleteButton = [[NSButton alloc] initWithFrame:CGRectMake(frame.size.width - kSCPianoRollNoteCloseButtonSize * 0.5f, frame.size.height - kSCPianoRollNoteCloseButtonSize * 0.5f, kSCPianoRollNoteCloseButtonSize, kSCPianoRollNoteCloseButtonSize)];
+        deleteButton.autoresizingMask = NSViewMinXMargin;
+        [self addSubview:deleteButton];
     }
     
     return self;
 }
-
 - (NSPoint)pointOfEvent:(NSEvent*)event {
     return [self convertPoint:event.locationInWindow fromView:nil];
 }
@@ -88,6 +93,7 @@ typedef enum {
         const float minimumWidth = 20.0f; // TODO: This value should be variable.
         newWidth = fmaxf(newWidth, minimumWidth);
         self.frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y, newWidth, originalFrame.size.height);
+//        deleteButton.frame = CGRectMake(self.fra, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
     }
 //    NSLog(@"mouseDragged at (%f, %f)", move.x, move.y);
 }
