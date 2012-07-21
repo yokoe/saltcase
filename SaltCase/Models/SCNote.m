@@ -9,10 +9,11 @@
 #import "SCNote.h"
 
 @implementation SCNote
-@synthesize startsAt, length;
+@synthesize startsAt, length, pitch;
 - (NSDictionary*)dictionaryRepresentation {
     return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:startsAt], @"startsAt", 
-            [NSNumber numberWithFloat:length], @"length", nil];
+            [NSNumber numberWithFloat:length], @"length", 
+            [NSNumber numberWithInt:pitch], @"pitch", nil];
 }
 - (NSString*)description { return [[self dictionaryRepresentation] description]; }
 @end

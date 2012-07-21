@@ -11,5 +11,6 @@
 @interface SCNote : NSObject
 @property (assign) float startsAt;
 @property (assign) float length;
+@property (assign) int pitch;
 - (NSDictionary*)dictionaryRepresentation;
 @end

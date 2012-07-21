@@ -25,6 +25,7 @@
         SCNote* note = [[SCNote alloc] init];
         note.startsAt = noteView.frame.origin.x / self.gridHorizontalInterval;
         note.length = noteView.frame.size.width / self.gridHorizontalInterval;
+        note.pitch = (int)round(noteView.frame.origin.y / kSCNoteLineHeight);
         [notes addObject:note];
     }
     return notes;
