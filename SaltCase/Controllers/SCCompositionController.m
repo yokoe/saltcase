@@ -18,6 +18,7 @@
 @interface SCCompositionController() {
     SCPianoRoll* pianoRoll;
 }
+@property (strong) NSArray* events;
 @end
 
 @implementation SCCompositionController
@@ -33,6 +34,7 @@
 @synthesize scrollView;
 @synthesize keyboardScroll;
 @synthesize metronome;
+@synthesize events = events_;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -107,7 +109,8 @@
     for (SCAudioEvent* event in events) {
         event.timingPacketNumber = (int)round(event.timing * [SCAppController sharedInstance].synth.samplingFrameRate);
     }
-    NSLog(@"Events: %@", events);
+    self.events = events;
+    NSLog(@"Events: %@", self.events);
     
     if ([[SCAppController sharedInstance] playComposition:self]) {
         NSLog(@"Started playing %@", composition);

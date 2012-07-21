@@ -43,6 +43,17 @@ const float kSCMaximumTempo = 320.0f;
             [events addObject:event];
         }
     }
+    [events sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        SCAudioEvent* ev1 = obj1;
+        SCAudioEvent* ev2 = obj2;
+        if (ev1.timing > ev2.timing) {
+            return NSOrderedDescending;
+        } else if (ev1.timing > ev2.timing) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedSame;
+        }
+    }];
     return events;
 }
 
