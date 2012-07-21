@@ -122,7 +122,7 @@
             int numToRender = (nextEvent.timingPacketNumber - (renderedPackets + i));
 //            NSLog(@"Render A[%d]-[%d] (%d)", renderedPackets + i, nextEvent.timingPacketNumber, numToRender);
             [self renderPartToBuffer:buffer numOfPackets:numToRender sender:sender];
-            for (int j = 0; j < numToRender; j++) buffer += 2;
+            buffer += kSCNumOfChannels * numToRender;
             numRendered += numToRender;
 
             i = nextEvent.timingPacketNumber - renderedPackets;
@@ -137,7 +137,7 @@
             int numToRender = (renderedPackets + numOfPackets - (renderedPackets + i));
 //            NSLog(@"Render B[%d]-[%d (%d)]", renderedPackets + i, renderedPackets + numOfPackets, numToRender);
             [self renderPartToBuffer:buffer numOfPackets:numToRender sender:sender];
-            for (int j = 0; j < numToRender; j++) buffer += 2;
+            buffer += kSCNumOfChannels * numToRender;
             i = numOfPackets;
 //            NSLog(@"i = %d, nTR = %d", i, numToRender);
             
