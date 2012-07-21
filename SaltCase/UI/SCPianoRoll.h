@@ -19,4 +19,5 @@
 @property (assign) float gridHorizontalInterval;
 @property (readonly) NSArray* notes;
 - (void)loadNotes:(NSArray*)notesInComposition;
+- (void)moveBarToTiming:(NSTimeInterval)beats;
 @end

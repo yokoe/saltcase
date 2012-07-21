@@ -13,6 +13,11 @@
 #import "SCSynth.h"
 #import "SCKeyboardView.h"
 
+@interface SCCompositionController() {
+    SCPianoRoll* pianoRoll;
+}
+@end
+
 @implementation SCCompositionController
 @synthesize composition;
 @synthesize playButton;
@@ -39,11 +44,13 @@
                 int quarterNotes = (int)floor(player.timeElapsed / timeIntervalPerQuarterNote);
                 
                 [timeLabel setStringValue:[NSString stringWithFormat:@"Time: %.1f (%d qtr.s)", player.timeElapsed, quarterNotes]];
+                
+                [pianoRoll moveBarToTiming:player.timeElapsed / timeIntervalPerQuarterNote];
             });
         }
     }];
     
-    SCPianoRoll* pianoRoll = [[SCPianoRoll alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 1000.f, 1000.0f)];
+    pianoRoll = [[SCPianoRoll alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 1000.f, 1000.0f)];
     pianoRoll.delegate = self;
     if (composition.notes) [pianoRoll loadNotes:composition.notes];
     scrollView.documentView = pianoRoll;

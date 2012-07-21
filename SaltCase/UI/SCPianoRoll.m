@@ -14,10 +14,11 @@
 @interface SCPianoRoll()
 @property (strong) NSMutableArray* noteViews;
 @property (weak) SCPianoRollNote* selectedNote;
+@property (weak) NSView* timingBar;
 @end
 
 @implementation SCPianoRoll
-@synthesize delegate, gridHorizontalInterval, noteViews, selectedNote;
+@synthesize delegate, gridHorizontalInterval, noteViews, selectedNote, timingBar;
 
 - (NSArray*)notes {
     NSMutableArray* notes = [NSMutableArray array];
@@ -42,6 +43,13 @@
         self.wantsLayer = YES;
         self.noteViews = [NSMutableArray array];
         self.gridHorizontalInterval = kSCPianoRollHorizontalGridInterval;
+        
+        
+        NSView* bar = [[NSView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 2.0f, self.frame.size.height)];
+        bar.wantsLayer = YES;
+        bar.layer.backgroundColor = CGColorCreateGenericRGB(0.0f, 0.0f, 0.0f, 1.0f);
+        [self addSubview:bar];
+        self.timingBar = bar;
     }
     return self;
 }
@@ -91,6 +99,10 @@
         float y = [self pitchNumberAtPoint:cursorAt] * kSCNoteLineHeight;
         self.selectedNote.frame = NSMakeRect(cursorAt.x, y, self.selectedNote.frame.size.width, kSCNoteLineHeight);
     }
+}
+
+- (void)moveBarToTiming:(NSTimeInterval)beats {
+    self.timingBar.frame = CGRectMake(beats * self.gridHorizontalInterval, 0.0f, 2.0f, self.frame.size.height);
 }
 
 #pragma mark SCPianoRollNoteDelegate
