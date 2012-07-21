@@ -10,4 +10,5 @@
 
 @interface SCAudioEvent : NSObject
 @property (assign) NSTimeInterval timing;
+@property (assign) UInt32 timingPacketNumber;
 @end

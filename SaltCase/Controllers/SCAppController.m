@@ -3,7 +3,6 @@
 #import "SCCompositionController.h"
 @interface SCAppController()
 @property (strong) id<SCAudioRenderer> currentlyPlaying;
-@property (strong) SCSynth* synth;
 @end
 
 @implementation SCAppController

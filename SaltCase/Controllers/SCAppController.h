@@ -5,6 +5,7 @@
 @class SCCompositionController;
 @interface SCAppController : NSObject
 @property (strong, readonly) id<SCAudioRenderer> currentlyPlaying;
+@property (strong) SCSynth* synth;
 + (SCAppController*)sharedInstance;
 - (BOOL)playComposition:(id<SCAudioRenderer>)composition;
 - (void)stopComposition:(id<SCAudioRenderer>)composition;

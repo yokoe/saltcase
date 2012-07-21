@@ -13,6 +13,7 @@
 #import "SCSynth.h"
 #import "SCKeyboardView.h"
 #import "SCNote.h"
+#import "SCAudioEvent.h"
 
 @interface SCCompositionController() {
     SCPianoRoll* pianoRoll;
@@ -102,7 +103,11 @@
     [self.metronome reset];
     self.metronome.tempo = composition.tempo;
     
-    NSLog(@"Events: %@", self.composition.audioEvents);
+    NSArray* events = self.composition.audioEvents;
+    for (SCAudioEvent* event in events) {
+        event.timingPacketNumber = (int)round(event.timing * [SCAppController sharedInstance].synth.samplingFrameRate);
+    }
+    NSLog(@"Events: %@", events);
     
     if ([[SCAppController sharedInstance] playComposition:self]) {
         NSLog(@"Started playing %@", composition);
