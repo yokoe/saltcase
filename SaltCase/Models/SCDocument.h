@@ -13,4 +13,5 @@
 @property (weak) IBOutlet SCCompositionController *controller;
 @property (nonatomic, assign) float tempo;
 @property (nonatomic, assign) UInt32 bars;
+@property (nonatomic, strong) NSArray* notes;
 @end

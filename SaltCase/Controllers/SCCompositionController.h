@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "SCSynth.h"
 #import "SCMetronome.h"
+#import "SCPianoRoll.h"
 @class SCDocument;
 
-@interface SCCompositionController : NSObject <NSToolbarDelegate, SCAudioRenderer>
+@interface SCCompositionController : NSObject <NSToolbarDelegate, SCAudioRenderer, SCPianoRollDelegate>
 @property (weak) IBOutlet SCDocument *composition;
 @property (weak) IBOutlet NSToolbarItem *playButton;
 @property (weak) IBOutlet NSToolbarItem *stopButton;

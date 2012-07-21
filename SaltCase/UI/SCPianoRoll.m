@@ -17,7 +17,7 @@
 @end
 
 @implementation SCPianoRoll
-@synthesize gridHorizontalInterval, noteViews, selectedNote;
+@synthesize delegate, gridHorizontalInterval, noteViews, selectedNote;
 
 - (NSArray*)notes {
     NSMutableArray* notes = [NSMutableArray array];
@@ -80,8 +80,9 @@
 
 #pragma mark SCPianoRollNoteDelegate
 - (void)noteDidUpdate:(SCPianoRollNote *)note {
-    NSLog(@"did update %@", note);
-    NSLog(@"notes: %@", self.notes);
+    if ([self.delegate respondsToSelector:@selector(pianoRollDidUpdate:)]) {
+        [self.delegate pianoRollDidUpdate:self];
+    }
 }
 - (void)noteToBeRemoved:(SCPianoRollNote *)note {
     [note removeFromSuperview];
@@ -99,6 +100,10 @@
     [self addSubview:note];
     [self.noteViews addObject:note];
     self.selectedNote = note;
+    
+    if ([self.delegate respondsToSelector:@selector(pianoRollDidUpdate:)]) {
+        [self.delegate pianoRollDidUpdate:self];
+    }
 }
 - (void)mouseDragged:(NSEvent *)theEvent {
     [self moveSelectedNoteTo:[self pointOfEvent:theEvent]];

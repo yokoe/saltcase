@@ -12,7 +12,6 @@
 #import "SCDocument.h"
 #import "SCSynth.h"
 #import "SCKeyboardView.h"
-#import "SCPianoRoll.h"
 
 @implementation SCCompositionController
 @synthesize composition;
@@ -44,7 +43,9 @@
         }
     }];
     
-    scrollView.documentView = [[SCPianoRoll alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 1000.f, 1000.0f)];
+    SCPianoRoll* pianoRoll = [[SCPianoRoll alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 1000.f, 1000.0f)];
+    pianoRoll.delegate = self;
+    scrollView.documentView = pianoRoll;
     keyboardScroll.documentView = [[SCKeyboardView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, keyboardScroll.contentView.frame.size.width, 1000.0f)];
     
     // Synchronize scrolling between the piano roll and the keyboard view.
@@ -83,6 +84,7 @@
     return NO;
 }
 
+#pragma mark Audio
 - (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {
     [self.metronome renderToBuffer:buffer numOfPackets:numOfPackets player:sender];
 }
@@ -112,5 +114,10 @@
 }
 - (void)settingsSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     [sheet orderOut:self];
+}
+
+#pragma mark Editor
+- (void)pianoRollDidUpdate:(id)sender {
+    composition.notes = ((SCPianoRoll*)sender).notes;
 }
 @end

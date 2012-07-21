@@ -9,7 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 #import "SCPianoRollNote.h"
+
+@protocol SCPianoRollDelegate <NSObject>
+- (void)pianoRollDidUpdate:(id)sender;
+@end
+
 @interface SCPianoRoll : NSView<SCPianoRollNoteDelegate>
+@property (weak) id<SCPianoRollDelegate> delegate;
 @property (assign) float gridHorizontalInterval;
 @property (readonly) NSArray* notes;
 @end

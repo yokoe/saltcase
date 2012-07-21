@@ -9,6 +9,7 @@
 #import "SCDocument.h"
 #import "SCAppController.h"
 #import "SCCompositionController.h"
+#import "SCNote.h"
 #import "SBJson.h"
 
 const float kSCDefaultTempo = 120.0f;
@@ -19,6 +20,7 @@ const float kSCMaximumTempo = 320.0f;
 @synthesize controller;
 @synthesize tempo = tempo_;
 @synthesize bars = bars_;
+@synthesize notes;
 
 - (void)setTempo:(float)tempo {
     // Range limitation: 40.0f - 320.0f
@@ -64,6 +66,12 @@ const float kSCMaximumTempo = 320.0f;
     [dictionary setObject:header forKey:@"header"];
     
     [header setObject:[NSNumber numberWithFloat:self.tempo] forKey:@"tempo"];
+    
+    NSMutableArray* noteDictionaries = [NSMutableArray array];
+    for (SCNote* note in self.notes) {
+        [noteDictionaries addObject:[note dictionaryRepresentation]];
+    }
+    [dictionary setObject:noteDictionaries forKey:@"notes"];
     
     NSError* error = nil;
     if ([[dictionary JSONRepresentation] writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:&error]) {
