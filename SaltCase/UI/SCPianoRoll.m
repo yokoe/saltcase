@@ -15,7 +15,7 @@
 @end
 
 @implementation SCPianoRoll
-@synthesize notes, selectedNote;
+@synthesize gridHorizontalInterval, notes, selectedNote;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -23,6 +23,7 @@
     if (self) {
         self.wantsLayer = YES;
         self.notes = [NSMutableArray array];
+        self.gridHorizontalInterval = kSCPianoRollHorizontalGridInterval;
     }
     return self;
 }
@@ -41,7 +42,7 @@
     float x = 0.0f;
     while (x <= self.frame.size.width) {
         [NSBezierPath strokeLineFromPoint:NSMakePoint(x, 0.0f) toPoint:NSMakePoint(x, self.frame.size.height)];
-        x += kSCPianoRollHorizontalGridInterval;
+        x += self.gridHorizontalInterval;
     }
 }
 
@@ -66,8 +67,8 @@
 - (void)noteDidUpdate:(SCPianoRollNote *)note {
     NSLog(@"did update %@", note);
     for (SCPianoRollNote* note in self.notes) {
-        float startsAt = note.frame.origin.x / kSCPianoRollHorizontalGridInterval;
-        float length = note.frame.size.width / kSCPianoRollHorizontalGridInterval;
+        float startsAt = note.frame.origin.x / self.gridHorizontalInterval;
+        float length = note.frame.size.width / self.gridHorizontalInterval;
         NSLog(@"%f - (%f)", startsAt, length);
     }
 }
@@ -82,7 +83,7 @@
     NSPoint cursorAt = [self pointOfEvent:theEvent];
     
     float y = [self pitchNumberAtPoint:cursorAt] * kSCNoteLineHeight;
-    SCPianoRollNote* note = [[SCPianoRollNote alloc] initWithFrame:NSMakeRect(cursorAt.x, y, 50.0f, kSCNoteLineHeight)];
+    SCPianoRollNote* note = [[SCPianoRollNote alloc] initWithFrame:NSMakeRect(cursorAt.x, y, self.gridHorizontalInterval, kSCNoteLineHeight)];
     note.delegate = self;
     [self addSubview:note];
     [self.notes addObject:note];
