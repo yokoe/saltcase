@@ -26,6 +26,8 @@
         note.startsAt = noteView.frame.origin.x / self.gridHorizontalInterval;
         note.length = noteView.frame.size.width / self.gridHorizontalInterval;
         note.pitch = (int)round(noteView.frame.origin.y / kSCNoteLineHeight);
+        note.text = noteView.text;
+        NSLog(@"note %@", note);
         [notes addObject:note];
     }
     return notes;
@@ -49,6 +51,7 @@
         SCPianoRollNote* noteView = [[SCPianoRollNote alloc] initWithFrame:NSMakeRect(note.startsAt * self.gridHorizontalInterval,
                                                                                       note.pitch * kSCNoteLineHeight, 
                                                                                       note.length * self.gridHorizontalInterval, kSCNoteLineHeight)];
+        if (note.text) noteView.text = note.text;
         noteView.delegate = self;
         [self addSubview:noteView];
         [self.noteViews addObject:noteView];

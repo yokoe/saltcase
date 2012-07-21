@@ -62,6 +62,7 @@ typedef enum {
     CGRect originalFrame;
     SCPianoRollNoteEditingMode editMode;
     SCPianoRollNoteDeleteButton* deleteButton;
+    NSTextField* textField;
 }
 @end
 
@@ -81,7 +82,7 @@ typedef enum {
 
         self.wantsLayer = YES;
         
-        NSTextField* textField = [[NSTextField alloc] initWithFrame:CGRectMake(kSCPianoRollNoteTextFieldMarginLeft, kSCPianoRollNoteTextFieldMarginY, 30.0f, self.frame.size.height- kSCPianoRollNoteTextFieldMarginY * 2)];
+        textField = [[NSTextField alloc] initWithFrame:CGRectMake(kSCPianoRollNoteTextFieldMarginLeft, kSCPianoRollNoteTextFieldMarginY, 30.0f, self.frame.size.height- kSCPianoRollNoteTextFieldMarginY * 2)];
         textField.backgroundColor = [NSColor clearColor];
         textField.textColor = [NSColor whiteColor];
         textField.wantsLayer = YES;
@@ -90,6 +91,7 @@ typedef enum {
         textField.layer.shadowOpacity = 1.0f;
         textField.layer.backgroundColor = CGColorCreateGenericRGB(1.0f, 1.0f, 1.0f, 0.25f);
         textField.layer.borderWidth = 0.0f;
+        textField.delegate = self;
         [textField setBezeled:NO];
         
         // Set the default character
@@ -107,6 +109,13 @@ typedef enum {
     }
     
     return self;
+}
+
+- (void)setText:(NSString *)text {
+    [textField setStringValue:text];
+}
+- (NSString*)text {
+    return textField.stringValue;
 }
 
 // Make delete button clickable.
@@ -159,6 +168,13 @@ typedef enum {
 - (void)mouseUp:(NSEvent *)theEvent {
 //    NSPoint cursorAt = [self pointOfEvent:theEvent];
 //    NSLog(@"mouseUp at (%f, %f)", cursorAt.x, cursorAt.y);
+    if ([self.delegate respondsToSelector:@selector(noteDidUpdate:)]) {
+        [self.delegate noteDidUpdate:self];
+    }
+}
+
+#pragma mark TextField delegate
+- (void)controlTextDidChange:(NSNotification *)obj {
     if ([self.delegate respondsToSelector:@selector(noteDidUpdate:)]) {
         [self.delegate noteDidUpdate:self];
     }

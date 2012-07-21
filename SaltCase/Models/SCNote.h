@@ -12,6 +12,7 @@
 @property (assign) float startsAt;
 @property (assign) float length;
 @property (assign) int pitch;
+@property (strong) NSString* text;
 - (NSDictionary*)dictionaryRepresentation;
 - (id)initWithDictionary:(NSDictionary*)dictionary;
 @end

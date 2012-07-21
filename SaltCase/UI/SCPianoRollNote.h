@@ -14,6 +14,7 @@
 - (void)noteToBeRemoved:(SCPianoRollNote*)note;
 @end
 
-@interface SCPianoRollNote : NSView
+@interface SCPianoRollNote : NSView <NSTextFieldDelegate>
 @property (weak) id<SCPianoRollNoteDelegate> delegate;
+@property (nonatomic) NSString* text;
 @end
