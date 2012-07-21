@@ -40,12 +40,12 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 SCSynth* player = (SCSynth*)note.object;
                 
-                float timeIntervalPerQuarterNote = (60.0f / self.composition.tempo);
-                int quarterNotes = (int)floor(player.timeElapsed / timeIntervalPerQuarterNote);
+                float timeIntervalPerBeat = (60.0f / self.composition.tempo);
+                int beats = (int)floor(player.timeElapsed / timeIntervalPerBeat);
                 
-                [timeLabel setStringValue:[NSString stringWithFormat:@"Time: %.1f (%d qtr.s)", player.timeElapsed, quarterNotes]];
+                [timeLabel setStringValue:[NSString stringWithFormat:@"Time: %.1f (%d qtr.s)", player.timeElapsed, beats]];
                 
-                [pianoRoll moveBarToTiming:player.timeElapsed / timeIntervalPerQuarterNote];
+                [pianoRoll moveBarToTiming:player.timeElapsed / timeIntervalPerBeat];
             });
         }
     }];
