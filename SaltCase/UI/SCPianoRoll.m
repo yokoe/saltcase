@@ -65,7 +65,11 @@
 #pragma mark SCPianoRollNoteDelegate
 - (void)noteDidUpdate:(SCPianoRollNote *)note {
     NSLog(@"did update %@", note);
-    NSLog(@"notes: %@", self.notes);
+    for (SCPianoRollNote* note in self.notes) {
+        float startsAt = note.frame.origin.x / kSCPianoRollHorizontalGridInterval;
+        float length = note.frame.size.width / kSCPianoRollHorizontalGridInterval;
+        NSLog(@"%f - (%f)", startsAt, length);
+    }
 }
 - (void)noteToBeRemoved:(SCPianoRollNote *)note {
     [note removeFromSuperview];
