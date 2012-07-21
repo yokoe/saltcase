@@ -10,19 +10,19 @@
 #import "SCPianoRollNote.h"
 
 @interface SCPianoRoll()
-@property (strong) NSMutableArray* notes;
+@property (strong) NSMutableArray* noteViews;
 @property (weak) SCPianoRollNote* selectedNote;
 @end
 
 @implementation SCPianoRoll
-@synthesize gridHorizontalInterval, notes, selectedNote;
+@synthesize gridHorizontalInterval, noteViews, selectedNote;
 
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.wantsLayer = YES;
-        self.notes = [NSMutableArray array];
+        self.noteViews = [NSMutableArray array];
         self.gridHorizontalInterval = kSCPianoRollHorizontalGridInterval;
     }
     return self;
@@ -66,7 +66,7 @@
 #pragma mark SCPianoRollNoteDelegate
 - (void)noteDidUpdate:(SCPianoRollNote *)note {
     NSLog(@"did update %@", note);
-    for (SCPianoRollNote* note in self.notes) {
+    for (SCPianoRollNote* note in self.noteViews) {
         float startsAt = note.frame.origin.x / self.gridHorizontalInterval;
         float length = note.frame.size.width / self.gridHorizontalInterval;
         NSLog(@"%f - (%f)", startsAt, length);
@@ -74,7 +74,7 @@
 }
 - (void)noteToBeRemoved:(SCPianoRollNote *)note {
     [note removeFromSuperview];
-    [notes removeObject:note];
+    [noteViews removeObject:note];
 }
 
 #pragma mark Mouse events
@@ -86,7 +86,7 @@
     SCPianoRollNote* note = [[SCPianoRollNote alloc] initWithFrame:NSMakeRect(cursorAt.x, y, self.gridHorizontalInterval, kSCNoteLineHeight)];
     note.delegate = self;
     [self addSubview:note];
-    [self.notes addObject:note];
+    [self.noteViews addObject:note];
     self.selectedNote = note;
 }
 - (void)mouseDragged:(NSEvent *)theEvent {
