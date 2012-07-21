@@ -9,6 +9,8 @@
 #import "SCPianoRoll.h"
 #import "SCPianoRollNote.h"
 
+#import "SCNote.h"
+
 @interface SCPianoRoll()
 @property (strong) NSMutableArray* noteViews;
 @property (weak) SCPianoRollNote* selectedNote;
@@ -16,6 +18,19 @@
 
 @implementation SCPianoRoll
 @synthesize gridHorizontalInterval, noteViews, selectedNote;
+
+- (NSArray*)notes {
+    NSMutableArray* notes = [NSMutableArray array];
+    for (SCPianoRollNote* noteView in noteViews) {
+        SCNote* note = [[SCNote alloc] init];
+        note.startsAt = noteView.frame.origin.x / self.gridHorizontalInterval;
+        note.length = noteView.frame.size.width / self.gridHorizontalInterval;
+        [notes addObject:note];
+    }
+    return notes;
+}
+
+#pragma mark -
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -66,11 +81,7 @@
 #pragma mark SCPianoRollNoteDelegate
 - (void)noteDidUpdate:(SCPianoRollNote *)note {
     NSLog(@"did update %@", note);
-    for (SCPianoRollNote* note in self.noteViews) {
-        float startsAt = note.frame.origin.x / self.gridHorizontalInterval;
-        float length = note.frame.size.width / self.gridHorizontalInterval;
-        NSLog(@"%f - (%f)", startsAt, length);
-    }
+    NSLog(@"notes: %@", self.notes);
 }
 - (void)noteToBeRemoved:(SCPianoRollNote *)note {
     [note removeFromSuperview];

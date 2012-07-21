@@ -11,4 +11,5 @@
 #import "SCPianoRollNote.h"
 @interface SCPianoRoll : NSView<SCPianoRollNoteDelegate>
 @property (assign) float gridHorizontalInterval;
+@property (readonly) NSArray* notes;
 @end
