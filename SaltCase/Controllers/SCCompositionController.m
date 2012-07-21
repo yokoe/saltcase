@@ -102,9 +102,7 @@
     [self.metronome reset];
     self.metronome.tempo = composition.tempo;
     
-    for (SCNote* note in self.composition.notes) {
-        NSLog(@"%f -> %f", [note startsAtSecondsInTempo:composition.tempo], [note endsAtSecondsInTempo:composition.tempo]);
-    }
+    NSLog(@"Events: %@", self.composition.audioEvents);
     
     if ([[SCAppController sharedInstance] playComposition:self]) {
         NSLog(@"Started playing %@", composition);

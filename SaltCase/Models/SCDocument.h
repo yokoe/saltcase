@@ -14,4 +14,5 @@
 @property (nonatomic, assign) float tempo;
 @property (nonatomic, assign) UInt32 bars;
 @property (nonatomic, strong) NSArray* notes;
+@property (readonly) NSArray* audioEvents;
 @end

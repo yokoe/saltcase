@@ -64,6 +64,8 @@
 		19D6790D15B1118800A51E9A /* SCPianoRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D6790B15B1118800A51E9A /* SCPianoRoll.m */; };
 		19DC171E15BA7C8400CB1CDA /* SCNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC171D15BA7C8400CB1CDA /* SCNote.m */; };
 		19DC171F15BA7C8400CB1CDA /* SCNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC171D15BA7C8400CB1CDA /* SCNote.m */; };
+		19DC172315BABE7A00CB1CDA /* SCAudioEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC172215BABE7A00CB1CDA /* SCAudioEvent.m */; };
+		19DC172415BABE7A00CB1CDA /* SCAudioEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC172215BABE7A00CB1CDA /* SCAudioEvent.m */; };
 		19E1748615A93F260045A3C3 /* ToolbarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19E1748515A93F260045A3C3 /* ToolbarButton.png */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +147,8 @@
 		19D6790B15B1118800A51E9A /* SCPianoRoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPianoRoll.m; sourceTree = "<group>"; };
 		19DC171C15BA7C8400CB1CDA /* SCNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNote.h; sourceTree = "<group>"; };
 		19DC171D15BA7C8400CB1CDA /* SCNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNote.m; sourceTree = "<group>"; };
+		19DC172115BABE7A00CB1CDA /* SCAudioEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAudioEvent.h; sourceTree = "<group>"; };
+		19DC172215BABE7A00CB1CDA /* SCAudioEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAudioEvent.m; sourceTree = "<group>"; };
 		19E1748515A93F260045A3C3 /* ToolbarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarButton.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -333,6 +337,8 @@
 				1992DC5D15A9733900AC074F /* SCSynth.m */,
 				1995A82A15AC6A4000678A93 /* SCMetronome.h */,
 				1995A82B15AC6A4000678A93 /* SCMetronome.m */,
+				19DC172115BABE7A00CB1CDA /* SCAudioEvent.h */,
+				19DC172215BABE7A00CB1CDA /* SCAudioEvent.m */,
 			);
 			name = SynthEngine;
 			path = SaltCase/SynthEngine;
@@ -504,6 +510,7 @@
 				1948352D15B59BB0003D90E8 /* SCDocument.m in Sources */,
 				1948353115B5AB60003D90E8 /* SCPianoRollNote.m in Sources */,
 				19DC171E15BA7C8400CB1CDA /* SCNote.m in Sources */,
+				19DC172315BABE7A00CB1CDA /* SCAudioEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +538,7 @@
 				1948352E15B59BB0003D90E8 /* SCDocument.m in Sources */,
 				1948353215B5AB60003D90E8 /* SCPianoRollNote.m in Sources */,
 				19DC171F15BA7C8400CB1CDA /* SCNote.m in Sources */,
+				19DC172415BABE7A00CB1CDA /* SCAudioEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

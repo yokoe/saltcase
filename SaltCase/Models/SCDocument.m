@@ -11,6 +11,7 @@
 #import "SCCompositionController.h"
 #import "SCNote.h"
 #import "SBJson.h"
+#import "SCAudioEvent.h"
 
 const float kSCDefaultTempo = 120.0f;
 const float kSCMinimumTempo = 40.0f;
@@ -25,6 +26,24 @@ const float kSCMaximumTempo = 320.0f;
 - (void)setTempo:(float)tempo {
     // Range limitation: 40.0f - 320.0f
     tempo_ = fminf(fmaxf(kSCMinimumTempo, tempo), kSCMaximumTempo);
+}
+
+- (NSArray*)audioEvents {
+    NSMutableArray* events = [NSMutableArray array];
+    for (SCNote* note in self.notes) {
+        { // Start
+            SCAudioEvent* event = [[SCAudioEvent alloc] init];
+            event.timing = [note startsAtSecondsInTempo:self.tempo];
+            [events addObject:event];
+        }
+        
+        { // End
+            SCAudioEvent* event = [[SCAudioEvent alloc] init];
+            event.timing = [note endsAtSecondsInTempo:self.tempo];
+            [events addObject:event];
+        }
+    }
+    return events;
 }
 
 // For debugging.
