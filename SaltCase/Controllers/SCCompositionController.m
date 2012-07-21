@@ -17,6 +17,8 @@
 
 @interface SCCompositionController() {
     SCPianoRoll* pianoRoll;
+    UInt32 nextEventIndex;
+    UInt32 renderedPackets;
 }
 @property (strong) NSArray* events;
 @end
@@ -98,8 +100,53 @@
 }
 
 #pragma mark Audio
-- (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {
+- (SCAudioEvent*)nextEvent {
+    if (nextEventIndex < self.events.count) {
+        return [self.events objectAtIndex:nextEventIndex];
+    } else {
+        return nil;
+    }
+}
+- (void)renderPartToBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender{
     [self.metronome renderToBuffer:buffer numOfPackets:numOfPackets player:sender];
+}
+- (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {
+    int i = 0;
+    int numRendered = 0;
+    while (i < numOfPackets) {
+        SCAudioEvent* nextEvent = [self nextEvent];
+        
+        // Next event is in the buffer.
+        if (nextEvent && nextEvent.timingPacketNumber < renderedPackets + numOfPackets) {
+            // Render to the next event.
+            int numToRender = (nextEvent.timingPacketNumber - (renderedPackets + i));
+//            NSLog(@"Render A[%d]-[%d] (%d)", renderedPackets + i, nextEvent.timingPacketNumber, numToRender);
+            [self renderPartToBuffer:buffer numOfPackets:numToRender sender:sender];
+            for (int j = 0; j < numToRender; j++) buffer += 2;
+            numRendered += numToRender;
+
+            i = nextEvent.timingPacketNumber - renderedPackets;
+            
+            // Process the event here.
+            NSLog(@"Event %d", nextEventIndex);
+            
+            // Go next event.
+            nextEventIndex++;
+        } else { // No events scheduled in the buffer
+            
+            int numToRender = (renderedPackets + numOfPackets - (renderedPackets + i));
+//            NSLog(@"Render B[%d]-[%d (%d)]", renderedPackets + i, renderedPackets + numOfPackets, numToRender);
+            [self renderPartToBuffer:buffer numOfPackets:numToRender sender:sender];
+            for (int j = 0; j < numToRender; j++) buffer += 2;
+            i = numOfPackets;
+//            NSLog(@"i = %d, nTR = %d", i, numToRender);
+            
+            numRendered += numToRender;
+        }
+    }
+    if (numRendered != 1024) NSLog(@"Rendered packets count is incorrect. %d", numRendered);
+    
+    renderedPackets += numOfPackets;
 }
 - (IBAction)playComposition:(id)sender {
     [self.metronome reset];
@@ -110,6 +157,8 @@
         event.timingPacketNumber = (int)round(event.timing * [SCAppController sharedInstance].synth.samplingFrameRate);
     }
     self.events = events;
+    nextEventIndex = 0;
+    renderedPackets = 0;
     NSLog(@"Events: %@", self.events);
     
     if ([[SCAppController sharedInstance] playComposition:self]) {
