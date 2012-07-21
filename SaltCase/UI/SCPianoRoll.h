@@ -18,4 +18,5 @@
 @property (weak) id<SCPianoRollDelegate> delegate;
 @property (assign) float gridHorizontalInterval;
 @property (readonly) NSArray* notes;
+- (void)loadNotes:(NSArray*)notesInComposition;
 @end

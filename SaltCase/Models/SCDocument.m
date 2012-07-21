@@ -93,11 +93,22 @@ const float kSCMaximumTempo = 320.0f;
                 if (header) {
                     NSNumber* tempoValue = [header objectForKey:@"tempo"];
                     if (tempoValue) self.tempo = tempoValue.floatValue;
-                    return YES;
                 } else {
                     NSLog(@"Header section not found.\n%@", jsonString);
                     return NO;
                 }
+                
+                NSArray* noteArray = [dictionary objectForKey:@"notes"];
+                if (noteArray) {
+                    NSMutableArray* notes_ = [NSMutableArray array];
+                    for (NSDictionary* noteDictionary in noteArray) {
+                        SCNote* note = [[SCNote alloc] initWithDictionary:noteDictionary];
+                        [notes_ addObject:note];
+                    }
+                    self.notes = notes_;
+                }
+                
+                return YES;
             } else {
                 NSLog(@"JSON parse error.");
                 return NO;

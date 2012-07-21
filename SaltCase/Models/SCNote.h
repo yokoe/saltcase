@@ -13,4 +13,5 @@
 @property (assign) float length;
 @property (assign) int pitch;
 - (NSDictionary*)dictionaryRepresentation;
+- (id)initWithDictionary:(NSDictionary*)dictionary;
 @end

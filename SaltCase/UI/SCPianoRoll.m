@@ -44,6 +44,17 @@
     return self;
 }
 
+- (void)loadNotes:(NSArray*)notesInComposition {
+    for (SCNote* note in notesInComposition) {
+        SCPianoRollNote* noteView = [[SCPianoRollNote alloc] initWithFrame:NSMakeRect(note.startsAt * self.gridHorizontalInterval,
+                                                                                      note.pitch * kSCNoteLineHeight, 
+                                                                                      note.length * self.gridHorizontalInterval, kSCNoteLineHeight)];
+        noteView.delegate = self;
+        [self addSubview:noteView];
+        [self.noteViews addObject:noteView];
+    }
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     [[NSColor grayColor] set];
