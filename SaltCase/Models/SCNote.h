@@ -15,4 +15,7 @@
 @property (strong) NSString* text;
 - (NSDictionary*)dictionaryRepresentation;
 - (id)initWithDictionary:(NSDictionary*)dictionary;
+
+- (NSTimeInterval)startsAtSecondsInTempo:(float)tempo;
+- (NSTimeInterval)endsAtSecondsInTempo:(float)tempo;
 @end

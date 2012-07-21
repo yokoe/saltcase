@@ -12,6 +12,7 @@
 #import "SCDocument.h"
 #import "SCSynth.h"
 #import "SCKeyboardView.h"
+#import "SCNote.h"
 
 @interface SCCompositionController() {
     SCPianoRoll* pianoRoll;
@@ -100,6 +101,11 @@
 - (IBAction)playComposition:(id)sender {
     [self.metronome reset];
     self.metronome.tempo = composition.tempo;
+    
+    for (SCNote* note in self.composition.notes) {
+        NSLog(@"%f -> %f", [note startsAtSecondsInTempo:composition.tempo], [note endsAtSecondsInTempo:composition.tempo]);
+    }
+    
     if ([[SCAppController sharedInstance] playComposition:self]) {
         NSLog(@"Started playing %@", composition);
     } else {

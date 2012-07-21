@@ -29,4 +29,11 @@
             self.text ? self.text : @"", @"text", nil];
 }
 - (NSString*)description { return [[self dictionaryRepresentation] description]; }
+
+- (NSTimeInterval)startsAtSecondsInTempo:(float)tempo {
+    return startsAt * 60.0f / tempo;
+}
+- (NSTimeInterval)endsAtSecondsInTempo:(float)tempo {
+    return (startsAt + length) * 60.0f / tempo;
+}
 @end
