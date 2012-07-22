@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum SCAudioEventType {
+    SCAudioEventNoteOn = 1,
+    SCAudioEventNoteOff = 2,
+} SCAudioEventType;
+
 @interface SCAudioEvent : NSObject
 @property (assign) NSTimeInterval timing;
 @property (assign) UInt32 timingPacketNumber;
+@property (assign) SCAudioEventType type;
 @end

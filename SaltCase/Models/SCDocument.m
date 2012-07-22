@@ -34,12 +34,14 @@ const float kSCMaximumTempo = 320.0f;
         { // Start
             SCAudioEvent* event = [[SCAudioEvent alloc] init];
             event.timing = [note startsAtSecondsInTempo:self.tempo];
+            event.type = SCAudioEventNoteOn;
             [events addObject:event];
         }
         
         { // End
             SCAudioEvent* event = [[SCAudioEvent alloc] init];
             event.timing = [note endsAtSecondsInTempo:self.tempo];
+            event.type = SCAudioEventNoteOff;
             [events addObject:event];
         }
     }
