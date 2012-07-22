@@ -19,6 +19,9 @@
     SCPianoRoll* pianoRoll;
     UInt32 nextEventIndex;
     UInt32 renderedPackets;
+    
+    // These are for debugging.
+    float sinVolume;
 }
 @property (strong) NSArray* events;
 @end
@@ -108,6 +111,17 @@
     }
 }
 - (void)renderPartToBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender{
+    float* buf = buffer;
+    static float th_ = 0.0f;
+    for (int i = 0; i < numOfPackets; i++) {
+        float signal = sin(th_) * sinVolume;
+        th_ += 0.05f;
+        if (th_ >= 6.283f) { 
+         th_ -= 6.283f;
+         }
+        *buf++ += signal;
+        *buf++ += signal;
+    }
     [self.metronome renderToBuffer:buffer numOfPackets:numOfPackets player:sender];
 }
 - (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {
@@ -129,6 +143,11 @@
             
             // Process the event here.
             NSLog(@"Event %d", nextEventIndex);
+            if (nextEvent.type == SCAudioEventNoteOn) {
+                sinVolume = 0.5f;
+            } else {
+                sinVolume = 0.0f;
+            }
             
             // Go next event.
             nextEventIndex++;
@@ -160,6 +179,8 @@
     nextEventIndex = 0;
     renderedPackets = 0;
     NSLog(@"Events: %@", self.events);
+    
+    sinVolume = 0.0f;  // for debugging
     
     if ([[SCAppController sharedInstance] playComposition:self]) {
         NSLog(@"Started playing %@", composition);
