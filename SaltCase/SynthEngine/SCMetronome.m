@@ -26,6 +26,8 @@
     
     int packetsInterval = (60.0f / tempo) * player.samplingFrameRate;
     
+    float *buf = buffer;
+    
     for (int i = 0; i < numOfPackets; i++) {
         if (nextPacket <= currentPacket) {
             currentAmplitude = 0.75f;
@@ -35,8 +37,8 @@
         theta += deltaSpeed;
         if (theta >= 6.28) theta -= 6.28;
         float wave = sin(theta) * currentAmplitude;
-        *buffer++ = wave; // Left
-        *buffer++ = wave; // Right
+        *buf++ += wave; // Left
+        *buf++ += wave; // Right
         
         currentAmplitude -= 0.001f;
         currentAmplitude = fmaxf(0.0f, currentAmplitude);
