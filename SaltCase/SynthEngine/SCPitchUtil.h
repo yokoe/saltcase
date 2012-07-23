@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface SCPitchUtil : NSObject
++ (float)frequencyOfPitch:(int)pitch;
 + (NSArray*)keyNames;
 + (NSArray*)keyCofficients;
 @end

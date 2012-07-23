@@ -28,8 +28,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // TODO: Move to appropriate class.
-        
         self.keyCofficients = [SCPitchUtil keyCofficients];
         self.keyNames = [SCPitchUtil keyNames];
         
@@ -63,12 +61,6 @@
     }
 }
 
-// TODO: Move to appropriate class.
-- (float)frequencyOfPitch:(int)pitch {
-    if (pitch < 0) return 0.0f;
-    int octave = (pitch / keyCofficients.count);
-    return kSCLowestCFrequency * [[keyCofficients objectAtIndex:pitch % keyCofficients.count] floatValue] * pow(2, octave);
-}
 - (void)deselectKey {
     [self selectKey:-1];
     if ([SCAppController sharedInstance].currentlyPlaying == self) {
@@ -80,7 +72,7 @@
     if ([SCAppController sharedInstance].currentlyPlaying == nil || [SCAppController sharedInstance].currentlyPlaying == self) {    
         if (selectedKey != keyNumber) {
             selectedKey = keyNumber;
-            NSLog(@"selectKey %d %.3f", keyNumber, [self frequencyOfPitch:keyNumber]);
+            NSLog(@"selectKey %d %.3f", keyNumber, [SCPitchUtil frequencyOfPitch:keyNumber]);
             [self setNeedsDisplay:YES];
             if ([SCAppController sharedInstance].currentlyPlaying == nil) {
                 [[SCAppController sharedInstance] playComposition:self];
@@ -103,7 +95,7 @@
 }
 
 - (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {
-    float pitch = [self frequencyOfPitch:selectedKey];
+    float pitch = [SCPitchUtil frequencyOfPitch:selectedKey];
     delta = fmaxf(2.0f * M_PI * pitch / sender.samplingFrameRate, 0.0f);
     for (int i = 0; i < numOfPackets; i++) {
         float signal = sin(theta) * 0.5f;
