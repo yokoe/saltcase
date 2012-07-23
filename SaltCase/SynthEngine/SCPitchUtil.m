@@ -1,0 +1,50 @@
+//
+//  SCPitchUtil.m
+//  SaltCase
+//
+//  Created by Sota Yokoe on 7/23/12.
+//  Copyright (c) 2012 Pankaku Inc. All rights reserved.
+//
+
+#import "SCPitchUtil.h"
+
+@interface SCPitchUtil()
+@property (strong) NSArray* keyCofficients;
+@property (strong) NSArray* keyNames;
+@end
+
+@implementation SCPitchUtil
+@synthesize keyCofficients, keyNames;
+
++ (SCPitchUtil*)sharedInstance
+{
+    static dispatch_once_t once;
+    static SCPitchUtil* sharedInstance;
+    dispatch_once(&once, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        NSDictionary* noteMappings = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NoteMap" ofType:@"plist"]];
+        NSMutableArray* names = [NSMutableArray array];
+        NSMutableArray* cofficients = [NSMutableArray array];
+        for (NSDictionary* note in [noteMappings objectForKey:@"Notes"]) {
+            [names addObject:[note objectForKey:@"Name"]];
+            [cofficients addObject:[note objectForKey:@"Frequency"]];
+        }
+        self.keyNames = names;
+        self.keyCofficients = cofficients;
+    }
+    return self;
+}
+
+#pragma mark -
+
++ (NSArray*)keyCofficients { return [self sharedInstance].keyCofficients; }
++ (NSArray*)keyNames { return [self sharedInstance].keyNames; }
+@end

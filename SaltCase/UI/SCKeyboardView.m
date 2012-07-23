@@ -8,6 +8,7 @@
 
 #import "SCKeyboardView.h"
 #import "SCAppController.h"
+#import "SCPitchUtil.h"
 
 @interface SCKeyboardView() {
     int selectedKey;
@@ -28,15 +29,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         // TODO: Move to appropriate class.
-        NSDictionary* noteMappings = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NoteMap" ofType:@"plist"]];
-        NSMutableArray* names = [NSMutableArray array];
-        NSMutableArray* cofficients = [NSMutableArray array];
-        for (NSDictionary* note in [noteMappings objectForKey:@"Notes"]) {
-            [names addObject:[note objectForKey:@"Name"]];
-            [cofficients addObject:[note objectForKey:@"Frequency"]];
-        }
-        self.keyCofficients = cofficients;
-        self.keyNames = names;
+        
+        self.keyCofficients = [SCPitchUtil keyCofficients];
+        self.keyNames = [SCPitchUtil keyNames];
         
         [self deselectKey];
     }
