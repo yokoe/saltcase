@@ -9,7 +9,7 @@
 #import "SCAudioEvent.h"
 
 @implementation SCAudioEvent
-@synthesize note, pitch, timing, timingPacketNumber, type;
+@synthesize frequency, note, pitch, timing, timingPacketNumber, type;
 
 - (NSString*)description {
     return [NSString stringWithFormat:@"%.2f(%d) - %d", timing, timingPacketNumber, type];

@@ -15,6 +15,7 @@ typedef enum SCAudioEventType {
 } SCAudioEventType;
 
 @interface SCAudioEvent : NSObject
+@property (assign) float frequency;
 @property (assign) int pitch;
 @property (assign) NSTimeInterval timing;
 @property (assign) UInt32 timingPacketNumber;

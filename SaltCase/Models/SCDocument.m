@@ -12,10 +12,12 @@
 #import "SCNote.h"
 #import "SBJson.h"
 #import "SCAudioEvent.h"
+#import "SCPitchUtil.h"
 
 const float kSCDefaultTempo = 120.0f;
 const float kSCMinimumTempo = 40.0f;
 const float kSCMaximumTempo = 320.0f;
+const float kSCGliderTransitionControlInterval = 0.001f;
 
 @implementation SCDocument
 @synthesize controller;
@@ -36,6 +38,7 @@ const float kSCMaximumTempo = 320.0f;
             event.timing = [note startsAtSecondsInTempo:self.tempo];
             event.type = SCAudioEventNoteOn;
             event.pitch = note.pitch;
+            event.frequency = [SCPitchUtil frequencyOfPitch:event.pitch];
             event.note = note;
             [events addObject:event];
         }
@@ -45,10 +48,12 @@ const float kSCMaximumTempo = 320.0f;
             event.timing = [note endsAtSecondsInTempo:self.tempo];
             event.type = SCAudioEventNoteOff;
             event.note = note;
+            event.frequency = [SCPitchUtil frequencyOfPitch:event.pitch];
             [events addObject:event];
         }
     }
-    [events sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    
+    NSComparisonResult (^sortComparator)(id,id) = ^(id obj1, id obj2) {
         SCAudioEvent* ev1 = obj1;
         SCAudioEvent* ev2 = obj2;
         if (ev1.timing > ev2.timing) {
@@ -58,29 +63,55 @@ const float kSCMaximumTempo = 320.0f;
         } else {
             return NSOrderedSame;
         }
-    }];
+    };
+    
+    [events sortUsingComparator:sortComparator];
     
     // Enable glider
     NSMutableArray* notesOn = [NSMutableArray array];
     NSMutableArray* eventsToRemove = [NSMutableArray array];
+    NSMutableArray* eventsToAdd = [NSMutableArray array];
     for (SCAudioEvent* event in events) {
         if (event.type == SCAudioEventNoteOn) {
-            [notesOn addObject:event.note];
-            
-            if (notesOn.count > 1) {
+            if (notesOn.count > 0) {
                 event.type = SCAudioEventPitchChange;
+                event.pitch = ((SCNote*)[notesOn lastObject]).pitch;
+                event.frequency = [SCPitchUtil frequencyOfPitch:event.pitch];
             }
+            
+            [notesOn addObject:event.note];
             
         }
         if (event.type == SCAudioEventNoteOff) {
             [notesOn removeObject:event.note];
             
             if (notesOn.count > 0) {
-                [eventsToRemove addObject:event];
+                event.type = SCAudioEventPitchChange;
+                event.pitch = ((SCNote*)[notesOn lastObject]).pitch;
+                event.frequency = [SCPitchUtil frequencyOfPitch:event.pitch];
+                
+                SCNote* thisNote = event.note;
+                SCNote* lastNote = notesOn.lastObject; // Currently playing
+                
+                NSTimeInterval transitionLength = [thisNote endsAtSecondsInTempo:self.tempo] - [lastNote startsAtSecondsInTempo:self.tempo];
+                if (transitionLength >= 0.0f) {
+                    for (float t = 0.0f; t < transitionLength; t += kSCGliderTransitionControlInterval) {
+                        SCAudioEvent* pitchChangeEvent = [[SCAudioEvent alloc] init];
+                        pitchChangeEvent.type = SCAudioEventPitchChange;
+                        
+                        float p = t / transitionLength;
+                        
+                        pitchChangeEvent.frequency = [SCPitchUtil frequencyOfPitch:lastNote.pitch] * p + [SCPitchUtil frequencyOfPitch:thisNote.pitch] * (1.0f - p);
+                        pitchChangeEvent.timing = [lastNote startsAtSecondsInTempo:self.tempo] + t;
+                        [eventsToAdd addObject:pitchChangeEvent];
+                    }
+                }
             }
         }
     }
     [events removeObjectsInArray:eventsToRemove];
+    [events addObjectsFromArray:eventsToAdd];
+    [events sortUsingComparator:sortComparator];
     
     return events;
 }

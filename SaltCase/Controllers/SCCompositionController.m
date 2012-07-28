@@ -116,13 +116,13 @@
     switch (event.type) {
         case SCAudioEventNoteOn:
             sinVolume = 0.5f;
-            sinDelta = M_PI * 2.0 * [SCPitchUtil frequencyOfPitch:event.pitch] / sender.samplingFrameRate;
+            sinDelta = M_PI * 2.0 * event.frequency / sender.samplingFrameRate;
             break;
         case SCAudioEventNoteOff:
             sinVolume = 0.0f;
             break;
         case SCAudioEventPitchChange:
-            sinDelta = M_PI * 2.0 * [SCPitchUtil frequencyOfPitch:event.pitch] / sender.samplingFrameRate;
+            sinDelta = M_PI * 2.0 * event.frequency / sender.samplingFrameRate;
             break;
         default:
             break;

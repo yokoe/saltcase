@@ -91,7 +91,6 @@
     }
     STAssertEquals(numberOfNoteOn, 1, @"Overlapped notes should be treated as one note. Only 1 'on' event should exist.");
     STAssertEquals(numberOfNoteOff, 1, @"Overlapped notes should be treated as one note. Only 1 'off' event should exist.");
-    STAssertEquals(composition.audioEvents.count, (NSUInteger)3, @"There should be 3 events (on, on and off).");
 }
 
 @end
