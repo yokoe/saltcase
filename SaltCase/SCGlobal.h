@@ -18,4 +18,6 @@ static const float kSCPianoRollHorizontalGridInterval = 50.0f;
 
 static const int kSCNumOfChannels = 2;
 
+static const int kSCDefaultOctaveOffset = 1;
+
 #endif
