@@ -35,6 +35,7 @@ const float kSCMaximumTempo = 320.0f;
             SCAudioEvent* event = [[SCAudioEvent alloc] init];
             event.timing = [note startsAtSecondsInTempo:self.tempo];
             event.type = SCAudioEventNoteOn;
+            event.pitch = note.pitch;
             [events addObject:event];
         }
         

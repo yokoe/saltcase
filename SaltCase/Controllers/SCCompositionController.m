@@ -14,6 +14,7 @@
 #import "SCKeyboardView.h"
 #import "SCNote.h"
 #import "SCAudioEvent.h"
+#import "SCPitchUtil.h"
 
 @interface SCCompositionController() {
     SCPianoRoll* pianoRoll;
@@ -22,6 +23,7 @@
     
     // These are for debugging.
     float sinVolume;
+    float sinDelta;
 }
 @property (strong) NSArray* events;
 @end
@@ -110,12 +112,20 @@
         return nil;
     }
 }
+- (void)processEvent:(SCAudioEvent*)event sender:(SCSynth *)sender {
+    if (event.type == SCAudioEventNoteOn) {
+        sinVolume = 0.5f;
+        sinDelta = M_PI * 2.0 * [SCPitchUtil frequencyOfPitch:event.pitch] / sender.samplingFrameRate;
+    } else {
+        sinVolume = 0.0f;
+    }
+}
 - (void)renderPartToBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender{
     float* buf = buffer;
     static float th_ = 0.0f;
     for (int i = 0; i < numOfPackets; i++) {
         float signal = sin(th_) * sinVolume;
-        th_ += 0.05f;
+        th_ += sinDelta;
         if (th_ >= 6.283f) { 
          th_ -= 6.283f;
          }
@@ -140,14 +150,7 @@
             numRendered += numToRender;
 
             i = nextEvent.timingPacketNumber - renderedPackets;
-            
-            // Process the event here.
-            NSLog(@"Event %d", nextEventIndex);
-            if (nextEvent.type == SCAudioEventNoteOn) {
-                sinVolume = 0.5f;
-            } else {
-                sinVolume = 0.0f;
-            }
+            [self processEvent:nextEvent sender:sender];
             
             // Go next event.
             nextEventIndex++;
