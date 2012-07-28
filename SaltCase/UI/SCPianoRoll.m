@@ -11,7 +11,10 @@
 
 #import "SCNote.h"
 
-@interface SCPianoRoll()
+@interface SCPianoRoll() {
+    NSPoint dragStartedAt;
+    CGRect selectedNoteOriginalFrame;
+}
 @property (strong) NSMutableArray* noteViews;
 @property (weak) SCPianoRollNote* selectedNote;
 @property (weak) NSView* timingBar;
@@ -94,10 +97,12 @@
 - (NSPoint)pointOfEvent:(NSEvent*)event {
     return [self convertPoint:event.locationInWindow fromView:nil];
 }
-- (void)moveSelectedNoteTo:(NSPoint)cursorAt {
+- (void)moveSelectedStretchTo:(NSPoint)cursorAt {
     if (self.selectedNote) {
-        float y = [self pitchNumberAtPoint:cursorAt] * kSCNoteLineHeight;
-        self.selectedNote.frame = NSMakeRect(cursorAt.x, y, self.selectedNote.frame.size.width, kSCNoteLineHeight);
+        float diff = cursorAt.x - dragStartedAt.x;
+        float newWidth = fmaxf(selectedNoteOriginalFrame.size.width + diff, kSCPianoRollMinimumNoteWidth);
+        self.selectedNote.frame = NSMakeRect(selectedNoteOriginalFrame.origin.x, selectedNoteOriginalFrame.origin.y,
+                                             newWidth, selectedNoteOriginalFrame.size.height);
     }
 }
 
@@ -123,6 +128,8 @@
     
     float y = [self pitchNumberAtPoint:cursorAt] * kSCNoteLineHeight;
     SCPianoRollNote* note = [[SCPianoRollNote alloc] initWithFrame:NSMakeRect(cursorAt.x, y, self.gridHorizontalInterval, kSCNoteLineHeight)];
+    selectedNoteOriginalFrame = note.frame;
+    dragStartedAt = cursorAt;
     note.delegate = self;
     [self addSubview:note];
     [self.noteViews addObject:note];
@@ -133,10 +140,10 @@
     }
 }
 - (void)mouseDragged:(NSEvent *)theEvent {
-    [self moveSelectedNoteTo:[self pointOfEvent:theEvent]];
+    [self moveSelectedStretchTo:[self pointOfEvent:theEvent]];
 }
 - (void)mouseUp:(NSEvent *)theEvent {
-    [self moveSelectedNoteTo:[self pointOfEvent:theEvent]];
+    [self moveSelectedStretchTo:[self pointOfEvent:theEvent]];
     self.selectedNote = nil;
 }
 @end

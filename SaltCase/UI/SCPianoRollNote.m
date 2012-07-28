@@ -158,16 +158,12 @@ typedef enum {
         self.frame = CGRectMake(originalFrame.origin.x + move.x, newY, originalFrame.size.width, originalFrame.size.height);
     } else {
         float newWidth = originalFrame.size.width + move.x;
-        const float minimumWidth = 20.0f; // TODO: This value should be variable.
+        const float minimumWidth = kSCPianoRollMinimumNoteWidth;
         newWidth = fmaxf(newWidth, minimumWidth);
         self.frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y, newWidth, originalFrame.size.height);
-//        deleteButton.frame = CGRectMake(self.fra, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
     }
-//    NSLog(@"mouseDragged at (%f, %f)", move.x, move.y);
 }
 - (void)mouseUp:(NSEvent *)theEvent {
-//    NSPoint cursorAt = [self pointOfEvent:theEvent];
-//    NSLog(@"mouseUp at (%f, %f)", cursorAt.x, cursorAt.y);
     if ([self.delegate respondsToSelector:@selector(noteDidUpdate:)]) {
         [self.delegate noteDidUpdate:self];
     }
