@@ -19,6 +19,29 @@ const float kSCMinimumTempo = 40.0f;
 const float kSCMaximumTempo = 320.0f;
 const float kSCGliderTransitionControlInterval = 0.001f;
 
+NSComparisonResult (^noteSortComparator)(id,id) = ^(id obj1, id obj2) {
+    SCNote* note1 = obj1;
+    SCNote* note2 = obj2;
+    if (note1.startsAt > note2.startsAt) {
+        return NSOrderedDescending;
+    } else if (note1.startsAt < note2.startsAt) {
+        return NSOrderedAscending;
+    } else {
+        return NSOrderedSame;
+    }
+};
+NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
+    SCAudioEvent* ev1 = obj1;
+    SCAudioEvent* ev2 = obj2;
+    if (ev1.timing > ev2.timing) {
+        return NSOrderedDescending;
+    } else if (ev1.timing < ev2.timing) {
+        return NSOrderedAscending;
+    } else {
+        return NSOrderedSame;
+    }
+};
+
 @implementation SCDocument
 @synthesize controller;
 @synthesize tempo = tempo_;
@@ -29,7 +52,15 @@ const float kSCGliderTransitionControlInterval = 0.001f;
     // Range limitation: 40.0f - 320.0f
     tempo_ = fminf(fmaxf(kSCMinimumTempo, tempo), kSCMaximumTempo);
 }
-
+- (SCNote*)noteAfter:(SCNote*)noteBefore {
+    SCNote* nextNote = nil;
+    BOOL isNext = NO;
+    for (SCNote* note in [notes sortedArrayUsingComparator:noteSortComparator]) {
+        if (isNext) return note;
+        if (note == noteBefore) isNext = YES;
+    }
+    return nextNote;
+}
 - (NSArray*)audioEvents {
     NSMutableArray* events = [NSMutableArray array];
     for (SCNote* note in self.notes) {
@@ -52,20 +83,7 @@ const float kSCGliderTransitionControlInterval = 0.001f;
             [events addObject:event];
         }
     }
-    
-    NSComparisonResult (^sortComparator)(id,id) = ^(id obj1, id obj2) {
-        SCAudioEvent* ev1 = obj1;
-        SCAudioEvent* ev2 = obj2;
-        if (ev1.timing > ev2.timing) {
-            return NSOrderedDescending;
-        } else if (ev1.timing > ev2.timing) {
-            return NSOrderedAscending;
-        } else {
-            return NSOrderedSame;
-        }
-    };
-    
-    [events sortUsingComparator:sortComparator];
+    [events sortUsingComparator:eventSortComparator];
     
     // Enable glider
     NSMutableArray* notesOn = [NSMutableArray array];
@@ -91,27 +109,31 @@ const float kSCGliderTransitionControlInterval = 0.001f;
                 event.frequency = [SCPitchUtil frequencyOfPitch:event.pitch];
                 
                 SCNote* thisNote = event.note;
-                SCNote* lastNote = notesOn.lastObject; // Currently playing
+                SCNote* nextNote = [self noteAfter:thisNote]; // Currently playing
                 
-                NSTimeInterval transitionLength = [thisNote endsAtSecondsInTempo:self.tempo] - [lastNote startsAtSecondsInTempo:self.tempo];
-                if (transitionLength >= 0.0f) {
-                    for (float t = 0.0f; t < transitionLength; t += kSCGliderTransitionControlInterval) {
-                        SCAudioEvent* pitchChangeEvent = [[SCAudioEvent alloc] init];
-                        pitchChangeEvent.type = SCAudioEventPitchChange;
-                        
-                        float p = t / transitionLength;
-                        
-                        pitchChangeEvent.frequency = [SCPitchUtil frequencyOfPitch:lastNote.pitch] * p + [SCPitchUtil frequencyOfPitch:thisNote.pitch] * (1.0f - p);
-                        pitchChangeEvent.timing = [lastNote startsAtSecondsInTempo:self.tempo] + t;
-                        [eventsToAdd addObject:pitchChangeEvent];
+                if (nextNote) {                    
+                    NSTimeInterval transitionLength = [thisNote endsAtSecondsInTempo:self.tempo] - [nextNote startsAtSecondsInTempo:self.tempo];
+                    if (transitionLength >= 0.0f) {
+                        for (float t = 0.0f; t < transitionLength; t += kSCGliderTransitionControlInterval) {
+                            SCAudioEvent* pitchChangeEvent = [[SCAudioEvent alloc] init];
+                            pitchChangeEvent.type = SCAudioEventPitchChange;
+                            
+                            float p = t / transitionLength;
+                            
+                            pitchChangeEvent.frequency = [SCPitchUtil frequencyOfPitch:nextNote.pitch] * p + [SCPitchUtil frequencyOfPitch:thisNote.pitch] * (1.0f - p);
+                            pitchChangeEvent.timing = [nextNote startsAtSecondsInTempo:self.tempo] + t;
+                            [eventsToAdd addObject:pitchChangeEvent];
+                        }
                     }
+                } else {
+                    NSLog(@"Error no note after %@", thisNote);
                 }
             }
         }
     }
     [events removeObjectsInArray:eventsToRemove];
     [events addObjectsFromArray:eventsToAdd];
-    [events sortUsingComparator:sortComparator];
+    [events sortUsingComparator:eventSortComparator];
     
     return events;
 }

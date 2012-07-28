@@ -189,7 +189,7 @@
     self.events = events;
     nextEventIndex = 0;
     renderedPackets = 0;
-    NSLog(@"Events: %@", self.events);
+//    NSLog(@"Events: %@", self.events);
     
     sinVolume = 0.0f;  // for debugging
     

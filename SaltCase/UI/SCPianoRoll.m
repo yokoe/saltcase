@@ -134,10 +134,6 @@
     [self addSubview:note];
     [self.noteViews addObject:note];
     self.selectedNote = note;
-    
-    if ([self.delegate respondsToSelector:@selector(pianoRollDidUpdate:)]) {
-        [self.delegate pianoRollDidUpdate:self];
-    }
 }
 - (void)mouseDragged:(NSEvent *)theEvent {
     [self moveSelectedStretchTo:[self pointOfEvent:theEvent]];
@@ -145,5 +141,9 @@
 - (void)mouseUp:(NSEvent *)theEvent {
     [self moveSelectedStretchTo:[self pointOfEvent:theEvent]];
     self.selectedNote = nil;
+    
+    if ([self.delegate respondsToSelector:@selector(pianoRollDidUpdate:)]) {
+        [self.delegate pianoRollDidUpdate:self];
+    }
 }
 @end
