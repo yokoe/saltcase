@@ -18,4 +18,5 @@ typedef enum SCAudioEventType {
 @property (assign) NSTimeInterval timing;
 @property (assign) UInt32 timingPacketNumber;
 @property (assign) SCAudioEventType type;
+@property (strong) id note;
 @end

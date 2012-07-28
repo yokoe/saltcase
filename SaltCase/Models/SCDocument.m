@@ -36,6 +36,7 @@ const float kSCMaximumTempo = 320.0f;
             event.timing = [note startsAtSecondsInTempo:self.tempo];
             event.type = SCAudioEventNoteOn;
             event.pitch = note.pitch;
+            event.note = note;
             [events addObject:event];
         }
         
@@ -43,6 +44,7 @@ const float kSCMaximumTempo = 320.0f;
             SCAudioEvent* event = [[SCAudioEvent alloc] init];
             event.timing = [note endsAtSecondsInTempo:self.tempo];
             event.type = SCAudioEventNoteOff;
+            event.note = note;
             [events addObject:event];
         }
     }
@@ -57,6 +59,22 @@ const float kSCMaximumTempo = 320.0f;
             return NSOrderedSame;
         }
     }];
+    
+    // Enable glider
+    NSMutableArray* notesOn = [NSMutableArray array];
+    NSMutableArray* eventsToRemove = [NSMutableArray array];
+    for (SCAudioEvent* event in events) {
+        if (event.type == SCAudioEventNoteOn) { [notesOn addObject:event.note]; }
+        if (event.type == SCAudioEventNoteOff) {
+            [notesOn removeObject:event.note];
+            
+            if (notesOn.count > 0) {
+                [eventsToRemove addObject:event];
+            }
+        }
+    }
+    [events removeObjectsInArray:eventsToRemove];
+    
     return events;
 }
 
