@@ -8,6 +8,7 @@
 
 #import "SaltCaseTests.h"
 #import "SCDocument.h"
+#import "SCNote.h"
 
 @implementation SaltCaseTests
 
@@ -37,6 +38,50 @@
     composition.tempo = 10000.0f;
     STAssertFalse(composition.tempo == 10000.0f, @"Tremenderous tempo cannot be set.");
     STAssertTrue(composition.tempo <= 320.0f, @"Tempo should be smaller than 320.0f");
+}
+
+- (void)testAudioEventOptimization
+{
+    SCDocument* composition = [[SCDocument alloc] init];
+    STAssertEquals(composition.notes.count, (NSUInteger)0, @"There should be no notes when a new composition is created.");
+    STAssertEquals(composition.audioEvents.count, (NSUInteger)0, @"There should be no events when no notes are set.");
+    
+    SCNote* note = [[SCNote alloc] init];
+    note.startsAt = 1.0f;
+    note.length = 0.5f;
+    composition.notes = [NSArray arrayWithObject:note];
+    STAssertEquals(composition.notes.count, (NSUInteger)1, @"There should be 1 event.");
+    STAssertEquals(composition.audioEvents.count, (NSUInteger)2, @"There should be 2 events (on and off).");
+}
+- (void)testAudioEventOptimizationWithNoOverlappedNotes {
+    SCDocument* composition = [[SCDocument alloc] init];
+    
+    SCNote* note1 = [[SCNote alloc] init];
+    note1.startsAt = 1.0f;
+    note1.length = 0.5f;
+    
+    SCNote* note2 = [[SCNote alloc] init];
+    note2.startsAt = 2.0f;
+    note2.length = 0.5f;
+    
+    composition.notes = [NSArray arrayWithObjects:note1, note2, nil];
+    STAssertEquals(composition.notes.count, (NSUInteger)2, @"There should be 2 event.");
+    STAssertEquals(composition.audioEvents.count, (NSUInteger)4, @"There should be 4 events (on and off for each note).");
+}
+- (void)testAudioEventOptimizationWithOverlappedNotes {
+    SCDocument* composition = [[SCDocument alloc] init];
+    
+    SCNote* note1 = [[SCNote alloc] init];
+    note1.startsAt = 1.0f;
+    note1.length = 1.5f;
+    
+    SCNote* note2 = [[SCNote alloc] init];
+    note2.startsAt = 2.0f;
+    note2.length = 0.5f;
+    
+    composition.notes = [NSArray arrayWithObjects:note1, note2, nil];
+    STAssertEquals(composition.notes.count, (NSUInteger)2, @"There should be 2 event.");
+    STAssertEquals(composition.audioEvents.count, (NSUInteger)3, @"There should be 3 events (on, on and off).");
 }
 
 @end

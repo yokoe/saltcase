@@ -57,6 +57,7 @@
 		1992DC6115A9736F00AC074F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1992DC6015A9736F00AC074F /* AudioToolbox.framework */; };
 		1995A82815AC678900678A93 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1992DC6015A9736F00AC074F /* AudioToolbox.framework */; };
 		1995A82C15AC6A4000678A93 /* SCMetronome.m in Sources */ = {isa = PBXBuildFile; fileRef = 1995A82B15AC6A4000678A93 /* SCMetronome.m */; };
+		19C6273E15C3B82E00B0BB96 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1948353315B5AC7C003D90E8 /* QuartzCore.framework */; };
 		19CA67A315AD9FBE00816234 /* SCKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA67A215AD9FBE00816234 /* SCKeyboardView.m */; };
 		19CA67A615ADD02A00816234 /* NoteMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19CA67A515ADD02A00816234 /* NoteMap.plist */; };
 		19CA67A715ADD02A00816234 /* NoteMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19CA67A515ADD02A00816234 /* NoteMap.plist */; };
@@ -171,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19C6273E15C3B82E00B0BB96 /* QuartzCore.framework in Frameworks */,
 				1995A82815AC678900678A93 /* AudioToolbox.framework in Frameworks */,
 				196B16A915A93CE0008E59D0 /* SenTestingKit.framework in Frameworks */,
 				196B16AA15A93CE0008E59D0 /* Cocoa.framework in Frameworks */,
