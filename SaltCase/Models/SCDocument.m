@@ -64,7 +64,14 @@ const float kSCMaximumTempo = 320.0f;
     NSMutableArray* notesOn = [NSMutableArray array];
     NSMutableArray* eventsToRemove = [NSMutableArray array];
     for (SCAudioEvent* event in events) {
-        if (event.type == SCAudioEventNoteOn) { [notesOn addObject:event.note]; }
+        if (event.type == SCAudioEventNoteOn) {
+            [notesOn addObject:event.note];
+            
+            if (notesOn.count > 1) {
+                event.type = SCAudioEventPitchChange;
+            }
+            
+        }
         if (event.type == SCAudioEventNoteOff) {
             [notesOn removeObject:event.note];
             

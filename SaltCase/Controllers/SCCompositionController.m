@@ -113,11 +113,19 @@
     }
 }
 - (void)processEvent:(SCAudioEvent*)event sender:(SCSynth *)sender {
-    if (event.type == SCAudioEventNoteOn) {
-        sinVolume = 0.5f;
-        sinDelta = M_PI * 2.0 * [SCPitchUtil frequencyOfPitch:event.pitch] / sender.samplingFrameRate;
-    } else {
-        sinVolume = 0.0f;
+    switch (event.type) {
+        case SCAudioEventNoteOn:
+            sinVolume = 0.5f;
+            sinDelta = M_PI * 2.0 * [SCPitchUtil frequencyOfPitch:event.pitch] / sender.samplingFrameRate;
+            break;
+        case SCAudioEventNoteOff:
+            sinVolume = 0.0f;
+            break;
+        case SCAudioEventPitchChange:
+            sinDelta = M_PI * 2.0 * [SCPitchUtil frequencyOfPitch:event.pitch] / sender.samplingFrameRate;
+            break;
+        default:
+            break;
     }
 }
 - (void)renderPartToBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender{

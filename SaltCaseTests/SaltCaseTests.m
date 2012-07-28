@@ -9,6 +9,7 @@
 #import "SaltCaseTests.h"
 #import "SCDocument.h"
 #import "SCNote.h"
+#import "SCAudioEvent.h"
 
 @implementation SaltCaseTests
 
@@ -81,6 +82,15 @@
     
     composition.notes = [NSArray arrayWithObjects:note1, note2, nil];
     STAssertEquals(composition.notes.count, (NSUInteger)2, @"There should be 2 event.");
+    
+    int numberOfNoteOn = 0;
+    int numberOfNoteOff = 0;
+    for (SCAudioEvent* event in composition.audioEvents) {
+        if (event.type == SCAudioEventNoteOn) numberOfNoteOn++;
+        if (event.type == SCAudioEventNoteOff) numberOfNoteOff++;
+    }
+    STAssertEquals(numberOfNoteOn, 1, @"Overlapped notes should be treated as one note. Only 1 'on' event should exist.");
+    STAssertEquals(numberOfNoteOff, 1, @"Overlapped notes should be treated as one note. Only 1 'off' event should exist.");
     STAssertEquals(composition.audioEvents.count, (NSUInteger)3, @"There should be 3 events (on, on and off).");
 }
 

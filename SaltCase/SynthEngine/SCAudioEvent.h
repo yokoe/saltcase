@@ -11,6 +11,7 @@
 typedef enum SCAudioEventType {
     SCAudioEventNoteOn = 1,
     SCAudioEventNoteOff = 2,
+    SCAudioEventPitchChange = 101,
 } SCAudioEventType;
 
 @interface SCAudioEvent : NSObject
