@@ -61,12 +61,13 @@
         }
     }];
     
-    pianoRoll = [[SCPianoRoll alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 1000.f, 1000.0f)];
+    float maxHeight = kSCNumOfRows * kSCNoteLineHeight;
+    pianoRoll = [[SCPianoRoll alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 2000.f, maxHeight)];
     pianoRoll.delegate = self;
     if (composition.notes) [pianoRoll loadNotes:composition.notes];
     scrollView.documentView = pianoRoll;
     
-    keyboardScroll.documentView = [[SCKeyboardView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, keyboardScroll.contentView.frame.size.width, 1000.0f)];
+    keyboardScroll.documentView = [[SCKeyboardView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, keyboardScroll.contentView.frame.size.width, maxHeight)];
     
     // Synchronize scrolling between the piano roll and the keyboard view.
     // http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/NSScrollViewGuide/Articles/SynchroScroll.html
