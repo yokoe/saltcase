@@ -15,6 +15,8 @@ static const float kSCLowestCFrequency = 130.813f;
 
 // TODO: This parameter should be flexable.
 static const float kSCPianoRollHorizontalGridInterval = 50.0f;
+static const float kSCPianoRollHorizontalMinGridInterval = 50.0f;
+static const float kSCPianoRollHorizontalMaxGridInterval = 400.0f;
 
 static const float kSCPianoRollMinimumNoteWidth = 20.0f;
 

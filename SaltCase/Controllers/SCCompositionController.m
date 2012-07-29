@@ -24,6 +24,8 @@
     // These are for debugging.
     float sinVolume;
     float sinDelta;
+    
+    NSSlider* pianoRollXScaleSlider;
 }
 @property (strong) NSArray* events;
 @end
@@ -68,6 +70,15 @@
     scrollView.documentView = pianoRoll;
     
     keyboardScroll.documentView = [[SCKeyboardView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, keyboardScroll.contentView.frame.size.width, maxHeight)];
+    
+    pianoRollXScaleSlider = [[NSSlider alloc] initWithFrame:CGRectMake(0.0f, 0.0f, keyboardScroll.frame.size.width, 20.0f)];
+    pianoRollXScaleSlider.maxValue = kSCPianoRollHorizontalMaxGridInterval;
+    pianoRollXScaleSlider.minValue = kSCPianoRollHorizontalMinGridInterval;
+    [pianoRollXScaleSlider setFloatValue:kSCPianoRollHorizontalGridInterval]; // TODO: Restore setting.
+    [keyboardScroll.documentView addSubview:pianoRollXScaleSlider];
+    [pianoRollXScaleSlider setTarget:self];
+    [pianoRollXScaleSlider setAction:@selector(pianoRollXScaleSliderDidUpdate:)];
+
     
     // Synchronize scrolling between the piano roll and the keyboard view.
     // http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/NSScrollViewGuide/Articles/SynchroScroll.html
@@ -222,5 +233,8 @@
 #pragma mark Editor
 - (void)pianoRollDidUpdate:(id)sender {
     composition.notes = ((SCPianoRoll*)sender).notes;
+}
+- (void)pianoRollXScaleSliderDidUpdate:(id)sender {
+    pianoRoll.gridHorizontalInterval = [sender floatValue];
 }
 @end

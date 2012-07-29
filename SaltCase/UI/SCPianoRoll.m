@@ -21,7 +21,7 @@
 @end
 
 @implementation SCPianoRoll
-@synthesize delegate, gridHorizontalInterval, noteViews, selectedNote, timingBar;
+@synthesize delegate, gridHorizontalInterval = gridHorizontalInterval_, noteViews, selectedNote, timingBar;
 
 - (NSArray*)notes {
     NSMutableArray* notes = [NSMutableArray array];
@@ -35,6 +35,14 @@
         [notes addObject:note];
     }
     return notes;
+}
+
+- (void)setGridHorizontalInterval:(float)gridHorizontalInterval {
+    gridHorizontalInterval_ = gridHorizontalInterval;
+    
+    // TODO: Layout notes.
+    
+    [self setNeedsDisplay:YES];
 }
 
 #pragma mark -

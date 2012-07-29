@@ -16,7 +16,7 @@
 
 @interface SCPianoRoll : NSView<SCPianoRollNoteDelegate>
 @property (weak) id<SCPianoRollDelegate> delegate;
-@property (assign) float gridHorizontalInterval;
+@property (nonatomic, assign) float gridHorizontalInterval;
 @property (readonly) NSArray* notes;
 - (void)loadNotes:(NSArray*)notesInComposition;
 - (void)moveBarToTiming:(NSTimeInterval)beats;
