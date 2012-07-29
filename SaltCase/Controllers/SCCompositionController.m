@@ -16,17 +16,15 @@
 #import "SCAudioEvent.h"
 #import "SCPitchUtil.h"
 
+#import "SCSineWaveGenerator.h"
+
 @interface SCCompositionController() {
     SCPianoRoll* pianoRoll;
     UInt32 nextEventIndex;
-    UInt32 renderedPackets;
-    
-    // These are for debugging.
-    float sinVolume;
-    float sinDelta;
-    
+    UInt32 renderedPackets;    
     NSSlider* pianoRollXScaleSlider;
 }
+@property (strong) SCSineWaveGenerator* vocalLine;
 @property (strong) NSArray* events;
 @end
 
@@ -44,6 +42,7 @@
 @synthesize keyboardScroll;
 @synthesize metronome;
 @synthesize events = events_;
+@synthesize vocalLine;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -96,6 +95,8 @@
         [scrollView.contentView scrollToPoint:changedBoundsOrigin];
         [scrollView reflectScrolledClipView:scrollView.contentView];
     }];
+    
+    self.vocalLine = [[SCSineWaveGenerator alloc] init];
 }
 - (void)dealloc
 {
@@ -127,31 +128,21 @@
 - (void)processEvent:(SCAudioEvent*)event sender:(SCSynth *)sender {
     switch (event.type) {
         case SCAudioEventNoteOn:
-            sinVolume = 0.5f;
-            sinDelta = M_PI * 2.0 * event.frequency / sender.samplingFrameRate;
+            [vocalLine onWithVelocity:0.5f];
+            [vocalLine setFrequency:event.frequency];
             break;
         case SCAudioEventNoteOff:
-            sinVolume = 0.0f;
+            [vocalLine off];
             break;
         case SCAudioEventPitchChange:
-            sinDelta = M_PI * 2.0 * event.frequency / sender.samplingFrameRate;
+            [vocalLine setFrequency:event.frequency];
             break;
         default:
             break;
     }
 }
 - (void)renderPartToBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender{
-    float* buf = buffer;
-    static float th_ = 0.0f;
-    for (int i = 0; i < numOfPackets; i++) {
-        float signal = sin(th_) * sinVolume;
-        th_ += sinDelta;
-        if (th_ >= 6.283f) { 
-         th_ -= 6.283f;
-         }
-        *buf++ += signal;
-        *buf++ += signal;
-    }
+    [self.vocalLine renderToBuffer:buffer numOfPackets:numOfPackets sender:sender];
     [self.metronome renderToBuffer:buffer numOfPackets:numOfPackets player:sender];
 }
 - (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {
@@ -203,7 +194,7 @@
     renderedPackets = 0;
 //    NSLog(@"Events: %@", self.events);
     
-    sinVolume = 0.0f;  // for debugging
+    [vocalLine off];
     
     if ([[SCAppController sharedInstance] playComposition:self]) {
         NSLog(@"Started playing %@", composition);
