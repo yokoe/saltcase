@@ -38,9 +38,18 @@
 }
 
 - (void)setGridHorizontalInterval:(float)gridHorizontalInterval {
+    float previousScale = gridHorizontalInterval_;
     gridHorizontalInterval_ = gridHorizontalInterval;
     
-    // TODO: Layout notes.
+    // Stretch notes.
+    float scale = gridHorizontalInterval / previousScale;
+    for (SCPianoRollNote* note in self.noteViews) {
+        CGRect originalFrame = note.frame;
+        note.frame = CGRectMake(originalFrame.origin.x * scale,
+                                originalFrame.origin.y,
+                                originalFrame.size.width * scale,
+                                originalFrame.size.height);
+    }
     
     [self setNeedsDisplay:YES];
 }
