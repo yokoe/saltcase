@@ -68,7 +68,8 @@
     if (composition.notes) [pianoRoll loadNotes:composition.notes];
     scrollView.documentView = pianoRoll;
     
-    keyboardScroll.documentView = [[SCKeyboardView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, keyboardScroll.contentView.frame.size.width, maxHeight)];
+    SCKeyboardView* keyboard = [[SCKeyboardView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, keyboardScroll.contentView.frame.size.width, maxHeight)];
+    keyboardScroll.documentView = keyboard;
     
     pianoRollXScaleSlider = [[NSSlider alloc] initWithFrame:CGRectMake(0.0f, 0.0f, keyboardScroll.frame.size.width, 20.0f)];
     pianoRollXScaleSlider.maxValue = kSCPianoRollHorizontalMaxGridInterval;
@@ -97,6 +98,7 @@
     }];
     
     self.vocalLine = [[SCSineWaveGenerator alloc] init];
+    keyboard.vocalLine = vocalLine;
 }
 - (void)dealloc
 {

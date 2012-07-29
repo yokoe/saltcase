@@ -9,6 +9,7 @@
 #import "SCKeyboardView.h"
 #import "SCAppController.h"
 #import "SCPitchUtil.h"
+#import "SCSineWaveGenerator.h"
 
 @interface SCKeyboardView() {
     int selectedKey;
@@ -22,7 +23,7 @@
 @end
 
 @implementation SCKeyboardView
-@synthesize keyCofficients, keyNames;
+@synthesize keyCofficients, keyNames, vocalLine;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -95,14 +96,11 @@
 }
 
 - (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {
-    float pitch = [SCPitchUtil frequencyOfPitch:selectedKey];
-    delta = fmaxf(2.0f * M_PI * pitch / sender.samplingFrameRate, 0.0f);
-    for (int i = 0; i < numOfPackets; i++) {
-        float signal = sin(theta) * 0.5f;
-        *buffer++ = signal;
-        *buffer++ = signal;
-        theta += delta;
-        if (theta >= M_PI * 2.0f) theta -= M_PI * 2.0f;
+    if (vocalLine && [vocalLine isKindOfClass:[SCSineWaveGenerator class]]) { // TODO: Use protocol.
+        SCSineWaveGenerator* generator = vocalLine;
+        generator.frequency = [SCPitchUtil frequencyOfPitch:selectedKey];
+        [generator onWithVelocity:0.5f];
+        [generator renderToBuffer:buffer numOfPackets:numOfPackets sender:sender];
     }
 }
 @end

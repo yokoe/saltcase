@@ -11,4 +11,5 @@
 
 // TODO: Make a renderer later.
 @interface SCKeyboardView : NSView<SCAudioRenderer>
+@property (weak) id vocalLine;
 @end
