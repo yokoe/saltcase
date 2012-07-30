@@ -8,10 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SCSynth.h"
+#import "SCVocalInstrument.h"
 
-@interface SCSineWaveGenerator : NSObject
-@property (assign) float frequency;
-- (void)onWithVelocity:(float)velocity;
-- (void)off;
-- (void)renderToBuffer:(float*)buffer numOfPackets:(int)numOfPackets sender:(SCSynth*)sender;
+@interface SCSineWaveGenerator : SCVocalInstrument
 @end

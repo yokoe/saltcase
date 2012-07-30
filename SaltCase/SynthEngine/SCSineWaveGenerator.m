@@ -15,7 +15,6 @@
 @end
 
 @implementation SCSineWaveGenerator
-@synthesize frequency = targetFrequency;
 
 - (void)onWithVelocity:(float)velocity {
     amplitude = velocity;

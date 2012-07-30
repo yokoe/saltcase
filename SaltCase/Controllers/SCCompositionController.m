@@ -16,6 +16,7 @@
 #import "SCAudioEvent.h"
 #import "SCPitchUtil.h"
 
+#import "SCVocalInstrument.h"
 #import "SCSineWaveGenerator.h"
 
 @interface SCCompositionController() {
@@ -23,8 +24,8 @@
     UInt32 nextEventIndex;
     UInt32 renderedPackets;    
     NSSlider* pianoRollXScaleSlider;
+    SCVocalInstrument* vocalLine;
 }
-@property (strong) SCSineWaveGenerator* vocalLine;
 @property (strong) NSArray* events;
 @end
 
@@ -42,7 +43,6 @@
 @synthesize keyboardScroll;
 @synthesize metronome;
 @synthesize events = events_;
-@synthesize vocalLine;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -97,7 +97,7 @@
         [scrollView reflectScrolledClipView:scrollView.contentView];
     }];
     
-    self.vocalLine = [[SCSineWaveGenerator alloc] init];
+    vocalLine = [[SCSineWaveGenerator alloc] init];
     keyboard.vocalLine = vocalLine;
 }
 - (void)dealloc
@@ -144,7 +144,7 @@
     }
 }
 - (void)renderPartToBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender{
-    [self.vocalLine renderToBuffer:buffer numOfPackets:numOfPackets sender:sender];
+    [vocalLine renderToBuffer:buffer numOfPackets:numOfPackets sender:sender];
     [self.metronome renderToBuffer:buffer numOfPackets:numOfPackets player:sender];
 }
 - (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {

@@ -37,6 +37,8 @@
 		193F77EB15B846A3009E2BDB /* DefaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 193F77E915B846A3009E2BDB /* DefaultSettings.plist */; };
 		1948170015C6C75C00C338A6 /* sample-voice.wav in Resources */ = {isa = PBXBuildFile; fileRef = 194816FF15C6C75C00C338A6 /* sample-voice.wav */; };
 		1948170115C6C75C00C338A6 /* sample-voice.wav in Resources */ = {isa = PBXBuildFile; fileRef = 194816FF15C6C75C00C338A6 /* sample-voice.wav */; };
+		1948170615C6C82500C338A6 /* SCVocalInstrument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948170515C6C82500C338A6 /* SCVocalInstrument.m */; };
+		1948170715C6C82500C338A6 /* SCVocalInstrument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948170515C6C82500C338A6 /* SCVocalInstrument.m */; };
 		1948352915B59BB0003D90E8 /* SCAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352315B59BB0003D90E8 /* SCAppController.m */; };
 		1948352A15B59BB0003D90E8 /* SCAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352315B59BB0003D90E8 /* SCAppController.m */; };
 		1948352B15B59BB0003D90E8 /* SCCompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352515B59BB0003D90E8 /* SCCompositionController.m */; };
@@ -116,6 +118,8 @@
 		191B042615B05826007BA3AE /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		193F77E915B846A3009E2BDB /* DefaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultSettings.plist; sourceTree = "<group>"; };
 		194816FF15C6C75C00C338A6 /* sample-voice.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sample-voice.wav"; sourceTree = "<group>"; };
+		1948170415C6C82500C338A6 /* SCVocalInstrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCVocalInstrument.h; sourceTree = "<group>"; };
+		1948170515C6C82500C338A6 /* SCVocalInstrument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCVocalInstrument.m; sourceTree = "<group>"; };
 		1948352215B59BB0003D90E8 /* SCAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAppController.h; sourceTree = "<group>"; };
 		1948352315B59BB0003D90E8 /* SCAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAppController.m; sourceTree = "<group>"; };
 		1948352415B59BB0003D90E8 /* SCCompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCompositionController.h; sourceTree = "<group>"; };
@@ -364,6 +368,8 @@
 				19FF80F415BD97B500198F79 /* SCPitchUtil.m */,
 				1900B33515C52C4E00E75714 /* SCSineWaveGenerator.h */,
 				1900B33615C52C4E00E75714 /* SCSineWaveGenerator.m */,
+				1948170415C6C82500C338A6 /* SCVocalInstrument.h */,
+				1948170515C6C82500C338A6 /* SCVocalInstrument.m */,
 			);
 			name = SynthEngine;
 			path = SaltCase/SynthEngine;
@@ -541,6 +547,7 @@
 				19DC172315BABE7A00CB1CDA /* SCAudioEvent.m in Sources */,
 				19FF80F515BD97B500198F79 /* SCPitchUtil.m in Sources */,
 				1900B33715C52C4E00E75714 /* SCSineWaveGenerator.m in Sources */,
+				1948170615C6C82500C338A6 /* SCVocalInstrument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +578,7 @@
 				19DC172415BABE7A00CB1CDA /* SCAudioEvent.m in Sources */,
 				19FF80F615BD97B500198F79 /* SCPitchUtil.m in Sources */,
 				1900B33815C52C4E00E75714 /* SCSineWaveGenerator.m in Sources */,
+				1948170715C6C82500C338A6 /* SCVocalInstrument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
