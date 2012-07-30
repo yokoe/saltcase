@@ -35,6 +35,8 @@
 		191B043E15B05826007BA3AE /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B042615B05826007BA3AE /* SBJsonWriter.m */; };
 		193F77EA15B846A3009E2BDB /* DefaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 193F77E915B846A3009E2BDB /* DefaultSettings.plist */; };
 		193F77EB15B846A3009E2BDB /* DefaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 193F77E915B846A3009E2BDB /* DefaultSettings.plist */; };
+		1948170015C6C75C00C338A6 /* sample-voice.wav in Resources */ = {isa = PBXBuildFile; fileRef = 194816FF15C6C75C00C338A6 /* sample-voice.wav */; };
+		1948170115C6C75C00C338A6 /* sample-voice.wav in Resources */ = {isa = PBXBuildFile; fileRef = 194816FF15C6C75C00C338A6 /* sample-voice.wav */; };
 		1948352915B59BB0003D90E8 /* SCAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352315B59BB0003D90E8 /* SCAppController.m */; };
 		1948352A15B59BB0003D90E8 /* SCAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352315B59BB0003D90E8 /* SCAppController.m */; };
 		1948352B15B59BB0003D90E8 /* SCCompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948352515B59BB0003D90E8 /* SCCompositionController.m */; };
@@ -113,6 +115,7 @@
 		191B042515B05826007BA3AE /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		191B042615B05826007BA3AE /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		193F77E915B846A3009E2BDB /* DefaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultSettings.plist; sourceTree = "<group>"; };
+		194816FF15C6C75C00C338A6 /* sample-voice.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sample-voice.wav"; sourceTree = "<group>"; };
 		1948352215B59BB0003D90E8 /* SCAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAppController.h; sourceTree = "<group>"; };
 		1948352315B59BB0003D90E8 /* SCAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAppController.m; sourceTree = "<group>"; };
 		1948352415B59BB0003D90E8 /* SCCompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCompositionController.h; sourceTree = "<group>"; };
@@ -224,6 +227,14 @@
 				191B042615B05826007BA3AE /* SBJsonWriter.m */,
 			);
 			path = SBJson;
+			sourceTree = "<group>";
+		};
+		194816FE15C6C75C00C338A6 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				194816FF15C6C75C00C338A6 /* sample-voice.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		1948352115B59BB0003D90E8 /* Controllers */ = {
@@ -374,6 +385,7 @@
 		19E1748315A93F260045A3C3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				194816FE15C6C75C00C338A6 /* Sounds */,
 				19E1748415A93F260045A3C3 /* Images */,
 			);
 			path = Resources;
@@ -466,6 +478,7 @@
 				19E1748615A93F260045A3C3 /* ToolbarButton.png in Resources */,
 				19CA67A615ADD02A00816234 /* NoteMap.plist in Resources */,
 				193F77EA15B846A3009E2BDB /* DefaultSettings.plist in Resources */,
+				1948170015C6C75C00C338A6 /* sample-voice.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +489,7 @@
 				196B16B215A93CE0008E59D0 /* InfoPlist.strings in Resources */,
 				19CA67A715ADD02A00816234 /* NoteMap.plist in Resources */,
 				193F77EB15B846A3009E2BDB /* DefaultSettings.plist in Resources */,
+				1948170115C6C75C00C338A6 /* sample-voice.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
