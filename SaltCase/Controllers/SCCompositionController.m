@@ -46,21 +46,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.metronome = [[SCMetronome alloc] init];
-    [[NSNotificationCenter defaultCenter] addObserverForName:SCBufferUpdateNotification object:nil queue:[NSOperationQueue new] usingBlock:^(NSNotification *note) {
-        if ([SCAppController sharedInstance].currentlyPlaying == self) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                SCSynth* player = (SCSynth*)note.object;
-                
-                float timeIntervalPerBeat = (60.0f / self.composition.tempo);
-                int beats = (int)floor(player.timeElapsed / timeIntervalPerBeat);
-                
-                [timeLabel setStringValue:[NSString stringWithFormat:@"Time: %.1f (%d qtr.s)", player.timeElapsed, beats]];
-                
-                [pianoRoll moveBarToTiming:player.timeElapsed / timeIntervalPerBeat];
-            });
-        }
-    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioBufferDidUpdate:) name:SCBufferUpdateNotification object:nil];
     
     float maxHeight = kSCNumOfRows * kSCNoteLineHeight;
     pianoRoll = [[SCPianoRoll alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 2000.f, maxHeight)];
@@ -82,28 +69,50 @@
     
     // Synchronize scrolling between the piano roll and the keyboard view.
     // http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/NSScrollViewGuide/Articles/SynchroScroll.html
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSViewBoundsDidChangeNotification object:scrollView.contentView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        NSClipView *changedContentView = note.object;
-        NSPoint changedBoundsOrigin = changedContentView.documentVisibleRect.origin;
-        changedBoundsOrigin.x = 0.0f;
-        [keyboardScroll.contentView scrollToPoint:changedBoundsOrigin];
-        [keyboardScroll reflectScrolledClipView:keyboardScroll.contentView];
-    }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSViewBoundsDidChangeNotification object:keyboardScroll.contentView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        NSClipView *changedContentView = note.object;
-        NSPoint changedBoundsOrigin = changedContentView.documentVisibleRect.origin;
-        changedBoundsOrigin.x = scrollView.contentView.bounds.origin.x;
-        [scrollView.contentView scrollToPoint:changedBoundsOrigin];
-        [scrollView reflectScrolledClipView:scrollView.contentView];
-    }];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pianoRollDidScroll:) name:NSViewBoundsDidChangeNotification object:scrollView.contentView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardViewDidScroll:) name:NSViewBoundsDidChangeNotification object:keyboardScroll.contentView];
     vocalLine = [[SCSineWaveGenerator alloc] init];
     keyboard.vocalLine = vocalLine;
 }
 - (void)dealloc
 {
+    NSLog(@"CompositionContr dealloc");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+#pragma mark Notifications
+
+- (void)audioBufferDidUpdate:(NSNotification*)note {
+    if ([SCAppController sharedInstance].currentlyPlaying == self) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            SCSynth* player = (SCSynth*)note.object;
+            
+            float timeIntervalPerBeat = (60.0f / self.composition.tempo);
+            int beats = (int)floor(player.timeElapsed / timeIntervalPerBeat);
+            
+            [timeLabel setStringValue:[NSString stringWithFormat:@"Time: %.1f (%d qtr.s)", player.timeElapsed, beats]];
+            
+            [pianoRoll moveBarToTiming:player.timeElapsed / timeIntervalPerBeat];
+        });
+    }
+}
+
+- (void)pianoRollDidScroll:(NSNotification*)note {
+    NSClipView *changedContentView = note.object;
+    NSPoint changedBoundsOrigin = changedContentView.documentVisibleRect.origin;
+    changedBoundsOrigin.x = 0.0f;
+    [keyboardScroll.contentView scrollToPoint:changedBoundsOrigin];
+    [keyboardScroll reflectScrolledClipView:keyboardScroll.contentView];
+}
+- (void)keyboardViewDidScroll:(NSNotification*)note {
+    NSClipView *changedContentView = note.object;
+    NSPoint changedBoundsOrigin = changedContentView.documentVisibleRect.origin;
+    changedBoundsOrigin.x = scrollView.contentView.bounds.origin.x;
+    [scrollView.contentView scrollToPoint:changedBoundsOrigin];
+    [scrollView reflectScrolledClipView:scrollView.contentView];
+}
+
+#pragma mark -
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem {
     if (theItem == playButton) {
