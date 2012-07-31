@@ -7,12 +7,13 @@
 //
 
 #import "SCSimpleSampler.h"
-#import "SYExtAudioFile.h"
+#import "SYLinearPCMData.h"
 
 @interface SCSimpleSampler(){
     float amplitude;
     float theta;
-    SYExtAudioFile* audioFile;
+    float sampleIndex;
+    SYLinearPCMData* audioFile;
 }
 @end
 
@@ -21,9 +22,10 @@
 - (id)initWithFile:(NSString*)filePath {
     self = [super init];
     if (self) {
-        audioFile = [SYExtAudioFile audioFileWithContentOfFile:filePath];
-        if (audioFile == nil) {
-            NSLog(@"Critical Error: Failed to load audio file. %@", filePath);
+        NSError* error = nil;
+        audioFile = [SYLinearPCMData dataWithFile:filePath error:&error];
+        if (audioFile == nil || error != nil) {
+            NSLog(@"Critical: Failed to load audio file. %@\nError: %@", filePath, error);
             self = nil;
             return nil;
         }
@@ -40,13 +42,12 @@
 
 - (void)renderToBuffer:(float *)buffer numOfPackets:(int)numOfPackets sender:(SCSynth *)sender {
     float* buf = buffer;
-    float delta = M_PI * 2.0f * targetFrequency / sender.samplingFrameRate;
+    float* samples = audioFile.signal;
     for (int i = 0; i < numOfPackets; i++) {
-        float signal = sin(theta) * amplitude;
-        theta += delta;
-        if (theta >= 6.283f) {
-            theta -= 6.283f;
-        }
+        float signal = samples[(int)round(sampleIndex)] * amplitude;
+        sampleIndex += 1.0f;
+        if ((int)round(sampleIndex) >= audioFile.frames) sampleIndex = 0.0f;
+        
         *buf++ += signal;
         *buf++ += signal;
     }
