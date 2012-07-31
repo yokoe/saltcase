@@ -9,5 +9,5 @@
 #import "SCVocalInstrument.h"
 
 @interface SCSimpleSampler : SCVocalInstrument
-
+- (id)initWithFile:(NSString*)filePath;
 @end

@@ -15,6 +15,15 @@
 @end
 
 @implementation SCSimpleSampler
+
+- (id)initWithFile:(NSString*)filePath {
+    self = [super init];
+    if (self) {
+        NSLog(@"Load from file: %@", filePath);
+    }
+    return self;
+}
+
 - (void)onWithVelocity:(float)velocity {
     amplitude = velocity;
 }

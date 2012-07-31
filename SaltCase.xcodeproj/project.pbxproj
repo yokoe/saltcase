@@ -11,6 +11,10 @@
 		1900B33815C52C4E00E75714 /* SCSineWaveGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1900B33615C52C4E00E75714 /* SCSineWaveGenerator.m */; };
 		191A0B6715C81132009EC315 /* SCSimpleSampler.m in Sources */ = {isa = PBXBuildFile; fileRef = 191A0B6615C81132009EC315 /* SCSimpleSampler.m */; };
 		191A0B6815C81132009EC315 /* SCSimpleSampler.m in Sources */ = {isa = PBXBuildFile; fileRef = 191A0B6615C81132009EC315 /* SCSimpleSampler.m */; };
+		191A0B6E15C81B92009EC315 /* SYExtAudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 191A0B6B15C81B92009EC315 /* SYExtAudioFile.m */; };
+		191A0B6F15C81B92009EC315 /* SYExtAudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 191A0B6B15C81B92009EC315 /* SYExtAudioFile.m */; };
+		191A0B7015C81B92009EC315 /* SYLinearPCMData.m in Sources */ = {isa = PBXBuildFile; fileRef = 191A0B6D15C81B92009EC315 /* SYLinearPCMData.m */; };
+		191A0B7115C81B92009EC315 /* SYLinearPCMData.m in Sources */ = {isa = PBXBuildFile; fileRef = 191A0B6D15C81B92009EC315 /* SYLinearPCMData.m */; };
 		191B042715B05826007BA3AE /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B040F15B05826007BA3AE /* NSObject+SBJson.m */; };
 		191B042815B05826007BA3AE /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B040F15B05826007BA3AE /* NSObject+SBJson.m */; };
 		191B042915B05826007BA3AE /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B041215B05826007BA3AE /* SBJsonParser.m */; };
@@ -95,6 +99,11 @@
 		1900B33615C52C4E00E75714 /* SCSineWaveGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSineWaveGenerator.m; sourceTree = "<group>"; };
 		191A0B6515C81132009EC315 /* SCSimpleSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSimpleSampler.h; sourceTree = "<group>"; };
 		191A0B6615C81132009EC315 /* SCSimpleSampler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSimpleSampler.m; sourceTree = "<group>"; };
+		191A0B6A15C81B92009EC315 /* SYExtAudioFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYExtAudioFile.h; sourceTree = "<group>"; };
+		191A0B6B15C81B92009EC315 /* SYExtAudioFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYExtAudioFile.m; sourceTree = "<group>"; };
+		191A0B6C15C81B92009EC315 /* SYLinearPCMData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLinearPCMData.h; sourceTree = "<group>"; };
+		191A0B6D15C81B92009EC315 /* SYLinearPCMData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLinearPCMData.m; sourceTree = "<group>"; };
+		191A0B7215C81BAF009EC315 /* SYError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYError.h; sourceTree = "<group>"; };
 		191B040E15B05826007BA3AE /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		191B040F15B05826007BA3AE /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		191B041015B05826007BA3AE /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -362,6 +371,11 @@
 		1992DC5A15A9732500AC074F /* SynthEngine */ = {
 			isa = PBXGroup;
 			children = (
+				191A0B7215C81BAF009EC315 /* SYError.h */,
+				191A0B6A15C81B92009EC315 /* SYExtAudioFile.h */,
+				191A0B6B15C81B92009EC315 /* SYExtAudioFile.m */,
+				191A0B6C15C81B92009EC315 /* SYLinearPCMData.h */,
+				191A0B6D15C81B92009EC315 /* SYLinearPCMData.m */,
 				1992DC5C15A9733900AC074F /* SCSynth.h */,
 				1992DC5D15A9733900AC074F /* SCSynth.m */,
 				1995A82A15AC6A4000678A93 /* SCMetronome.h */,
@@ -555,6 +569,8 @@
 				1900B33715C52C4E00E75714 /* SCSineWaveGenerator.m in Sources */,
 				1948170615C6C82500C338A6 /* SCVocalInstrument.m in Sources */,
 				191A0B6715C81132009EC315 /* SCSimpleSampler.m in Sources */,
+				191A0B6E15C81B92009EC315 /* SYExtAudioFile.m in Sources */,
+				191A0B7015C81B92009EC315 /* SYLinearPCMData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,6 +603,8 @@
 				1900B33815C52C4E00E75714 /* SCSineWaveGenerator.m in Sources */,
 				1948170715C6C82500C338A6 /* SCVocalInstrument.m in Sources */,
 				191A0B6815C81132009EC315 /* SCSimpleSampler.m in Sources */,
+				191A0B6F15C81B92009EC315 /* SYExtAudioFile.m in Sources */,
+				191A0B7115C81B92009EC315 /* SYLinearPCMData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
