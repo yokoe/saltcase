@@ -18,6 +18,7 @@
 
 #import "SCVocalInstrument.h"
 #import "SCSineWaveGenerator.h"
+#import "SCSimpleSampler.h"
 
 @interface SCCompositionController() {
     SCPianoRoll* pianoRoll;
@@ -71,7 +72,7 @@
     // http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/NSScrollViewGuide/Articles/SynchroScroll.html
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pianoRollDidScroll:) name:NSViewBoundsDidChangeNotification object:scrollView.contentView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardViewDidScroll:) name:NSViewBoundsDidChangeNotification object:keyboardScroll.contentView];
-    vocalLine = [[SCSineWaveGenerator alloc] init];
+    vocalLine = [[SCSimpleSampler alloc] init];
     keyboard.vocalLine = vocalLine;
 }
 - (void)dealloc

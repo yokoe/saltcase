@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1900B33715C52C4E00E75714 /* SCSineWaveGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1900B33615C52C4E00E75714 /* SCSineWaveGenerator.m */; };
 		1900B33815C52C4E00E75714 /* SCSineWaveGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1900B33615C52C4E00E75714 /* SCSineWaveGenerator.m */; };
+		191A0B6715C81132009EC315 /* SCSimpleSampler.m in Sources */ = {isa = PBXBuildFile; fileRef = 191A0B6615C81132009EC315 /* SCSimpleSampler.m */; };
+		191A0B6815C81132009EC315 /* SCSimpleSampler.m in Sources */ = {isa = PBXBuildFile; fileRef = 191A0B6615C81132009EC315 /* SCSimpleSampler.m */; };
 		191B042715B05826007BA3AE /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B040F15B05826007BA3AE /* NSObject+SBJson.m */; };
 		191B042815B05826007BA3AE /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B040F15B05826007BA3AE /* NSObject+SBJson.m */; };
 		191B042915B05826007BA3AE /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B041215B05826007BA3AE /* SBJsonParser.m */; };
@@ -91,6 +93,8 @@
 /* Begin PBXFileReference section */
 		1900B33515C52C4E00E75714 /* SCSineWaveGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSineWaveGenerator.h; sourceTree = "<group>"; };
 		1900B33615C52C4E00E75714 /* SCSineWaveGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSineWaveGenerator.m; sourceTree = "<group>"; };
+		191A0B6515C81132009EC315 /* SCSimpleSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSimpleSampler.h; sourceTree = "<group>"; };
+		191A0B6615C81132009EC315 /* SCSimpleSampler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSimpleSampler.m; sourceTree = "<group>"; };
 		191B040E15B05826007BA3AE /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		191B040F15B05826007BA3AE /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		191B041015B05826007BA3AE /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -370,6 +374,8 @@
 				1900B33615C52C4E00E75714 /* SCSineWaveGenerator.m */,
 				1948170415C6C82500C338A6 /* SCVocalInstrument.h */,
 				1948170515C6C82500C338A6 /* SCVocalInstrument.m */,
+				191A0B6515C81132009EC315 /* SCSimpleSampler.h */,
+				191A0B6615C81132009EC315 /* SCSimpleSampler.m */,
 			);
 			name = SynthEngine;
 			path = SaltCase/SynthEngine;
@@ -548,6 +554,7 @@
 				19FF80F515BD97B500198F79 /* SCPitchUtil.m in Sources */,
 				1900B33715C52C4E00E75714 /* SCSineWaveGenerator.m in Sources */,
 				1948170615C6C82500C338A6 /* SCVocalInstrument.m in Sources */,
+				191A0B6715C81132009EC315 /* SCSimpleSampler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +586,7 @@
 				19FF80F615BD97B500198F79 /* SCPitchUtil.m in Sources */,
 				1900B33815C52C4E00E75714 /* SCSineWaveGenerator.m in Sources */,
 				1948170715C6C82500C338A6 /* SCVocalInstrument.m in Sources */,
+				191A0B6815C81132009EC315 /* SCSimpleSampler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

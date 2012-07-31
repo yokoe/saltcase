@@ -9,7 +9,7 @@
 #import "SCKeyboardView.h"
 #import "SCAppController.h"
 #import "SCPitchUtil.h"
-#import "SCSineWaveGenerator.h"
+#import "SCVocalInstrument.h"
 
 @interface SCKeyboardView() {
     int selectedKey;
@@ -96,8 +96,8 @@
 }
 
 - (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {
-    if (vocalLine && [vocalLine isKindOfClass:[SCSineWaveGenerator class]]) { // TODO: Use protocol.
-        SCSineWaveGenerator* generator = vocalLine;
+    if (vocalLine && [vocalLine isKindOfClass:[SCVocalInstrument class]]) {
+        SCVocalInstrument* generator = vocalLine;
         generator.frequency = [SCPitchUtil frequencyOfPitch:selectedKey];
         [generator onWithVelocity:0.5f];
         [generator renderToBuffer:buffer numOfPackets:numOfPackets sender:sender];
