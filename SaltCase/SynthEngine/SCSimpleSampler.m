@@ -7,10 +7,12 @@
 //
 
 #import "SCSimpleSampler.h"
+#import "SYExtAudioFile.h"
 
 @interface SCSimpleSampler(){
     float amplitude;
     float theta;
+    SYExtAudioFile* audioFile;
 }
 @end
 
@@ -19,7 +21,12 @@
 - (id)initWithFile:(NSString*)filePath {
     self = [super init];
     if (self) {
-        NSLog(@"Load from file: %@", filePath);
+        audioFile = [SYExtAudioFile audioFileWithContentOfFile:filePath];
+        if (audioFile == nil) {
+            NSLog(@"Critical Error: Failed to load audio file. %@", filePath);
+            self = nil;
+            return nil;
+        }
     }
     return self;
 }
