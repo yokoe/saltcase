@@ -14,6 +14,7 @@
     float theta;
     float sampleIndex;
     SYLinearPCMData* audioFile;
+    BOOL isOn;
 }
 @end
 
@@ -36,10 +37,18 @@
 }
 
 - (void)onWithVelocity:(float)velocity {
+    if (!isOn) {
+        @synchronized(self) {
+            NSLog(@"reset");
+            sampleIndex = 0.0f;
+        }
+    }
     amplitude = velocity;
+    isOn = YES;
 }
 - (void)off {
     amplitude = 0.0f;
+    isOn = NO;
 }
 
 - (void)renderToBuffer:(float *)buffer numOfPackets:(int)numOfPackets sender:(SCSynth *)sender {
@@ -51,13 +60,15 @@
     int loopStart = (int)round((float)audioFile.frames / 3.0f);
     int loopEnd = (int)round((float)audioFile.frames * 2.0f / 3.0f);
     
-    for (int i = 0; i < numOfPackets; i++) {
-        float signal = samples[(int)round(sampleIndex)] * amplitude;
-        sampleIndex += delta;
-        if ((int)round(sampleIndex) >= loopEnd) sampleIndex = loopStart;
-        
-        *buf++ += signal;
-        *buf++ += signal;
+    @synchronized(self) {
+        for (int i = 0; i < numOfPackets; i++) {
+            float signal = samples[(int)round(sampleIndex)] * amplitude;
+            sampleIndex += delta;
+            if ((int)round(sampleIndex) >= loopEnd) sampleIndex = loopStart;
+            
+            *buf++ += signal;
+            *buf++ += signal;
+        }
     }
 }
 @end

@@ -64,6 +64,9 @@
 
 - (void)deselectKey {
     [self selectKey:-1];
+    if (vocalLine && [vocalLine isKindOfClass:[SCVocalInstrument class]]) {
+        [vocalLine off];
+    }
     if ([SCAppController sharedInstance].currentlyPlaying == self) {
         [[SCAppController sharedInstance] stopComposition:self];
     }
