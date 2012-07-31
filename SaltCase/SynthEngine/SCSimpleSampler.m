@@ -18,8 +18,9 @@
 @end
 
 @implementation SCSimpleSampler
+@synthesize baseFrequency;
 
-- (id)initWithFile:(NSString*)filePath {
+- (id)initWithFile:(NSString*)filePath baseFrequency:(float)frequency {
     self = [super init];
     if (self) {
         NSError* error = nil;
@@ -29,6 +30,7 @@
             self = nil;
             return nil;
         }
+        baseFrequency = frequency;
     }
     return self;
 }
@@ -43,9 +45,10 @@
 - (void)renderToBuffer:(float *)buffer numOfPackets:(int)numOfPackets sender:(SCSynth *)sender {
     float* buf = buffer;
     float* samples = audioFile.signal;
+    float delta = targetFrequency / baseFrequency;
     for (int i = 0; i < numOfPackets; i++) {
         float signal = samples[(int)round(sampleIndex)] * amplitude;
-        sampleIndex += 1.0f;
+        sampleIndex += delta;
         if ((int)round(sampleIndex) >= audioFile.frames) sampleIndex = 0.0f;
         
         *buf++ += signal;

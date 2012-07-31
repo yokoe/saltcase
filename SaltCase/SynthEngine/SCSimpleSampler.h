@@ -9,5 +9,6 @@
 #import "SCVocalInstrument.h"
 
 @interface SCSimpleSampler : SCVocalInstrument
-- (id)initWithFile:(NSString*)filePath;
+@property (assign) float baseFrequency;
+- (id)initWithFile:(NSString*)filePath baseFrequency:(float)frequency;
 @end
