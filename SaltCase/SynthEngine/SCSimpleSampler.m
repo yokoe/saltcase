@@ -46,10 +46,15 @@
     float* buf = buffer;
     float* samples = audioFile.signal;
     float delta = targetFrequency / baseFrequency;
+    
+    // TODO: Optimize
+    int loopStart = (int)round((float)audioFile.frames / 3.0f);
+    int loopEnd = (int)round((float)audioFile.frames * 2.0f / 3.0f);
+    
     for (int i = 0; i < numOfPackets; i++) {
         float signal = samples[(int)round(sampleIndex)] * amplitude;
         sampleIndex += delta;
-        if ((int)round(sampleIndex) >= audioFile.frames) sampleIndex = 0.0f;
+        if ((int)round(sampleIndex) >= loopEnd) sampleIndex = loopStart;
         
         *buf++ += signal;
         *buf++ += signal;
