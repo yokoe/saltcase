@@ -57,14 +57,41 @@
     float delta = targetFrequency / baseFrequency;
     
     // TODO: Optimize
-    int loopStart = (int)round((float)audioFile.frames / 3.0f);
-    int loopEnd = (int)round((float)audioFile.frames * 2.0f / 3.0f);
+    int quarterSamples = (int)round((float)audioFile.frames / 4.0f);
+    int loopLength = quarterSamples * 2;
+    int loopStart = quarterSamples;
+    int loopMiddle = loopStart + loopLength / 2;
+    
     
     @synchronized(self) {
         for (int i = 0; i < numOfPackets; i++) {
             float signal = samples[(int)round(sampleIndex)] * amplitude;
             sampleIndex += delta;
-            if ((int)round(sampleIndex) >= loopEnd) sampleIndex = loopStart;
+            
+            int sampleIndexInt = (int)round(sampleIndex);
+            if (sampleIndexInt <= loopMiddle) { // Before loop start
+                signal = samples[sampleIndexInt];
+            } else { // Loop start
+                int samplesFromLoopStart = (sampleIndexInt - loopStart) % loopLength;
+                float t = (float)samplesFromLoopStart / (float)loopLength;
+                
+                float amp1, amp2;
+                float sig1 = samples[loopStart + samplesFromLoopStart];
+                float sig2 = samples[(loopStart + samplesFromLoopStart + loopLength) % loopLength];
+                
+                if (t <= 0.5f) {
+                    amp1 = t * 2.0f;
+                    amp2 = 1.0f - amp1;
+                } else {
+                    amp1 = 1.0f - (t - 0.5f) * 2.0f;
+                    amp2 = 1.0f - amp1;
+                }
+                signal = sig1 * amp1 + sig2 * amp2;
+                
+                if (sampleIndexInt >= (loopStart + loopLength * 2)) {
+                    sampleIndex -= (float)(loopLength * 2);
+                }
+            }
             
             *buf++ += signal;
             *buf++ += signal;
