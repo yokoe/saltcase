@@ -70,7 +70,7 @@
             
             int sampleIndexInt = (int)round(sampleIndex);
             if (sampleIndexInt <= loopMiddle) { // Before loop start
-                signal = samples[sampleIndexInt];
+                signal = samples[sampleIndexInt] * amplitude;
             } else { // Loop start
                 int samplesFromLoopStart = (sampleIndexInt - loopStart) % loopLength;
                 float t = (float)samplesFromLoopStart / (float)loopLength;
@@ -81,7 +81,7 @@
                 
                 amp1 = -cos(t * M_PI * 2.0f) * 0.5f + 0.5f;
                 amp2 = 1.0f - amp1;
-                signal = sig1 * amp1 + sig2 * amp2;
+                signal = (sig1 * amp1 + sig2 * amp2) * amplitude;
                 
                 if (sampleIndexInt >= (loopStart + loopLength * 2)) {
                     sampleIndex -= (float)(loopLength * 2);
