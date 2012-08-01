@@ -79,13 +79,8 @@
                 float sig1 = samples[loopStart + samplesFromLoopStart];
                 float sig2 = samples[(loopStart + samplesFromLoopStart + loopLength) % loopLength];
                 
-                if (t <= 0.5f) {
-                    amp1 = t * 2.0f;
-                    amp2 = 1.0f - amp1;
-                } else {
-                    amp1 = 1.0f - (t - 0.5f) * 2.0f;
-                    amp2 = 1.0f - amp1;
-                }
+                amp1 = -cos(t * M_PI * 2.0f) * 0.5f + 0.5f;
+                amp2 = 1.0f - amp1;
                 signal = sig1 * amp1 + sig2 * amp2;
                 
                 if (sampleIndexInt >= (loopStart + loopLength * 2)) {
