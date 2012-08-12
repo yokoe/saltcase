@@ -13,4 +13,5 @@
 @property (readonly) NSTimeInterval timeElapsed;
 - (void)playWithRenderer:(NSObject<SCAudioRenderer>*)renderer;
 - (void)stop:(BOOL)shouldStopImmediately;
+- (float)levelForChannel:(int)channel;
 @end

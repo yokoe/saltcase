@@ -91,7 +91,8 @@
             float timeIntervalPerBeat = (60.0f / self.composition.tempo);
             int beats = (int)floor(player.timeElapsed / timeIntervalPerBeat);
             
-            [timeLabel setStringValue:[NSString stringWithFormat:@"%02d:%06.3f - %03d/%d", (int)floor(player.timeElapsed / 60), player.timeElapsed - (int)floor(player.timeElapsed / 60) * 60 , beats / 4, beats % 4]];
+            [timeLabel setStringValue:[NSString stringWithFormat:@"%02d:%06.3f - %03d/%d %.2f|%.2f", (int)floor(player.timeElapsed / 60), player.timeElapsed - (int)floor(player.timeElapsed / 60) * 60 , beats / 4, beats % 4,
+                                       [player levelForChannel:0], [player levelForChannel:1]]];
             
             [pianoRoll moveBarToTiming:player.timeElapsed / timeIntervalPerBeat];
         });

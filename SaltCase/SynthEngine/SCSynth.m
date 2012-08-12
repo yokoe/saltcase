@@ -8,6 +8,7 @@ const float kSCSamplingFrameRate = 44100.0f;
 
 @interface SCSynth() {
     AudioQueueRef audioQueueObject;
+    float level_[2];
 }
 @property (assign) UInt32 bufferPacketLength;
 @property (nonatomic, strong) SCMetronome* metronome;
@@ -15,6 +16,7 @@ const float kSCSamplingFrameRate = 44100.0f;
 @property UInt32 renderedPackets;
 - (void)clearRenderBuffer;
 - (void)render;
+- (void)setLevel:(float)value forChannel:(int)channel;
 @end
 
 @implementation SCSynth
@@ -30,6 +32,9 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
     
     static float prevValue[2];
     prevValue[0] = 0.0f, prevValue[1] = 0.0f;
+    
+    float maxAmplitude[2];
+    maxAmplitude[0] = 0.0f, maxAmplitude[1] = 0.0f;
 
     // Limitter and Low-pass filter (to protect speakers / ears).
 	float volume = 0.5f;
@@ -38,11 +43,16 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
 		rawSignal = fmin(0.999f, rawSignal);
 		rawSignal = fmax(-0.999f,rawSignal);
         
+        maxAmplitude[i % 2] = fmaxf(maxAmplitude[i % 2], fabsf(rawSignal));
+        
         SInt16 limittedSignal = (prevValue[i % 2] + rawSignal) * 16384.0f;
         prevValue[i % 2] = rawSignal;
         
         *output++ = limittedSignal;
     }
+    
+    [player setLevel:maxAmplitude[0] forChannel:0];
+    [player setLevel:maxAmplitude[1] forChannel:1];
     
     inBuffer->mAudioDataByteSize = numBytes;
     AudioQueueEnqueueBuffer(inAQ, inBuffer, 0, NULL);
@@ -129,5 +139,11 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
 }
 - (float)samplingFrameRate {
     return kSCSamplingFrameRate;
+}
+- (float)levelForChannel:(int)channel {
+    return level_[channel];
+}
+- (void)setLevel:(float)value forChannel:(int)channel {
+    level_[channel] = value;
 }
 @end
