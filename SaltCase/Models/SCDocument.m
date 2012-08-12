@@ -243,4 +243,14 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
     [super close];
 }
 
+#pragma mark Export
+- (IBAction)exportVocal:(id)sender{
+    // TODO: Implementation
+    NSLog(@"Export Vocal");
+}
+- (IBAction)exportAll:(id)sender{
+    // TODO: Implementation
+    NSLog(@"Export All");
+}
+
 @end
