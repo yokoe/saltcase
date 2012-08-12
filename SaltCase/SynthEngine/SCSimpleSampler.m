@@ -13,6 +13,10 @@
     float amplitude;
     float theta;
     float sampleIndex;
+    
+    float vibratoTheta;
+    float vibratoAmplitude;
+    float targetVibratoAmplitude;
     SYLinearPCMData* audioFile;
     BOOL isOn;
 }
@@ -41,6 +45,8 @@
         @synchronized(self) {
             NSLog(@"reset");
             sampleIndex = 0.0f;
+            vibratoAmplitude = 0.0f;
+            targetVibratoAmplitude = 0.03f;
         }
     }
     amplitude = velocity;
@@ -48,6 +54,8 @@
 }
 - (void)off {
     amplitude = 0.0f;
+    targetVibratoAmplitude = 0.0f;
+    vibratoAmplitude = 0.0f;
     isOn = NO;
 }
 
@@ -66,7 +74,7 @@
     @synchronized(self) {
         for (int i = 0; i < numOfPackets; i++) {
             float signal = samples[(int)round(sampleIndex)] * amplitude;
-            sampleIndex += delta;
+            sampleIndex += (delta * (sin(vibratoTheta) * vibratoAmplitude + 1.0f));
             
             int sampleIndexInt = (int)round(sampleIndex);
             if (sampleIndexInt <= loopMiddle) { // Before loop start
@@ -90,6 +98,14 @@
             
             *buf++ += signal;
             *buf++ += signal;
+            
+            vibratoTheta += 0.0004f;
+            if (vibratoTheta >= M_PI * 2.0f) vibratoTheta -= M_PI * 2.0f;
+            if (targetVibratoAmplitude > vibratoAmplitude) {
+                vibratoAmplitude += 0.000001f;
+            } else {
+                vibratoAmplitude -= 0.000001f;
+            }
         }
     }
 }
