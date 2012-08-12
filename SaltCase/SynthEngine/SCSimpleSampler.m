@@ -9,6 +9,8 @@
 #import "SCSimpleSampler.h"
 #import "SYLinearPCMData.h"
 
+const int intervalBeforeVibratoStart = 44100 * 3;
+
 @interface SCSimpleSampler(){
     float amplitude;
     float theta;
@@ -19,6 +21,8 @@
     float targetVibratoAmplitude;
     SYLinearPCMData* audioFile;
     BOOL isOn;
+    
+    int samplesFromNoteOn;
 }
 @end
 
@@ -46,7 +50,7 @@
             NSLog(@"reset");
             sampleIndex = 0.0f;
             vibratoAmplitude = 0.0f;
-            targetVibratoAmplitude = 0.03f;
+            samplesFromNoteOn = 0;
         }
     }
     amplitude = velocity;
@@ -98,6 +102,13 @@
             
             *buf++ += signal;
             *buf++ += signal;
+            
+            samplesFromNoteOn++;
+            if (samplesFromNoteOn >= intervalBeforeVibratoStart) {
+                targetVibratoAmplitude = 0.03f;
+            } else {
+                targetVibratoAmplitude = 0.0f;
+            }
             
             vibratoTheta += 0.0004f;
             if (vibratoTheta >= M_PI * 2.0f) vibratoTheta -= M_PI * 2.0f;
