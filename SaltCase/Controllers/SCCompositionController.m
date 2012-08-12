@@ -219,6 +219,18 @@
     [[SCAppController sharedInstance] stopComposition:self];
 }
 
+#pragma mark Export
+- (void)exportWithStyle:(SCExportStyle)style {
+    NSSavePanel* savePanel = [NSSavePanel savePanel];
+    savePanel.allowedFileTypes = [NSArray arrayWithObjects:@"wav", @"aiff", @"m4a", nil];
+    [savePanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            // TODO: Export
+            NSLog(@"Export to: %@", savePanel.URL);
+        }
+    }];
+}
+
 #pragma mark Settings
 - (IBAction)openSettings:(id)sender {
     [tempoSlider setFloatValue:composition.tempo];

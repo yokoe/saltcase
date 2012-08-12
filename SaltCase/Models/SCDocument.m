@@ -245,12 +245,10 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
 
 #pragma mark Export
 - (IBAction)exportVocal:(id)sender{
-    // TODO: Implementation
-    NSLog(@"Export Vocal");
+    [self.controller exportWithStyle:SCExportVocalTrackOnly];
 }
 - (IBAction)exportAll:(id)sender{
-    // TODO: Implementation
-    NSLog(@"Export All");
+    [self.controller exportWithStyle:SCExportAllTracks];
 }
 
 @end

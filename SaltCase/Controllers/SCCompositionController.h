@@ -12,6 +12,11 @@
 #import "SCPianoRoll.h"
 @class SCDocument;
 
+typedef enum SCExportStyle {
+    SCExportVocalTrackOnly,
+    SCExportAllTracks
+} SCExportStyle;
+
 @interface SCCompositionController : NSObject <NSToolbarDelegate, SCAudioRenderer, SCPianoRollDelegate>
 @property (weak) IBOutlet SCDocument *composition;
 @property (weak) IBOutlet NSToolbarItem *playButton;
@@ -25,4 +30,5 @@
 @property (weak) IBOutlet NSScrollView *scrollView;
 @property (weak) IBOutlet NSScrollView *keyboardScroll;
 @property (strong) SCMetronome* metronome;
+- (void)exportWithStyle:(SCExportStyle)style;
 @end
