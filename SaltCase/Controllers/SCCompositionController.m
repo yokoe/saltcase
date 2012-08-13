@@ -41,6 +41,8 @@
 @synthesize window;
 @synthesize tempoSlider;
 @synthesize tempoLabel;
+@synthesize barsText;
+@synthesize barsStepper;
 @synthesize scrollView;
 @synthesize keyboardScroll;
 @synthesize metronome;
@@ -241,10 +243,14 @@
     [tempoSlider setFloatValue:composition.tempo];
     [tempoLabel takeFloatValueFrom:tempoSlider];
     
+    [barsText setIntegerValue:composition.bars];
+    [barsStepper takeIntegerValueFrom:barsText];
+    
     [[NSApplication sharedApplication] beginSheet:settingsSheet modalForWindow:window modalDelegate:self didEndSelector:@selector(settingsSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 - (IBAction)closeSettings:(id)sender {
     composition.tempo = tempoSlider.floatValue;
+    composition.bars = barsStepper.integerValue;
     [[NSApplication sharedApplication] endSheet:settingsSheet];
 }
 - (void)settingsSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {

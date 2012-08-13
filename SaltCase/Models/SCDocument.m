@@ -18,6 +18,7 @@ const float kSCDefaultTempo = 120.0f;
 const float kSCMinimumTempo = 40.0f;
 const float kSCMaximumTempo = 320.0f;
 const float kSCGliderTransitionControlInterval = 0.001f;
+const float kSCDefaultBars = 8;
 
 NSComparisonResult (^noteSortComparator)(id,id) = ^(id obj1, id obj2) {
     SCNote* note1 = obj1;
@@ -138,17 +139,13 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
     return events;
 }
 
-// For debugging.
-- (UInt32)bars {
-    return 4;
-}
-
 - (id)init
 {
     self = [super init];
     if (self) {
         // Default composition settings.
         self.tempo = kSCDefaultTempo;
+        self.bars = kSCDefaultBars;
     }
     return self;
 }
@@ -177,6 +174,7 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
     [dictionary setObject:header forKey:@"header"];
     
     [header setObject:[NSNumber numberWithFloat:self.tempo] forKey:@"tempo"];
+    [header setObject:[NSNumber numberWithInt:self.bars] forKey:@"bars"];
     
     NSMutableArray* noteDictionaries = [NSMutableArray array];
     for (SCNote* note in self.notes) {
@@ -204,6 +202,9 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
                 if (header) {
                     NSNumber* tempoValue = [header objectForKey:@"tempo"];
                     if (tempoValue) self.tempo = tempoValue.floatValue;
+                    
+                    NSNumber* barsValue = [header objectForKey:@"bars"];
+                    if (barsValue) self.bars = barsValue.integerValue;
                 } else {
                     NSLog(@"Header section not found.\n%@", jsonString);
                     return NO;
