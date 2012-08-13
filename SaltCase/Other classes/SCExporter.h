@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SCSynth.h"
 
 typedef enum SCExportStyle {
     SCExportVocalTrackOnly,
@@ -15,5 +16,6 @@ typedef enum SCExportStyle {
 
 @interface SCExporter : NSObject
 - (id)initWithURL:(NSURL*)url style:(SCExportStyle)style;
-- (void)export;
+- (void)exportWithSynth:(SCSynth*)synth;
+@property (strong) id<SCAudioRenderer> renderer;
 @end

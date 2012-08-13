@@ -26,7 +26,7 @@
     }
     return self;
 }
-- (void)export {
+- (void)exportWithSynth:(SCSynth*)synth {
     // cf.
     // http://objective-audio.jp/2008/05/-extendedaudiofile.html
     
@@ -64,15 +64,13 @@
     ioList.mBuffers[0].mData = ioData;
     
     // Test
-    float theta = 0.0f;
     for (int i = 0; i < 100; i++) {
         float* buf = ioList.mBuffers[0].mData;
         for (int j = 0; j < convertFrames; j++) {
-            float sig = sin(theta) * 0.5f;
-            *buf++ = sig; // left
-            *buf++ = sig; // right
-            theta += 0.1f;
+            *buf++ = 0.0f; // left
+            *buf++ = 0.0f; // right
         }
+        [self.renderer renderBuffer:ioList.mBuffers[0].mData numOfPackets:convertFrames sender:synth];
         
         error = ExtAudioFileWrite(outFileRef, convertFrames, &ioList);
         if (error != noErr) goto ExitExport;
@@ -82,6 +80,7 @@
     // Close file
     ExtAudioFileDispose(outFileRef);
     if (ioData) free(ioData);
+    return;
 ExitExport:
     if (outFileRef) ExtAudioFileDispose(outFileRef);
     if (ioData) free(ioData);

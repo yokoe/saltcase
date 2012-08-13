@@ -195,10 +195,7 @@
     
     renderedPackets += numOfPackets;
 }
-- (IBAction)playComposition:(id)sender {
-    [self.metronome reset];
-    self.metronome.tempo = composition.tempo;
-    
+- (void)prepareForPlay {
     NSArray* events = self.composition.audioEvents;
     for (SCAudioEvent* event in events) {
         event.timingPacketNumber = (int)round(event.timing * [SCAppController sharedInstance].synth.samplingFrameRate);
@@ -206,9 +203,14 @@
     self.events = events;
     nextEventIndex = 0;
     renderedPackets = 0;
-//    NSLog(@"Events: %@", self.events);
     
     [vocalLine off];
+}
+- (IBAction)playComposition:(id)sender {
+    [self.metronome reset];
+    self.metronome.tempo = composition.tempo;
+    
+    [self prepareForPlay];
     
     if ([[SCAppController sharedInstance] playComposition:self]) {
         NSLog(@"Started playing %@", composition);
@@ -227,7 +229,9 @@
     [savePanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             SCExporter* exporter = [[SCExporter alloc] initWithURL:savePanel.URL style:style];
-            [exporter export];
+            exporter.renderer = self;
+            [self prepareForPlay];
+            [exporter exportWithSynth:[SCAppController sharedInstance].synth];
         }
     }];
 }
