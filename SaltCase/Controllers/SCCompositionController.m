@@ -69,7 +69,6 @@
     [keyboardScroll.documentView addSubview:pianoRollXScaleSlider];
     [pianoRollXScaleSlider setTarget:self];
     [pianoRollXScaleSlider setAction:@selector(pianoRollXScaleSliderDidUpdate:)];
-
     
     // Synchronize scrolling between the piano roll and the keyboard view.
     // http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/NSScrollViewGuide/Articles/SynchroScroll.html
@@ -252,6 +251,8 @@
     composition.tempo = tempoSlider.floatValue;
     composition.bars = barsStepper.integerValue;
     [[NSApplication sharedApplication] endSheet:settingsSheet];
+    
+    [self resizePianoRoll];
 }
 - (void)settingsSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     [sheet orderOut:self];
@@ -263,5 +264,11 @@
 }
 - (void)pianoRollXScaleSliderDidUpdate:(id)sender {
     pianoRoll.gridHorizontalInterval = [sender floatValue];
+    [self resizePianoRoll];
+}
+- (void)resizePianoRoll {
+    CGRect originalFrame = pianoRoll.frame;
+    originalFrame.size.width = pianoRoll.gridHorizontalInterval * 4 * composition.bars;
+    pianoRoll.frame = originalFrame;
 }
 @end
