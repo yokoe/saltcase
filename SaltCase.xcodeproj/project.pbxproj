@@ -75,6 +75,8 @@
 		19CA67A715ADD02A00816234 /* NoteMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19CA67A515ADD02A00816234 /* NoteMap.plist */; };
 		19D6790C15B1118800A51E9A /* SCPianoRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D6790B15B1118800A51E9A /* SCPianoRoll.m */; };
 		19D6790D15B1118800A51E9A /* SCPianoRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D6790B15B1118800A51E9A /* SCPianoRoll.m */; };
+		19D90E9515D921B9004C7317 /* SCExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D90E9415D921B9004C7317 /* SCExporter.m */; };
+		19D90E9615D921B9004C7317 /* SCExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D90E9415D921B9004C7317 /* SCExporter.m */; };
 		19DC171E15BA7C8400CB1CDA /* SCNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC171D15BA7C8400CB1CDA /* SCNote.m */; };
 		19DC171F15BA7C8400CB1CDA /* SCNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC171D15BA7C8400CB1CDA /* SCNote.m */; };
 		19DC172315BABE7A00CB1CDA /* SCAudioEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC172215BABE7A00CB1CDA /* SCAudioEvent.m */; };
@@ -172,6 +174,8 @@
 		19CA67A515ADD02A00816234 /* NoteMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NoteMap.plist; sourceTree = "<group>"; };
 		19D6790A15B1118800A51E9A /* SCPianoRoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPianoRoll.h; sourceTree = "<group>"; };
 		19D6790B15B1118800A51E9A /* SCPianoRoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPianoRoll.m; sourceTree = "<group>"; };
+		19D90E9315D921B9004C7317 /* SCExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCExporter.h; path = "Other classes/SCExporter.h"; sourceTree = "<group>"; };
+		19D90E9415D921B9004C7317 /* SCExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCExporter.m; path = "Other classes/SCExporter.m"; sourceTree = "<group>"; };
 		19DC171C15BA7C8400CB1CDA /* SCNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNote.h; sourceTree = "<group>"; };
 		19DC171D15BA7C8400CB1CDA /* SCNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNote.m; sourceTree = "<group>"; };
 		19DC172115BABE7A00CB1CDA /* SCAudioEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAudioEvent.h; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 		196B168A15A93CDF008E59D0 /* SaltCase */ = {
 			isa = PBXGroup;
 			children = (
+				19D90E9115D92193004C7317 /* Other classes */,
 				1948352115B59BB0003D90E8 /* Controllers */,
 				1948352615B59BB0003D90E8 /* Models */,
 				19CA67A015AD9F9700816234 /* UI */,
@@ -406,6 +411,15 @@
 				1948353015B5AB5F003D90E8 /* SCPianoRollNote.m */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		19D90E9115D92193004C7317 /* Other classes */ = {
+			isa = PBXGroup;
+			children = (
+				19D90E9315D921B9004C7317 /* SCExporter.h */,
+				19D90E9415D921B9004C7317 /* SCExporter.m */,
+			);
+			name = "Other classes";
 			sourceTree = "<group>";
 		};
 		19E1748315A93F260045A3C3 /* Resources */ = {
@@ -571,6 +585,7 @@
 				191A0B6715C81132009EC315 /* SCSimpleSampler.m in Sources */,
 				191A0B6E15C81B92009EC315 /* SYExtAudioFile.m in Sources */,
 				191A0B7015C81B92009EC315 /* SYLinearPCMData.m in Sources */,
+				19D90E9515D921B9004C7317 /* SCExporter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +620,7 @@
 				191A0B6815C81132009EC315 /* SCSimpleSampler.m in Sources */,
 				191A0B6F15C81B92009EC315 /* SYExtAudioFile.m in Sources */,
 				191A0B7115C81B92009EC315 /* SYLinearPCMData.m in Sources */,
+				19D90E9615D921B9004C7317 /* SCExporter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

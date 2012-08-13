@@ -19,6 +19,7 @@
 #import "SCVocalInstrument.h"
 #import "SCSineWaveGenerator.h"
 #import "SCSimpleSampler.h"
+#import "SCExporter.h"
 
 @interface SCCompositionController() {
     SCPianoRoll* pianoRoll;
@@ -225,8 +226,8 @@
     savePanel.allowedFileTypes = [NSArray arrayWithObjects:@"wav", @"aiff", @"m4a", nil];
     [savePanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
-            // TODO: Export
-            NSLog(@"Export to: %@", savePanel.URL);
+            SCExporter* exporter = [[SCExporter alloc] initWithURL:savePanel.URL style:style];
+            [exporter export];
         }
     }];
 }

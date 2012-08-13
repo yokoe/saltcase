@@ -12,10 +12,7 @@
 #import "SCPianoRoll.h"
 @class SCDocument;
 
-typedef enum SCExportStyle {
-    SCExportVocalTrackOnly,
-    SCExportAllTracks
-} SCExportStyle;
+#import "SCExporter.h"
 
 @interface SCCompositionController : NSObject <NSToolbarDelegate, SCAudioRenderer, SCPianoRollDelegate>
 @property (weak) IBOutlet SCDocument *composition;
