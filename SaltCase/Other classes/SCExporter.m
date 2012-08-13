@@ -27,7 +27,13 @@
     return self;
 }
 - (void)export {
+    // cf.
+    // http://objective-audio.jp/2008/05/-extendedaudiofile.html
+    
+    const UInt32 convertFrames = 1024;
+    
     OSStatus error = noErr;
+    AudioStreamBasicDescription processFormat = [self processFormat];
     AudioStreamBasicDescription outFormat = [self outputFormat];
     ExtAudioFileRef outFileRef;
     
@@ -38,12 +44,47 @@
         goto ExitExport;
     }
     
+    // Set client format
+    error = ExtAudioFileSetProperty(outFileRef, kExtAudioFileProperty_ClientDataFormat, sizeof(processFormat), &processFormat);
+    if (error != noErr) {
+        NSLog(@"Failed to set client format");
+        goto ExitExport;
+    }
+    
+    UInt32 allocByteSize = convertFrames * processFormat.mBytesPerFrame;
+    float *ioData = malloc(allocByteSize);
+    if (!ioData) {
+        NSLog(@"Failed to allocate memory.");
+        goto ExitExport;
+    }
+    AudioBufferList ioList;
+    ioList.mNumberBuffers = 1;
+    ioList.mBuffers[0].mNumberChannels = processFormat.mChannelsPerFrame;
+    ioList.mBuffers[0].mDataByteSize = allocByteSize;
+    ioList.mBuffers[0].mData = ioData;
+    
+    // Test
+    float theta = 0.0f;
+    for (int i = 0; i < 100; i++) {
+        float* buf = ioList.mBuffers[0].mData;
+        for (int j = 0; j < convertFrames; j++) {
+            float sig = sin(theta) * 0.5f;
+            *buf++ = sig; // left
+            *buf++ = sig; // right
+            theta += 0.1f;
+        }
+        
+        error = ExtAudioFileWrite(outFileRef, convertFrames, &ioList);
+        if (error != noErr) goto ExitExport;
+    }
+    
+    
     // Close file
     ExtAudioFileDispose(outFileRef);
-    
-    return;
+    if (ioData) free(ioData);
 ExitExport:
     if (outFileRef) ExtAudioFileDispose(outFileRef);
+    if (ioData) free(ioData);
     NSLog(@"Export failed.");
 }
 
@@ -53,6 +94,18 @@ ExitExport:
     format.mFormatID = kAudioFormatLinearPCM;
     format.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
     format.mBitsPerChannel = 16;
+    format.mChannelsPerFrame = 2;
+    format.mFramesPerPacket = 1;
+    format.mBytesPerFrame =	format.mBitsPerChannel / 8 * format.mChannelsPerFrame;
+    format.mBytesPerPacket = format.mBytesPerFrame * format.mFramesPerPacket;
+    return format;
+}
+- (AudioStreamBasicDescription)processFormat {
+    AudioStreamBasicDescription format;
+    format.mSampleRate = 44100;
+    format.mFormatID = kAudioFormatLinearPCM;
+    format.mFormatFlags = kAudioFormatFlagsNativeFloatPacked;
+    format.mBitsPerChannel = 32;
     format.mChannelsPerFrame = 2;
     format.mFramesPerPacket = 1;
     format.mBytesPerFrame =	format.mBitsPerChannel / 8 * format.mChannelsPerFrame;
