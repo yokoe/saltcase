@@ -18,4 +18,5 @@ typedef enum SCExportStyle {
 - (id)initWithURL:(NSURL*)url style:(SCExportStyle)style;
 - (void)exportWithSynth:(SCSynth*)synth;
 @property (strong) id<SCAudioRenderer> renderer;
+@property (assign) int numOfFrames;
 @end

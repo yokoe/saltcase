@@ -53,6 +53,10 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
     // Range limitation: 40.0f - 320.0f
     tempo_ = fminf(fmaxf(kSCMinimumTempo, tempo), kSCMaximumTempo);
 }
+- (NSTimeInterval)lengthInSeconds {
+    return 60.0f / tempo_ * bars_ * 4;
+}
+
 - (SCNote*)noteAfter:(SCNote*)noteBefore {
     SCNote* nextNote = nil;
     BOOL isNext = NO;

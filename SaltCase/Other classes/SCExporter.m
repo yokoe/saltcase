@@ -63,8 +63,7 @@
     ioList.mBuffers[0].mDataByteSize = allocByteSize;
     ioList.mBuffers[0].mData = ioData;
     
-    // Test
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < self.numOfFrames; i += convertFrames) {
         float* buf = ioList.mBuffers[0].mData;
         for (int j = 0; j < convertFrames; j++) {
             *buf++ = 0.0f; // left

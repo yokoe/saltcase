@@ -15,6 +15,7 @@
 @property (nonatomic, assign) UInt32 bars;
 @property (nonatomic, strong) NSArray* notes;
 @property (readonly) NSArray* audioEvents;
+@property (readonly) NSTimeInterval lengthInSeconds;
 - (IBAction)exportVocal:(id)sender;
 - (IBAction)exportAll:(id)sender;
 @end

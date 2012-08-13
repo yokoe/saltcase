@@ -93,4 +93,16 @@
     STAssertEquals(numberOfNoteOff, 1, @"Overlapped notes should be treated as one note. Only 1 'off' event should exist.");
 }
 
+- (void)testLengthCalculation {
+    SCDocument* composition = [[SCDocument alloc] init];
+    composition.tempo = 60.0f;
+    composition.bars = 1;
+    STAssertTrue(abs(composition.lengthInSeconds - 4.0) <= 0.01, @"60bpm 4beats should be 4.0 secs.");
+    
+    composition.tempo = 120.0f;
+    STAssertTrue(abs(composition.lengthInSeconds - 2.0) <= 0.01, @"120bpm 4beats should be 2.0 secs.");
+    
+    composition.bars = 2;
+    STAssertTrue(abs(composition.lengthInSeconds - 4.0) <= 0.01, @"120bpm 8beats should be 4.0 secs.");
+}
 @end

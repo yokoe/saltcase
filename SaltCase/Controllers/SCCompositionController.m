@@ -231,6 +231,7 @@
         if (result == NSFileHandlingPanelOKButton) {
             SCExporter* exporter = [[SCExporter alloc] initWithURL:savePanel.URL style:style];
             exporter.renderer = self;
+            exporter.numOfFrames = [SCAppController sharedInstance].synth.samplingFrameRate * composition.lengthInSeconds;
             [self prepareForPlay];
             [exporter exportWithSynth:[SCAppController sharedInstance].synth];
         }
