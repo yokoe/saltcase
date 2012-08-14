@@ -14,6 +14,8 @@
 @interface SCExporter() {
     NSURL* url_;
     SCExportStyle style_;
+    void (^completionHandler_)(void);
+    void (^updateHandler_)(int framesWrote);
 }
 @end
 
@@ -26,64 +28,86 @@
     }
     return self;
 }
-- (void)exportWithSynth:(SCSynth*)synth {
+- (void)exportWithSynth:(SCSynth*)synth completionHandler:(void (^)(void))completionHandler updateHandler:(void (^)(int framesWrote))updateHandler{
     // cf.
     // http://objective-audio.jp/2008/05/-extendedaudiofile.html
     
-    const UInt32 convertFrames = 1024;
-    
-    OSStatus error = noErr;
-    AudioStreamBasicDescription processFormat = [self processFormat];
-    AudioStreamBasicDescription outFormat = [self outputFormat];
-    ExtAudioFileRef outFileRef;
-    
-    // Create a file
-    error = ExtAudioFileCreateWithURL((__bridge CFURLRef)url_, kAudioFileWAVEType, &outFormat, NULL, 0, &outFileRef);
-    if (error != noErr) {
-        NSLog(@"Failed to create file %@", url_);
-        goto ExitExport;
-    }
-    
-    // Set client format
-    error = ExtAudioFileSetProperty(outFileRef, kExtAudioFileProperty_ClientDataFormat, sizeof(processFormat), &processFormat);
-    if (error != noErr) {
-        NSLog(@"Failed to set client format");
-        goto ExitExport;
-    }
-    
-    UInt32 allocByteSize = convertFrames * processFormat.mBytesPerFrame;
-    float *ioData = malloc(allocByteSize);
-    if (!ioData) {
-        NSLog(@"Failed to allocate memory.");
-        goto ExitExport;
-    }
-    AudioBufferList ioList;
-    ioList.mNumberBuffers = 1;
-    ioList.mBuffers[0].mNumberChannels = processFormat.mChannelsPerFrame;
-    ioList.mBuffers[0].mDataByteSize = allocByteSize;
-    ioList.mBuffers[0].mData = ioData;
-    
-    for (int i = 0; i < self.numOfFrames; i += convertFrames) {
-        float* buf = ioList.mBuffers[0].mData;
-        for (int j = 0; j < convertFrames; j++) {
-            *buf++ = 0.0f; // left
-            *buf++ = 0.0f; // right
-        }
-        [self.renderer renderBuffer:ioList.mBuffers[0].mData numOfPackets:convertFrames sender:synth];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        completionHandler_ = [completionHandler copy];
+        updateHandler_ = [updateHandler copy];
         
-        error = ExtAudioFileWrite(outFileRef, convertFrames, &ioList);
-        if (error != noErr) goto ExitExport;
-    }
-    
-    
-    // Close file
-    ExtAudioFileDispose(outFileRef);
-    if (ioData) free(ioData);
-    return;
-ExitExport:
-    if (outFileRef) ExtAudioFileDispose(outFileRef);
-    if (ioData) free(ioData);
-    NSLog(@"Export failed.");
+        const UInt32 convertFrames = 1024;
+        
+        OSStatus error = noErr;
+        AudioStreamBasicDescription processFormat = [self processFormat];
+        AudioStreamBasicDescription outFormat = [self outputFormat];
+        ExtAudioFileRef outFileRef;
+        
+        // Create a file
+        error = ExtAudioFileCreateWithURL((__bridge CFURLRef)url_, kAudioFileWAVEType, &outFormat, NULL, 0, &outFileRef);
+        if (error != noErr) {
+            NSLog(@"Failed to create file %@", url_);
+            goto ExitExport;
+        }
+        
+        // Set client format
+        error = ExtAudioFileSetProperty(outFileRef, kExtAudioFileProperty_ClientDataFormat, sizeof(processFormat), &processFormat);
+        if (error != noErr) {
+            NSLog(@"Failed to set client format");
+            goto ExitExport;
+        }
+        
+        UInt32 allocByteSize = convertFrames * processFormat.mBytesPerFrame;
+        float *ioData = malloc(allocByteSize);
+        if (!ioData) {
+            NSLog(@"Failed to allocate memory.");
+            goto ExitExport;
+        }
+        AudioBufferList ioList;
+        ioList.mNumberBuffers = 1;
+        ioList.mBuffers[0].mNumberChannels = processFormat.mChannelsPerFrame;
+        ioList.mBuffers[0].mDataByteSize = allocByteSize;
+        ioList.mBuffers[0].mData = ioData;
+        
+        for (int i = 0; i < self.numOfFrames; i += convertFrames) {
+            float* buf = ioList.mBuffers[0].mData;
+            for (int j = 0; j < convertFrames; j++) {
+                *buf++ = 0.0f; // left
+                *buf++ = 0.0f; // right
+            }
+            [self.renderer renderBuffer:ioList.mBuffers[0].mData numOfPackets:convertFrames sender:synth];
+            
+            error = ExtAudioFileWrite(outFileRef, convertFrames, &ioList);
+            if (error != noErr) goto ExitExport;
+            
+            if (updateHandler_) {
+                updateHandler_(i);
+            }
+        }
+        
+        
+        // Close file
+        ExtAudioFileDispose(outFileRef);
+        if (ioData) free(ioData);
+        
+        if (completionHandler_) {
+            completionHandler();
+            completionHandler_ = nil;
+        }
+        if (updateHandler_) updateHandler_ = nil;
+        
+        return;
+    ExitExport:
+        if (outFileRef) ExtAudioFileDispose(outFileRef);
+        if (ioData) free(ioData);
+        NSLog(@"Export failed.");
+        
+        if (completionHandler_) {
+            completionHandler();
+            completionHandler_ = nil;
+        }
+        if (updateHandler_) updateHandler_ = nil;
+    });
 }
 
 - (AudioStreamBasicDescription)outputFormat {

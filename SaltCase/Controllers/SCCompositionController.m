@@ -37,6 +37,8 @@
 @synthesize stopButton;
 @synthesize timeLabel;
 @synthesize settingsButton;
+@synthesize progressBar;
+@synthesize progressPanel;
 @synthesize settingsSheet;
 @synthesize window;
 @synthesize tempoSlider;
@@ -233,9 +235,23 @@
             exporter.renderer = self;
             exporter.numOfFrames = [SCAppController sharedInstance].synth.samplingFrameRate * composition.lengthInSeconds;
             [self prepareForPlay];
-            [exporter exportWithSynth:[SCAppController sharedInstance].synth];
+            [exporter exportWithSynth:[SCAppController sharedInstance].synth completionHandler:^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSApplication sharedApplication] endSheet:progressPanel];
+                });
+            } updateHandler:^(int framesWrote) {
+                progressBar.maxValue = exporter.numOfFrames;
+                progressBar.doubleValue = framesWrote;
+            }];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSApplication sharedApplication] beginSheet:progressPanel modalForWindow:window modalDelegate:self didEndSelector:@selector(exportProgressPanelDidEnd:returnCode:contextInfo:) contextInfo:nil];
+            });   
         }
     }];
+}
+- (void)exportProgressPanelDidEnd:(NSWindow*)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    [sheet orderOut:self];
 }
 
 #pragma mark Settings

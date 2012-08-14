@@ -20,6 +20,8 @@
 @property (weak) IBOutlet NSToolbarItem *stopButton;
 @property (weak) IBOutlet NSTextField *timeLabel;
 @property (weak) IBOutlet NSToolbarItem *settingsButton;
+@property (weak) IBOutlet NSProgressIndicator *progressBar;
+@property (weak) IBOutlet NSPanel *progressPanel;
 @property (unsafe_unretained) IBOutlet NSPanel *settingsSheet;
 @property (unsafe_unretained) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSSlider *tempoSlider;

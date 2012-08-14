@@ -17,6 +17,7 @@
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
 			<string>NSNumberFormatter</string>
+			<string>NSProgressIndicator</string>
 			<string>NSScrollView</string>
 			<string>NSScroller</string>
 			<string>NSSlider</string>
@@ -471,7 +472,6 @@
 									<string key="NSFrame">{{574, 1}, {16, 528}}</string>
 									<reference key="NSSuperview" ref="956162319"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:15</string>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									<reference key="NSTarget" ref="956162319"/>
@@ -614,7 +614,6 @@
 							<string key="NSFrame">{{187, 13}, {75, 32}}</string>
 							<reference key="NSSuperview" ref="220638055"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="952220592">
@@ -829,6 +828,40 @@
 			<object class="NSUserDefaultsController" id="88702099">
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
+			<object class="NSWindowTemplate" id="920698222">
+				<int key="NSWindowStyleMask">31</int>
+				<int key="NSWindowBacking">2</int>
+				<string key="NSWindowRect">{{272, 172}, {527, 126}}</string>
+				<int key="NSWTFlags">-1535638528</int>
+				<string key="NSWindowTitle">Window</string>
+				<string key="NSWindowClass">NSPanel</string>
+				<nil key="NSViewClass"/>
+				<nil key="NSUserInterfaceItemIdentifier"/>
+				<object class="NSView" key="NSWindowView" id="257500949">
+					<reference key="NSNextResponder"/>
+					<int key="NSvFlags">256</int>
+					<array class="NSMutableArray" key="NSSubviews">
+						<object class="NSProgressIndicator" id="203516028">
+							<reference key="NSNextResponder" ref="257500949"/>
+							<int key="NSvFlags">268</int>
+							<string key="NSFrame">{{18, 86}, {491, 20}}</string>
+							<reference key="NSSuperview" ref="257500949"/>
+							<reference key="NSWindow"/>
+							<string key="NSReuseIdentifierKey">_NS:9</string>
+							<string key="NSHuggingPriority">{250, 250}</string>
+							<int key="NSpiFlags">16397</int>
+							<double key="NSMaxValue">100</double>
+						</object>
+					</array>
+					<string key="NSFrameSize">{527, 126}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
+					<string key="NSReuseIdentifierKey">_NS:21</string>
+				</object>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
+				<bool key="NSWindowIsRestorable">YES</bool>
+			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -999,6 +1032,22 @@
 						<reference key="destination" ref="320158561"/>
 					</object>
 					<int key="connectionID">100327</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">progressPanel</string>
+						<reference key="source" ref="218606778"/>
+						<reference key="destination" ref="920698222"/>
+					</object>
+					<int key="connectionID">100331</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">progressBar</string>
+						<reference key="source" ref="218606778"/>
+						<reference key="destination" ref="203516028"/>
+					</object>
+					<int key="connectionID">100333</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1374,6 +1423,27 @@
 						<reference key="object" ref="939159577"/>
 						<reference key="parent" ref="827400858"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">100328</int>
+						<reference key="object" ref="920698222"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="257500949"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">100329</int>
+						<reference key="object" ref="257500949"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="203516028"/>
+						</array>
+						<reference key="parent" ref="920698222"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">100332</int>
+						<reference key="object" ref="203516028"/>
+						<reference key="parent" ref="257500949"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1427,6 +1497,10 @@
 				<integer value="1041" key="100323.IBNumberFormatterBehaviorMetadataKey"/>
 				<boolean value="YES" key="100323.IBNumberFormatterLocalizesFormatMetadataKey"/>
 				<string key="100323.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="100328.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<boolean value="NO" key="100328.NSWindowTemplate.visibleAtLaunch"/>
+				<string key="100329.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="100332.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBWindowTemplateEditedContentRect">{{133, 170}, {507, 413}}</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1435,7 +1509,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100327</int>
+			<int key="maxID">100333</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1483,12 +1557,32 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SCCompositionController</string>
 					<string key="superclassName">NSObject</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="closeSettings:">id</string>
+						<string key="playComposition:">id</string>
+						<string key="stopComposition:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="closeSettings:">
+							<string key="name">closeSettings:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="playComposition:">
+							<string key="name">playComposition:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="stopComposition:">
+							<string key="name">stopComposition:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="barsStepper">NSStepper</string>
 						<string key="barsText">NSTextField</string>
 						<string key="composition">SCDocument</string>
 						<string key="keyboardScroll">NSScrollView</string>
 						<string key="playButton">NSToolbarItem</string>
+						<string key="progressPanel">NSPanel</string>
 						<string key="scrollView">NSScrollView</string>
 						<string key="settingsButton">NSToolbarItem</string>
 						<string key="settingsSheet">NSPanel</string>
@@ -1518,6 +1612,10 @@
 						<object class="IBToOneOutletInfo" key="playButton">
 							<string key="name">playButton</string>
 							<string key="candidateClassName">NSToolbarItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="progressPanel">
+							<string key="name">progressPanel</string>
+							<string key="candidateClassName">NSPanel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="scrollView">
 							<string key="name">scrollView</string>

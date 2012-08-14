@@ -16,7 +16,7 @@ typedef enum SCExportStyle {
 
 @interface SCExporter : NSObject
 - (id)initWithURL:(NSURL*)url style:(SCExportStyle)style;
-- (void)exportWithSynth:(SCSynth*)synth;
+- (void)exportWithSynth:(SCSynth*)synth completionHandler:(void (^)(void))completionHandler updateHandler:(void (^)(int framesWrote))updateHandler;
 @property (strong) id<SCAudioRenderer> renderer;
 @property (assign) int numOfFrames;
 @end
