@@ -78,6 +78,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardViewDidScroll:) name:NSViewBoundsDidChangeNotification object:keyboardScroll.contentView];
     vocalLine = [[SCSimpleSampler alloc] initWithFile:[[NSBundle mainBundle] pathForResource:@"sample-voice" ofType:@"wav"] baseFrequency:523.25f]; // This is for debugging
     keyboard.vocalLine = vocalLine;
+    
+    // Scroll to initial point.
+    [keyboardScroll.contentView scrollToPoint:NSMakePoint(0.0f, kSCNoteLineHeight * 12)];
+
 }
 - (void)dealloc
 {
