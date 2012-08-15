@@ -22,7 +22,7 @@ static const float kSCPianoRollMinimumNoteWidth = 20.0f;
 
 static const int kSCNumOfChannels = 2;
 
-static const int kSCDefaultOctaveOffset = 1;
+static const int kSCDefaultOctaveOffset = 0;
 
 static const int kSCNumOfRows = 12 * 4; // 4 octaves
 
