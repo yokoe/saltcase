@@ -77,7 +77,7 @@ const int intervalBeforeVibratoStart = 44100 * 3;
     
     @synchronized(self) {
         for (int i = 0; i < numOfPackets; i++) {
-            float signal = samples[(int)round(sampleIndex)] * amplitude;
+            float signal = 0.0f;
             sampleIndex += (delta * (sin(vibratoTheta) * vibratoAmplitude + 1.0f));
             
             int sampleIndexInt = (int)round(sampleIndex);
