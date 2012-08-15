@@ -21,6 +21,10 @@
     self = [super init];
     if (self) {
         self.synth = [[SCSynth alloc] init];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSRunAlertPanel(@"Warning!", @"This is a pre-alpha build of SaltCase. It is woefully incomplete!\nThere might be bugs which may hurt your ears or hardwares. Before starting to use this application, please detach all devices from your mac and set the speaker volume to minimum. \n\nBE CAREFUL, IT IS YOUR RESPONSIBILITY!", @"OK", nil, nil);
+        });
     }
     return self;
 }
