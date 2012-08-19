@@ -10,9 +10,12 @@
 #import "SYLinearPCMData.h"
 
 const int intervalBeforeVibratoStart = 44100 * 3;
+const float fadeOutDelta = -0.0001f;
 
 @interface SCSimpleSampler(){
     float amplitude;
+    float targetAmplitude;
+    float amplitudeDelta;
     float theta;
     float sampleIndex;
     
@@ -54,10 +57,12 @@ const int intervalBeforeVibratoStart = 44100 * 3;
         }
     }
     amplitude = velocity;
+    targetAmplitude = amplitude;
     isOn = YES;
 }
 - (void)off {
-    amplitude = 0.0f;
+    targetAmplitude = 0.0f;
+    amplitudeDelta = fadeOutDelta;
     targetVibratoAmplitude = 0.0f;
     vibratoAmplitude = 0.0f;
     isOn = NO;
@@ -116,6 +121,14 @@ const int intervalBeforeVibratoStart = 44100 * 3;
                 vibratoAmplitude += 0.000001f;
             } else {
                 vibratoAmplitude -= 0.000001f;
+            }
+            if (amplitudeDelta != 0.0f) {
+                if ((amplitudeDelta > 0.0f && amplitude < targetAmplitude) || (amplitudeDelta < 0.0f && amplitude > targetAmplitude)) {
+                    amplitude += amplitudeDelta;
+                } else {
+                    amplitude = targetAmplitude;
+                    amplitudeDelta = 0.0f;
+                }
             }
         }
     }
