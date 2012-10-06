@@ -11,7 +11,7 @@
 @interface SCVocalInstrument : NSObject {
     float targetFrequency;
 }
-@property (assign) float frequency;
+@property (assign, nonatomic) float frequency;
 - (void)onWithVelocity:(float)velocity;
 - (void)off;
 - (void)renderToBuffer:(float*)buffer numOfPackets:(int)numOfPackets sender:(SCSynth*)sender;

@@ -18,7 +18,7 @@
 
 #import "SCVocalInstrument.h"
 #import "SCSineWaveGenerator.h"
-#import "SCSimpleSampler.h"
+#import "SCMultiSampler.h"
 #import "SCExporter.h"
 
 @interface SCCompositionController() {
@@ -76,7 +76,7 @@
     // http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/NSScrollViewGuide/Articles/SynchroScroll.html
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pianoRollDidScroll:) name:NSViewBoundsDidChangeNotification object:scrollView.contentView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardViewDidScroll:) name:NSViewBoundsDidChangeNotification object:keyboardScroll.contentView];
-    vocalLine = [[SCSimpleSampler alloc] initWithFile:[[NSBundle mainBundle] pathForResource:@"sample-voice" ofType:@"wav"] baseFrequency:523.25f]; // This is for debugging
+    vocalLine = [[SCMultiSampler alloc] initWithFile:[[NSBundle mainBundle] pathForResource:@"sample-voice" ofType:@"wav"] baseFrequency:523.25f]; // This is for debugging
     keyboard.vocalLine = vocalLine;
     
     // Scroll to initial point.
