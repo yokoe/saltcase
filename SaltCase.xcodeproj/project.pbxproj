@@ -64,6 +64,7 @@
 		196B16AA15A93CE0008E59D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B168415A93CDF008E59D0 /* Cocoa.framework */; };
 		196B16B215A93CE0008E59D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 196B16B015A93CE0008E59D0 /* InfoPlist.strings */; };
 		196B16B515A93CE0008E59D0 /* SaltCaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 196B16B415A93CE0008E59D0 /* SaltCaseTests.m */; };
+		198BC328162013A4004C5010 /* sample in Resources */ = {isa = PBXBuildFile; fileRef = 198BC327162013A4004C5010 /* sample */; };
 		1992DC5E15A9733900AC074F /* SCSynth.m in Sources */ = {isa = PBXBuildFile; fileRef = 1992DC5D15A9733900AC074F /* SCSynth.m */; };
 		1992DC5F15A9733900AC074F /* SCSynth.m in Sources */ = {isa = PBXBuildFile; fileRef = 1992DC5D15A9733900AC074F /* SCSynth.m */; };
 		1992DC6115A9736F00AC074F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1992DC6015A9736F00AC074F /* AudioToolbox.framework */; };
@@ -163,6 +164,7 @@
 		196B16B315A93CE0008E59D0 /* SaltCaseTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaltCaseTests.h; sourceTree = "<group>"; };
 		196B16B415A93CE0008E59D0 /* SaltCaseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaltCaseTests.m; sourceTree = "<group>"; };
 		19764F0C15A957EF006A4CE1 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		198BC327162013A4004C5010 /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sample; sourceTree = "<group>"; };
 		1992DC5C15A9733900AC074F /* SCSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSynth.h; sourceTree = "<group>"; };
 		1992DC5D15A9733900AC074F /* SCSynth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSynth.m; sourceTree = "<group>"; };
 		1992DC6015A9736F00AC074F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -253,6 +255,7 @@
 		194816FE15C6C75C00C338A6 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				198BC327162013A4004C5010 /* sample */,
 				194816FF15C6C75C00C338A6 /* sample-voice.wav */,
 			);
 			path = Sounds;
@@ -519,6 +522,7 @@
 				19CA67A615ADD02A00816234 /* NoteMap.plist in Resources */,
 				193F77EA15B846A3009E2BDB /* DefaultSettings.plist in Resources */,
 				1948170015C6C75C00C338A6 /* sample-voice.wav in Resources */,
+				198BC328162013A4004C5010 /* sample in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
