@@ -27,20 +27,6 @@
             NSRunAlertPanel(@"Warning!", @"This is a pre-alpha build of SaltCase. It is woefully incomplete!\nThere might be bugs which may hurt your ears or hardwares. Before starting to use this application, please detach all devices from your mac and set the speaker volume to minimum. \n\nBE CAREFUL, IT IS YOUR RESPONSIBILITY!", @"OK", nil, nil);
         });
 #endif
-        // List samples.
-        NSString* sampleVoiceDirectory = [[NSBundle mainBundle] pathForResource:@"sample" ofType:nil];
-        NSArray* entriesInSampleVoiceDirectory = [[NSFileManager defaultManager] subpathsAtPath:sampleVoiceDirectory];
-        NSMutableArray *keys = [@[] mutableCopy];
-        for (NSString* entry in entriesInSampleVoiceDirectory) {
-            if ([entry rangeOfString:@"/"].location == NSNotFound) {
-                [keys addObject:entry];
-            }
-        }
-        NSString* firstKey = keys[0];
-        NSArray* voiceFiles = [[NSFileManager defaultManager] subpathsAtPath:[sampleVoiceDirectory stringByAppendingPathComponent:firstKey]];
-        for (NSString* file in voiceFiles) {
-            NSLog(@"%@", [file stringByDeletingPathExtension]);
-        }
     }
     return self;
 }

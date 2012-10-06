@@ -75,8 +75,9 @@
     // Synchronize scrolling between the piano roll and the keyboard view.
     // http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/NSScrollViewGuide/Articles/SynchroScroll.html
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pianoRollDidScroll:) name:NSViewBoundsDidChangeNotification object:scrollView.contentView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardViewDidScroll:) name:NSViewBoundsDidChangeNotification object:keyboardScroll.contentView];
-    vocalLine = [[SCMultiSampler alloc] initWithFile:[[NSBundle mainBundle] pathForResource:@"sample-voice" ofType:@"wav"] baseFrequency:523.25f]; // This is for debugging
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardViewDidScroll:) name:NSViewBoundsDidChangeNotification object:keyboardScroll.contentView];    
+    NSString* sampleVoiceDirectory = [[NSBundle mainBundle] pathForResource:@"sample" ofType:nil];
+    vocalLine = [[SCMultiSampler alloc] initWithContentsOfDirectoryAtPath:sampleVoiceDirectory];
     keyboard.vocalLine = vocalLine;
     
     // Scroll to initial point.
