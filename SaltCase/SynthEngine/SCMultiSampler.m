@@ -10,6 +10,7 @@
 #import "SCSimpleSampler.h"
 
 @interface SCMultiSampler()
+@property (strong) NSDictionary* samples;
 @property (strong) SCSimpleSampler *sampler;
 @end
 
@@ -37,12 +38,17 @@
         }
         NSString* firstKey = keys[0];
         NSArray* voiceFiles = [[NSFileManager defaultManager] subpathsAtPath:[directoryPath stringByAppendingPathComponent:firstKey]];
+        NSMutableDictionary* samples = [@{} mutableCopy];
         for (NSString* file in voiceFiles) {
-            NSLog(@"%@", [file stringByDeletingPathExtension]);
+            NSString* character = [file stringByDeletingPathExtension];
+            NSString* filePath = [[directoryPath stringByAppendingPathComponent:firstKey] stringByAppendingPathComponent:file];
+            SCSimpleSampler* sampler = [[SCSimpleSampler alloc] initWithFile:filePath baseFrequency:523.25f];
+            samples[character] = sampler;
         }
+        self.samples = samples;
         
         // Load first sample.
-        self.sampler = [[SCSimpleSampler alloc] initWithFile:[[directoryPath stringByAppendingPathComponent:firstKey] stringByAppendingPathComponent:voiceFiles[0]] baseFrequency:523.25f];
+        self.sampler = samples[samples.allKeys[0]];
         
         NSLog(@"%@", self.sampler);
     }
