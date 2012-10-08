@@ -152,6 +152,7 @@
         case SCAudioEventNoteOn:
             [vocalLine onWithVelocity:0.5f];
             [vocalLine setFrequency:event.frequency];
+            [vocalLine setText:event.text];
             break;
         case SCAudioEventNoteOff:
             [vocalLine off];

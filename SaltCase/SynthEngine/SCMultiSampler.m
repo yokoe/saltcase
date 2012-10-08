@@ -12,6 +12,7 @@
 @interface SCMultiSampler()
 @property (strong) NSDictionary* samples;
 @property (strong) SCSimpleSampler *sampler;
+@property (copy) NSString* currentText;
 @end
 
 @implementation SCMultiSampler
@@ -40,15 +41,17 @@
         NSArray* voiceFiles = [[NSFileManager defaultManager] subpathsAtPath:[directoryPath stringByAppendingPathComponent:firstKey]];
         NSMutableDictionary* samples = [@{} mutableCopy];
         for (NSString* file in voiceFiles) {
-            NSString* character = [file stringByDeletingPathExtension];
+            NSString* character = [[file stringByDeletingPathExtension] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSLog(@"%@", character);
             NSString* filePath = [[directoryPath stringByAppendingPathComponent:firstKey] stringByAppendingPathComponent:file];
             SCSimpleSampler* sampler = [[SCSimpleSampler alloc] initWithFile:filePath baseFrequency:523.25f];
             samples[character] = sampler;
         }
-        self.samples = samples;
         
+        self.samples = samples;        
         // Load first sample.
-        self.sampler = samples[samples.allKeys[0]];
+        self.currentText = samples.allKeys[0];
+        self.sampler = samples[self.currentText];
         
         NSLog(@"%@", self.sampler);
     }
@@ -60,8 +63,30 @@
 - (void)off {
     [self.sampler off];
 }
+- (void)setText:(NSString *)text {
+    NSString* escapedText = [text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    if (![self.currentText isEqualToString:escapedText]) {
+        NSString* foundKey = nil;
+        for (NSString* character in self.samples.allKeys) {
+            if ([character isEqualToString:escapedText]) {
+                foundKey = character;
+            }
+        }
+        if (foundKey) {
+            NSLog(@"Switch to %@, %@", text, foundKey);
+            self.currentText = escapedText;
+            self.sampler = self.samples[self.currentText];
+        } else {
+            NSLog(@"%@(%@) was not found. %@", text, escapedText, self.samples.allKeys);
+        }
+    }
+}
 
 - (void)renderToBuffer:(float *)buffer numOfPackets:(int)numOfPackets sender:(SCSynth *)sender {
-    [self.sampler renderToBuffer:buffer numOfPackets:numOfPackets sender:sender];
+    if (self.sampler) {
+        [self.sampler renderToBuffer:buffer numOfPackets:numOfPackets sender:sender];
+    } else {
+        NSLog(@"Warning: No sampler selected.");
+    }
 }
 @end

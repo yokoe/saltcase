@@ -12,6 +12,7 @@
     float targetFrequency;
 }
 @property (assign, nonatomic) float frequency;
+@property (copy) NSString* text;
 - (void)onWithVelocity:(float)velocity;
 - (void)off;
 - (void)renderToBuffer:(float*)buffer numOfPackets:(int)numOfPackets sender:(SCSynth*)sender;

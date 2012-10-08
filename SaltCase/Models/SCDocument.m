@@ -71,6 +71,7 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
     for (SCNote* note in self.notes) {
         { // Start
             SCAudioEvent* event = [[SCAudioEvent alloc] init];
+            event.text = note.text;
             event.timing = [note startsAtSecondsInTempo:self.tempo];
             event.type = SCAudioEventNoteOn;
             event.pitch = note.pitch;
