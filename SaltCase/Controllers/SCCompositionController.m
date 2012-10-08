@@ -150,9 +150,9 @@
 - (void)processEvent:(SCAudioEvent*)event sender:(SCSynth *)sender {
     switch (event.type) {
         case SCAudioEventNoteOn:
+            [vocalLine setText:event.text];
             [vocalLine onWithVelocity:0.5f];
             [vocalLine setFrequency:event.frequency];
-            [vocalLine setText:event.text];
             break;
         case SCAudioEventNoteOff:
             [vocalLine off];
