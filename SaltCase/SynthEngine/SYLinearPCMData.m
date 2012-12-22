@@ -140,6 +140,6 @@
 
 - (void)dealloc
 {
-    if (signal) free(signal);
+    if (_signal) free(_signal);
 }
 @end
