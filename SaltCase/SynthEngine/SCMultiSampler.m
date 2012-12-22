@@ -74,8 +74,14 @@
         }
         if (foundKey) {
             NSLog(@"Switch to %@, %@", text, foundKey);
+            
+            // TODO: Improve smoothness.
+            SCSimpleSampler* previous = self.sampler;
             self.currentText = escapedText;
             self.sampler = self.samples[self.currentText];
+            if (previous) {
+                self.sampler.frequency = previous.frequency;
+            }
         } else {
             NSLog(@"%@(%@) was not found. %@", text, escapedText, self.samples.allKeys);
         }

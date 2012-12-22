@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12A269</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
-		<string key="IBDocument.AppKitVersion">1187</string>
-		<string key="IBDocument.HIToolboxVersion">624.00</string>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2549</string>
+			<string key="NS.object.0">2844</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSBox</string>
@@ -64,7 +64,7 @@
 					<bool key="NSToolbarShowsBaselineSeparator">YES</bool>
 					<bool key="NSToolbarAllowsUserCustomization">YES</bool>
 					<bool key="NSToolbarAutosavesConfiguration">NO</bool>
-					<int key="NSToolbarDisplayMode">1</int>
+					<int key="NSToolbarDisplayMode">2</int>
 					<int key="NSToolbarSizeMode">1</int>
 					<dictionary class="NSMutableDictionary" key="NSToolbarIBIdentifiedItems">
 						<object class="NSToolbarItem" key="0A3D359A-8659-4900-97EA-D5258B10572F" id="520124240">
@@ -75,9 +75,9 @@
 							<string key="NSToolbarItemPaletteLabel">Stop</string>
 							<string key="NSToolbarItemToolTip"/>
 							<nil key="NSToolbarItemView"/>
-							<object class="NSCustomResource" key="NSToolbarItemImage" id="1019830768">
+							<object class="NSCustomResource" key="NSToolbarItemImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">ToolbarButton</string>
+								<string key="NSResourceName">ToolbarButtonStop</string>
 							</object>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
@@ -97,7 +97,10 @@
 							<string key="NSToolbarItemPaletteLabel">Play</string>
 							<string key="NSToolbarItemToolTip"/>
 							<nil key="NSToolbarItemView"/>
-							<reference key="NSToolbarItemImage" ref="1019830768"/>
+							<object class="NSCustomResource" key="NSToolbarItemImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">ToolbarButtonPlay</string>
+							</object>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
 							<string key="NSToolbarItemMinSize">{0, 0}</string>
@@ -116,9 +119,11 @@
 							<string key="NSToolbarItemPaletteLabel">Custom View</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSTextField" key="NSToolbarItemView" id="746889519">
-								<nil key="NSNextResponder"/>
+								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 14}, {229, 17}}</string>
+								<reference key="NSSuperview"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:1505</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="332146287">
@@ -194,7 +199,7 @@
 							<string key="NSToolbarItemPaletteLabel"/>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSBox" key="NSToolbarItemView" id="810650187">
-								<nil key="NSNextResponder"/>
+								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">12</int>
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="NSView" id="205797055">
@@ -227,6 +232,7 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{15, 12}, {445, 12}}</string>
 												<reference key="NSSuperview" ref="205797055"/>
+												<reference key="NSNextKeyView"/>
 												<string key="NSClassName">PlayPosIndicator</string>
 											</object>
 										</array>
@@ -236,6 +242,7 @@
 									</object>
 								</array>
 								<string key="NSFrame">{{0, 14}, {480, 49}}</string>
+								<reference key="NSSuperview"/>
 								<reference key="NSNextKeyView" ref="205797055"/>
 								<string key="NSOffsets">{0, 0}</string>
 								<object class="NSTextFieldCell" key="NSTitleCell">
@@ -442,10 +449,10 @@
 										<object class="NSView" id="360851141">
 											<reference key="NSNextResponder" ref="795161274"/>
 											<int key="NSvFlags">274</int>
-											<string key="NSFrameSize">{589, 528}</string>
+											<string key="NSFrameSize">{589, 545}</string>
 											<reference key="NSSuperview" ref="795161274"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="1032500306"/>
+											<reference key="NSNextKeyView" ref="58127935"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 										</object>
 									</array>
@@ -468,24 +475,26 @@
 								</object>
 								<object class="NSScroller" id="58127935">
 									<reference key="NSNextResponder" ref="956162319"/>
-									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{574, 1}, {16, 528}}</string>
+									<int key="NSvFlags">-2147483392</int>
+									<string key="NSFrame">{{-100, -100}, {15, 528}}</string>
 									<reference key="NSSuperview" ref="956162319"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="1032500306"/>
 									<string key="NSReuseIdentifierKey">_NS:15</string>
+									<bool key="NSEnabled">YES</bool>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									<reference key="NSTarget" ref="956162319"/>
 									<string key="NSAction">_doScroller:</string>
 									<double key="NSCurValue">1</double>
-									<double key="NSPercent">0.96363627910614014</double>
+									<double key="NSPercent">0.96880733944954134</double>
 								</object>
 								<object class="NSScroller" id="1032500306">
 									<reference key="NSNextResponder" ref="956162319"/>
-									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{1, 513}, {589, 16}}</string>
+									<int key="NSvFlags">-2147483392</int>
+									<string key="NSFrame">{{-100, -100}, {574, 15}}</string>
 									<reference key="NSSuperview" ref="956162319"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="58127935"/>
+									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:26</string>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									<int key="NSsFlags">1</int>
@@ -499,7 +508,7 @@
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="795161274"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
-							<int key="NSsFlags">133170</int>
+							<int key="NSsFlags">133730</int>
 							<reference key="NSVScroller" ref="58127935"/>
 							<reference key="NSHScroller" ref="1032500306"/>
 							<reference key="NSContentView" ref="795161274"/>
@@ -519,7 +528,7 @@
 											<reference key="NSNextResponder" ref="431125781"/>
 											<int key="NSvFlags">274</int>
 											<array class="NSMutableArray" key="NSSubviews"/>
-											<string key="NSFrameSize">{128, 528}</string>
+											<string key="NSFrameSize">{128, 530}</string>
 											<reference key="NSSuperview" ref="431125781"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="956162319"/>
@@ -543,6 +552,7 @@
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="1015763548"/>
 									<string key="NSReuseIdentifierKey">_NS:15</string>
+									<bool key="NSEnabled">YES</bool>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									<reference key="NSTarget" ref="366022601"/>
 									<string key="NSAction">_doScroller:</string>
@@ -569,7 +579,7 @@
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="804626791"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
-							<int key="NSsFlags">153602</int>
+							<int key="NSsFlags">153666</int>
 							<reference key="NSVScroller" ref="804626791"/>
 							<reference key="NSHScroller" ref="1015763548"/>
 							<reference key="NSContentView" ref="431125781"/>
@@ -584,7 +594,7 @@
 					<reference key="NSNextKeyView" ref="366022601"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
-				<string key="NSMinSize">{94, 180}</string>
+				<string key="NSMinSize">{94, 164}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<int key="NSWindowCollectionBehavior">128</int>
 				<bool key="NSWindowIsRestorable">YES</bool>
@@ -614,6 +624,7 @@
 							<string key="NSFrame">{{187, 13}, {75, 32}}</string>
 							<reference key="NSSuperview" ref="220638055"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="952220592">
@@ -847,6 +858,7 @@
 							<string key="NSFrame">{{18, 86}, {491, 20}}</string>
 							<reference key="NSSuperview" ref="257500949"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSHuggingPriority">{250, 250}</string>
 							<int key="NSpiFlags">16397</int>
@@ -856,6 +868,7 @@
 					<string key="NSFrameSize">{527, 126}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
+					<reference key="NSNextKeyView" ref="203516028"/>
 					<string key="NSReuseIdentifierKey">_NS:21</string>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
@@ -1514,74 +1527,15 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">NSDocument</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="printDocument:">id</string>
-						<string key="revertDocumentToSaved:">id</string>
-						<string key="runPageLayout:">id</string>
-						<string key="saveDocument:">id</string>
-						<string key="saveDocumentAs:">id</string>
-						<string key="saveDocumentTo:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="printDocument:">
-							<string key="name">printDocument:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="revertDocumentToSaved:">
-							<string key="name">revertDocumentToSaved:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="runPageLayout:">
-							<string key="name">runPageLayout:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="saveDocument:">
-							<string key="name">saveDocument:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="saveDocumentAs:">
-							<string key="name">saveDocumentAs:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="saveDocumentTo:">
-							<string key="name">saveDocumentTo:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NSDocument.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">SCCompositionController</string>
 					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="closeSettings:">id</string>
-						<string key="playComposition:">id</string>
-						<string key="stopComposition:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="closeSettings:">
-							<string key="name">closeSettings:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="playComposition:">
-							<string key="name">playComposition:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="stopComposition:">
-							<string key="name">stopComposition:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="barsStepper">NSStepper</string>
 						<string key="barsText">NSTextField</string>
 						<string key="composition">SCDocument</string>
 						<string key="keyboardScroll">NSScrollView</string>
 						<string key="playButton">NSToolbarItem</string>
+						<string key="progressBar">NSProgressIndicator</string>
 						<string key="progressPanel">NSPanel</string>
 						<string key="scrollView">NSScrollView</string>
 						<string key="settingsButton">NSToolbarItem</string>
@@ -1612,6 +1566,10 @@
 						<object class="IBToOneOutletInfo" key="playButton">
 							<string key="name">playButton</string>
 							<string key="candidateClassName">NSToolbarItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="progressBar">
+							<string key="name">progressBar</string>
+							<string key="candidateClassName">NSProgressIndicator</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="progressPanel">
 							<string key="name">progressPanel</string>
@@ -1701,7 +1659,8 @@
 			<string key="NSToolbarPrint">{32, 32}</string>
 			<string key="NSToolbarShowColors">{32, 32}</string>
 			<string key="NSToolbarShowFonts">{32, 32}</string>
-			<string key="ToolbarButton">{48, 48}</string>
+			<string key="ToolbarButtonPlay">{48, 48}</string>
+			<string key="ToolbarButtonStop">{48, 48}</string>
 		</dictionary>
 	</data>
 </archive>

@@ -52,6 +52,8 @@
 		1948353115B5AB60003D90E8 /* SCPianoRollNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948353015B5AB5F003D90E8 /* SCPianoRollNote.m */; };
 		1948353215B5AB60003D90E8 /* SCPianoRollNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1948353015B5AB5F003D90E8 /* SCPianoRollNote.m */; };
 		1948353415B5AC7C003D90E8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1948353315B5AC7C003D90E8 /* QuartzCore.framework */; };
+		19574686168559D400E3805B /* ToolbarButtonPlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 19574685168559D400E3805B /* ToolbarButtonPlay.png */; };
+		1957468916855A4E00E3805B /* ToolbarButtonStop.png in Resources */ = {isa = PBXBuildFile; fileRef = 1957468816855A4E00E3805B /* ToolbarButtonStop.png */; };
 		196B168515A93CDF008E59D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B168415A93CDF008E59D0 /* Cocoa.framework */; };
 		196B168F15A93CDF008E59D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 196B168D15A93CDF008E59D0 /* InfoPlist.strings */; };
 		196B169115A93CDF008E59D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 196B169015A93CDF008E59D0 /* main.m */; };
@@ -143,6 +145,8 @@
 		1948352F15B5AB5F003D90E8 /* SCPianoRollNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPianoRollNote.h; sourceTree = "<group>"; };
 		1948353015B5AB5F003D90E8 /* SCPianoRollNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPianoRollNote.m; sourceTree = "<group>"; };
 		1948353315B5AC7C003D90E8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		19574685168559D400E3805B /* ToolbarButtonPlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarButtonPlay.png; sourceTree = "<group>"; };
+		1957468816855A4E00E3805B /* ToolbarButtonStop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarButtonStop.png; sourceTree = "<group>"; };
 		196B168015A93CDF008E59D0 /* SaltCase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaltCase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		196B168415A93CDF008E59D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		196B168715A93CDF008E59D0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -438,6 +442,8 @@
 		19E1748415A93F260045A3C3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1957468816855A4E00E3805B /* ToolbarButtonStop.png */,
+				19574685168559D400E3805B /* ToolbarButtonPlay.png */,
 				19E1748515A93F260045A3C3 /* ToolbarButton.png */,
 			);
 			path = Images;
@@ -523,6 +529,8 @@
 				19CA67A615ADD02A00816234 /* NoteMap.plist in Resources */,
 				193F77EA15B846A3009E2BDB /* DefaultSettings.plist in Resources */,
 				198BC328162013A4004C5010 /* sample in Resources */,
+				19574686168559D400E3805B /* ToolbarButtonPlay.png in Resources */,
+				1957468916855A4E00E3805B /* ToolbarButtonStop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
