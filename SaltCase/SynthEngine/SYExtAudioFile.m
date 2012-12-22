@@ -14,7 +14,7 @@
 @end
 
 @implementation SYExtAudioFile
-@synthesize fileFormat, fileRef = audioFileRef, frames;
+@synthesize fileRef = audioFileRef;
 
 + (SYExtAudioFile*)audioFileWithContentOfFile:(NSString*)filePath {
     SYExtAudioFile* anInstance = [SYExtAudioFile new];
@@ -52,12 +52,12 @@
 }
 
 - (BOOL)loadFileFormatProperty {
-    UInt32 size = sizeof(fileFormat);
+    UInt32 size = sizeof(_fileFormat);
     OSStatus err = noErr;
-    err = ExtAudioFileGetProperty(audioFileRef, kExtAudioFileProperty_FileDataFormat, &size, &fileFormat);
+    err = ExtAudioFileGetProperty(audioFileRef, kExtAudioFileProperty_FileDataFormat, &size, &_fileFormat);
     if (err == noErr) {
-        size = sizeof(frames);
-        err = ExtAudioFileGetProperty(audioFileRef, kExtAudioFileProperty_FileLengthFrames, &size, &frames);
+        size = sizeof(_frames);
+        err = ExtAudioFileGetProperty(audioFileRef, kExtAudioFileProperty_FileLengthFrames, &size, &_frames);
         if (err == noErr) {
             return YES;
         } else {

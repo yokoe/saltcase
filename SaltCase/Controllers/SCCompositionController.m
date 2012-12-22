@@ -32,7 +32,6 @@
 @end
 
 @implementation SCCompositionController
-@synthesize events = events_;
 
 - (void)awakeFromNib {
     [super awakeFromNib];

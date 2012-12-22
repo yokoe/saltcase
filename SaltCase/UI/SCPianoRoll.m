@@ -21,7 +21,6 @@
 @end
 
 @implementation SCPianoRoll
-@synthesize gridHorizontalInterval = gridHorizontalInterval_;
 
 - (NSArray*)notes {
     NSMutableArray* notes = [NSMutableArray array];
@@ -38,8 +37,8 @@
 }
 
 - (void)setGridHorizontalInterval:(float)gridHorizontalInterval {
-    float previousScale = gridHorizontalInterval_;
-    gridHorizontalInterval_ = gridHorizontalInterval;
+    float previousScale = _gridHorizontalInterval;
+    _gridHorizontalInterval = gridHorizontalInterval;
     
     // Stretch notes.
     float scale = gridHorizontalInterval / previousScale;

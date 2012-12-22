@@ -43,15 +43,13 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
 };
 
 @implementation SCDocument
-@synthesize tempo = tempo_;
-@synthesize bars = bars_;
 
 - (void)setTempo:(float)tempo {
     // Range limitation: 40.0f - 320.0f
-    tempo_ = fminf(fmaxf(kSCMinimumTempo, tempo), kSCMaximumTempo);
+    _tempo = fminf(fmaxf(kSCMinimumTempo, tempo), kSCMaximumTempo);
 }
 - (NSTimeInterval)lengthInSeconds {
-    return 60.0f / tempo_ * bars_ * 4;
+    return 60.0f / self.tempo * self.bars * 4;
 }
 
 - (SCNote*)noteAfter:(SCNote*)noteBefore {

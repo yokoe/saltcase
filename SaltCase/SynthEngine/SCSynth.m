@@ -20,7 +20,6 @@ const float kSCSamplingFrameRate = 44100.0f;
 @end
 
 @implementation SCSynth
-@synthesize bufferPacketLength, metronome, renderBuffer, renderedPackets, renderer = renderer_;
 static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBufferRef inBuffer)
 {
     SCSynth *player =(__bridge SCSynth*)inUserData;
@@ -64,8 +63,8 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
 - (void)render {
     @autoreleasepool {
         [self clearRenderBuffer];
-        if (renderer_ && [renderer_ respondsToSelector:@selector(renderBuffer:numOfPackets:sender:)]) {
-            [renderer_ renderBuffer:renderBuffer numOfPackets:bufferPacketLength sender:self];
+        if (_renderer && [_renderer respondsToSelector:@selector(renderBuffer:numOfPackets:sender:)]) {
+            [_renderer renderBuffer:_renderBuffer numOfPackets:_bufferPacketLength sender:self];
         }
     }    
 }
@@ -80,10 +79,10 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
     return self;
 }
 - (void)clearRenderBuffer {
-    for (int i = 0; i < bufferPacketLength * 2; i++) renderBuffer[i] = 0.0f;
+    for (int i = 0; i < _bufferPacketLength * 2; i++) _renderBuffer[i] = 0.0f;
 }
 -(void)prepareAudioQueues{
-    renderBuffer = (float*)malloc(sizeof(float) * bufferPacketLength * 2);
+    _renderBuffer = (float*)malloc(sizeof(float) * _bufferPacketLength * 2);
     [self clearRenderBuffer];
     self.renderedPackets = 0;
     
@@ -103,7 +102,7 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
                         NULL,NULL,0, &audioQueueObject);
     
     AudioQueueBufferRef  buffers[kSCNumberOfBuffers];
-    UInt32 bufferByteSize = bufferPacketLength * audioFormat.mBytesPerPacket;
+    UInt32 bufferByteSize = _bufferPacketLength * audioFormat.mBytesPerPacket;
     
     // Allocate audio queue buffers and fill them.
     for(int i = 0; i < kSCNumberOfBuffers; i++){
@@ -126,12 +125,12 @@ static void outputCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
         AudioQueueDispose(audioQueueObject, YES);
         audioQueueObject = nil;
         self.renderer = nil;
-        free(renderBuffer);
+        free(_renderBuffer);
     }
 }
 - (void)dealloc
 {
-    free(renderBuffer);
+    free(_renderBuffer);
     AudioQueueDispose(audioQueueObject, YES);
 }
 - (NSTimeInterval)timeElapsed {

@@ -16,8 +16,6 @@
 @end
 
 @implementation SYLinearPCMData
-@synthesize currentFileFormat, frames, originalFileFormat, signal;
-
 - (NSError*)loadFromFile:(NSString*)filepath {
     // Check file existence.
     if ([[NSFileManager defaultManager] fileExistsAtPath:filepath] == NO) {
@@ -28,9 +26,9 @@
     if (!audioFile) {
         return [NSError errorWithDomain:SYSoundErrorDomain code:SYErrorFailedToOpenFile userInfo:nil];;
     }
-    originalFileFormat = audioFile.fileFormat;
+    _originalFileFormat = audioFile.fileFormat;
     [self setupFileFormat];
-    frames = audioFile.frames;
+    _frames = audioFile.frames;
     
     [self loadSignalFromAudioFile:audioFile];
     
@@ -41,17 +39,17 @@
     static const UInt32 bufferFrames = 1024;
     if ([self allocateSignalMemory]) {
         
-        UInt32 bytes = (UInt32)bufferFrames * currentFileFormat.mBytesPerFrame;
+        UInt32 bytes = (UInt32)bufferFrames * self.currentFileFormat.mBytesPerFrame;
         float* buffer = malloc(bytes);
         
         AudioBufferList ioList;
         ioList.mNumberBuffers = 1;
-        ioList.mBuffers[0].mNumberChannels = currentFileFormat.mChannelsPerFrame;
+        ioList.mBuffers[0].mNumberChannels = self.currentFileFormat.mChannelsPerFrame;
         ioList.mBuffers[0].mDataByteSize = bytes;
         ioList.mBuffers[0].mData = buffer;
         
-        UInt32 size = sizeof(currentFileFormat);
-        OSStatus err = ExtAudioFileSetProperty(audioFile.fileRef, kExtAudioFileProperty_ClientDataFormat, size, &currentFileFormat);
+        UInt32 size = sizeof(self.currentFileFormat);
+        OSStatus err = ExtAudioFileSetProperty(audioFile.fileRef, kExtAudioFileProperty_ClientDataFormat, size, &_currentFileFormat);
         if (err != noErr) {
             NSLog(@"Error set format");
         }
@@ -73,10 +71,10 @@
                 NSLog(@"Error in loading audio signal from file.");
                 break;
             }
-            for (int i = 0; i < loadedFrames * currentFileFormat.mChannelsPerFrame; i++) {
-                signal[totalLoadedFrames + i] = buffer[i];
+            for (int i = 0; i < loadedFrames * self.currentFileFormat.mChannelsPerFrame; i++) {
+                _signal[totalLoadedFrames + i] = buffer[i];
             }
-            totalLoadedFrames += (loadedFrames * currentFileFormat.mChannelsPerFrame);
+            totalLoadedFrames += (loadedFrames * self.currentFileFormat.mChannelsPerFrame);
             
             //最後まで読み込んだら終了
             if (loadedFrames == 0) break;
@@ -91,12 +89,12 @@
 
 - (BOOL)allocateSignalMemory {
     // Allocate memory.
-    UInt32 bytes = (UInt32)frames * currentFileFormat.mBytesPerFrame;
-    signal = malloc(bytes);
+    UInt32 bytes = (UInt32)self.frames * self.currentFileFormat.mBytesPerFrame;
+    _signal = malloc(bytes);
     if (signal) {
         // Fill with zero.
-        for (int i = 0; i < frames; i++) {
-            signal[i] = 0.0f;
+        for (int i = 0; i < self.frames; i++) {
+            _signal[i] = 0.0f;
         }
         return YES;
     } else {
@@ -106,22 +104,22 @@
 }
 
 - (void)setupFileFormat {
-    currentFileFormat.mSampleRate = originalFileFormat.mSampleRate;
-    currentFileFormat.mFormatID = kAudioFormatLinearPCM;
-    currentFileFormat.mFormatFlags = kAudioFormatFlagsNativeFloatPacked;
-    currentFileFormat.mBitsPerChannel = 32;
-    currentFileFormat.mChannelsPerFrame = originalFileFormat.mChannelsPerFrame;
-    currentFileFormat.mFramesPerPacket = 1;
-    currentFileFormat.mBytesPerFrame = 
-    currentFileFormat.mBitsPerChannel / 8 * currentFileFormat.mChannelsPerFrame;
-    currentFileFormat.mBytesPerPacket = 
-    currentFileFormat.mBytesPerFrame * currentFileFormat.mFramesPerPacket;
+    _currentFileFormat.mSampleRate = _originalFileFormat.mSampleRate;
+    _currentFileFormat.mFormatID = kAudioFormatLinearPCM;
+    _currentFileFormat.mFormatFlags = kAudioFormatFlagsNativeFloatPacked;
+    _currentFileFormat.mBitsPerChannel = 32;
+    _currentFileFormat.mChannelsPerFrame = _originalFileFormat.mChannelsPerFrame;
+    _currentFileFormat.mFramesPerPacket = 1;
+    _currentFileFormat.mBytesPerFrame =
+    _currentFileFormat.mBitsPerChannel / 8 * _currentFileFormat.mChannelsPerFrame;
+    _currentFileFormat.mBytesPerPacket =
+    _currentFileFormat.mBytesPerFrame * _currentFileFormat.mFramesPerPacket;
 }
 
 #pragma mark Getter
 
 - (float)timeLength {
-    return (float)frames / originalFileFormat.mSampleRate;
+    return (float)self.frames / self.originalFileFormat.mSampleRate;
 }
 
 - (id)initWithFile:(NSString*)filepath error:(NSError**)error {

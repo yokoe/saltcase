@@ -10,8 +10,6 @@
 
 @interface SYExtAudioFile : NSObject {
     ExtAudioFileRef audioFileRef;
-    AudioStreamBasicDescription fileFormat;
-    SInt64 frames;
 }
 @property (readonly) AudioStreamBasicDescription fileFormat;
 @property (readonly) SInt64 frames;

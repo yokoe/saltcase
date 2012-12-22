@@ -8,12 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface SYLinearPCMData : NSObject {
-    AudioStreamBasicDescription originalFileFormat;
-    AudioStreamBasicDescription currentFileFormat;
-    SInt64 frames;
-    float* signal;
-}
+@interface SYLinearPCMData : NSObject
 @property (readonly) AudioStreamBasicDescription currentFileFormat;
 @property (readonly) AudioStreamBasicDescription originalFileFormat;
 @property (readonly) SInt64 frames;
