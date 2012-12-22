@@ -29,6 +29,7 @@
 @property (weak) IBOutlet NSTextField *barsText;
 @property (weak) IBOutlet NSStepper *barsStepper;
 @property (weak) IBOutlet NSScrollView *scrollView;
+@property (weak) IBOutlet NSView *mainView;
 @property (weak) IBOutlet NSScrollView *keyboardScroll;
 @property (strong) SCMetronome* metronome;
 - (void)exportWithStyle:(SCExportStyle)style;

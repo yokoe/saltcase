@@ -70,7 +70,7 @@
     pianoRollXScaleSlider.maxValue = kSCPianoRollHorizontalMaxGridInterval;
     pianoRollXScaleSlider.minValue = kSCPianoRollHorizontalMinGridInterval;
     [pianoRollXScaleSlider setFloatValue:kSCPianoRollHorizontalGridInterval]; // TODO: Restore setting.
-    [keyboardScroll.documentView addSubview:pianoRollXScaleSlider];
+    [self.mainView addSubview:pianoRollXScaleSlider];
     [pianoRollXScaleSlider setTarget:self];
     [pianoRollXScaleSlider setAction:@selector(pianoRollXScaleSliderDidUpdate:)];
     
