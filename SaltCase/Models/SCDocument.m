@@ -10,7 +10,6 @@
 #import "SCAppController.h"
 #import "SCCompositionController.h"
 #import "SCNote.h"
-#import "SBJson.h"
 #import "SCAudioEvent.h"
 #import "SCPitchUtil.h"
 
@@ -170,10 +169,9 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
 {
     return YES;
 }
-
-- (BOOL)writeToFile:(NSString *)fileName ofType:(NSString *)type {
+- (NSData*)dataOfType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
     NSMutableDictionary* dictionary = [NSMutableDictionary dictionary];
-    NSMutableDictionary* header = [NSMutableDictionary dictionary];    
+    NSMutableDictionary* header = [NSMutableDictionary dictionary];
     [dictionary setObject:header forKey:@"header"];
     
     [header setObject:[NSNumber numberWithFloat:self.tempo] forKey:@"tempo"];
@@ -186,54 +184,43 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
     [dictionary setObject:noteDictionaries forKey:@"notes"];
     
     NSError* error = nil;
-    if ([[dictionary JSONRepresentation] writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:&error]) {
-        return YES;
+    NSData* data = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];
+    if (error == nil) {
+        return data;
     } else {
-        NSLog(@"Failed to write to file.\nFileName: %@\nError: %@", fileName, error);
-        return NO;
+        NSLog(@"Failed to prepare data.");
+        return nil;
     }
 }
-
-- (BOOL)readFromFile:(NSString *)fileName ofType:(NSString *)type {
+- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
     NSError* error = nil;
-    NSString* jsonString = [NSString stringWithContentsOfFile:fileName encoding:NSUTF8StringEncoding error:&error];
-    if (!error) {
-        if (jsonString) {
-            NSDictionary* dictionary = [jsonString JSONValue];
-            if (dictionary) {
-                NSDictionary* header = [dictionary objectForKey:@"header"];
-                if (header) {
-                    NSNumber* tempoValue = [header objectForKey:@"tempo"];
-                    if (tempoValue) self.tempo = tempoValue.floatValue;
-                    
-                    NSNumber* barsValue = [header objectForKey:@"bars"];
-                    if (barsValue) self.bars = barsValue.integerValue;
-                } else {
-                    NSLog(@"Header section not found.\n%@", jsonString);
-                    return NO;
-                }
-                
-                NSArray* noteArray = [dictionary objectForKey:@"notes"];
-                if (noteArray) {
-                    NSMutableArray* notes_ = [NSMutableArray array];
-                    for (NSDictionary* noteDictionary in noteArray) {
-                        SCNote* note = [[SCNote alloc] initWithDictionary:noteDictionary];
-                        [notes_ addObject:note];
-                    }
-                    self.notes = notes_;
-                }
-                
-                return YES;
-            } else {
-                NSLog(@"JSON parse error.");
-                return NO;
-            }
+    NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    if (dictionary) {
+        NSDictionary* header = [dictionary objectForKey:@"header"];
+        if (header) {
+            NSNumber* tempoValue = [header objectForKey:@"tempo"];
+            if (tempoValue) self.tempo = tempoValue.floatValue;
+            
+            NSNumber* barsValue = [header objectForKey:@"bars"];
+            if (barsValue) self.bars = barsValue.integerValue;
         } else {
-            NSLog(@"JSON string is nil.");
+            NSLog(@"Header section not found.\n%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             return NO;
         }
+        
+        NSArray* noteArray = [dictionary objectForKey:@"notes"];
+        if (noteArray) {
+            NSMutableArray* notes_ = [NSMutableArray array];
+            for (NSDictionary* noteDictionary in noteArray) {
+                SCNote* note = [[SCNote alloc] initWithDictionary:noteDictionary];
+                [notes_ addObject:note];
+            }
+            self.notes = notes_;
+        }
+        
+        return YES;
     } else {
-        NSLog(@"Failed to read from file.\nFileName: %@\nError: %@", fileName, error);
+        NSLog(@"JSON parse error.");
         return NO;
     }
 }
