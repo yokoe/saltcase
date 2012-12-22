@@ -64,13 +64,17 @@
     SCKeyboardView* keyboard = [[SCKeyboardView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, keyboardScroll.contentView.frame.size.width, maxHeight)];
     keyboardScroll.documentView = keyboard;
     
-    pianoRollXScaleSlider = [[NSSlider alloc] initWithFrame:CGRectMake(0.0f, 0.0f, keyboardScroll.frame.size.width, 20.0f)];
+    float pianoSliderHeight = scrollView.horizontalScroller.frame.size.height;
+    
+    pianoRollXScaleSlider = [[NSSlider alloc] initWithFrame:CGRectMake(0.0f, 0.0f, keyboardScroll.frame.size.width, pianoSliderHeight)];
     pianoRollXScaleSlider.maxValue = kSCPianoRollHorizontalMaxGridInterval;
     pianoRollXScaleSlider.minValue = kSCPianoRollHorizontalMinGridInterval;
     [pianoRollXScaleSlider setFloatValue:kSCPianoRollHorizontalGridInterval]; // TODO: Restore setting.
     [keyboardScroll.documentView addSubview:pianoRollXScaleSlider];
     [pianoRollXScaleSlider setTarget:self];
     [pianoRollXScaleSlider setAction:@selector(pianoRollXScaleSliderDidUpdate:)];
+    
+    keyboardScroll.frame = CGRectMake(0.0f, keyboardScroll.frame.origin.y + pianoSliderHeight, keyboardScroll.frame.size.width, keyboardScroll.frame.size.height - pianoSliderHeight);
     
     // Synchronize scrolling between the piano roll and the keyboard view.
     // http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/NSScrollViewGuide/Articles/SynchroScroll.html
@@ -81,7 +85,10 @@
     keyboard.vocalLine = vocalLine;
     
     // Scroll to initial point.
-    [keyboardScroll.contentView scrollToPoint:NSMakePoint(0.0f, kSCNoteLineHeight * 12)];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [keyboardScroll.contentView scrollToPoint:NSMakePoint(0.0f, kSCNoteLineHeight * 12)];
+    });
+    
 
 }
 - (void)dealloc
