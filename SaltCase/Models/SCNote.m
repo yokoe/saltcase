@@ -12,10 +12,10 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        self.startsAt = [[dictionary objectForKey:@"startsAt"] floatValue];
-        self.length = [[dictionary objectForKey:@"length"] floatValue];
-        self.pitch = [[dictionary objectForKey:@"pitch"] intValue];
-        self.text = [dictionary objectForKey:@"text"];
+        self.startsAt = [dictionary[@"startsAt"] floatValue];
+        self.length = [dictionary[@"length"] floatValue];
+        self.pitch = [dictionary[@"pitch"] intValue];
+        self.text = dictionary[@"text"];
     }
     return self;
 }

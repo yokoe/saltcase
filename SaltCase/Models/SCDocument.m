@@ -194,19 +194,19 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
     NSError* error = nil;
     NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
     if (dictionary) {
-        NSDictionary* header = [dictionary objectForKey:@"header"];
+        NSDictionary* header = dictionary[@"header"];
         if (header) {
-            NSNumber* tempoValue = [header objectForKey:@"tempo"];
+            NSNumber* tempoValue = header[@"tempo"];
             if (tempoValue) self.tempo = tempoValue.floatValue;
             
-            NSNumber* barsValue = [header objectForKey:@"bars"];
+            NSNumber* barsValue = header[@"bars"];
             if (barsValue) self.bars = barsValue.integerValue;
         } else {
             NSLog(@"Header section not found.\n%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             return NO;
         }
         
-        NSArray* noteArray = [dictionary objectForKey:@"notes"];
+        NSArray* noteArray = dictionary[@"notes"];
         if (noteArray) {
             NSMutableArray* notes_ = [NSMutableArray array];
             for (NSDictionary* noteDictionary in noteArray) {

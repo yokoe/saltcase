@@ -31,9 +31,9 @@
         NSDictionary* noteMappings = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NoteMap" ofType:@"plist"]];
         NSMutableArray* names = [NSMutableArray array];
         NSMutableArray* cofficients = [NSMutableArray array];
-        for (NSDictionary* note in [noteMappings objectForKey:@"Notes"]) {
-            [names addObject:[note objectForKey:@"Name"]];
-            [cofficients addObject:[note objectForKey:@"Frequency"]];
+        for (NSDictionary* note in noteMappings[@"Notes"]) {
+            [names addObject:note[@"Name"]];
+            [cofficients addObject:note[@"Frequency"]];
         }
         self.keyNames = names;
         self.keyCofficients = cofficients;

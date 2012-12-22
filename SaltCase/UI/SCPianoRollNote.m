@@ -95,7 +95,7 @@ typedef enum {
         
         // Set the default character
         NSDictionary* defaultEntries = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DefaultSettings" ofType:@"plist"]];
-        textField.stringValue = [defaultEntries objectForKey:@"DefaultCharacter"];
+        textField.stringValue = defaultEntries[@"DefaultCharacter"];
         
         [self addSubview:textField];
         
