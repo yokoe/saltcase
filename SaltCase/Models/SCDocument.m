@@ -44,10 +44,8 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
 };
 
 @implementation SCDocument
-@synthesize controller;
 @synthesize tempo = tempo_;
 @synthesize bars = bars_;
-@synthesize notes;
 
 - (void)setTempo:(float)tempo {
     // Range limitation: 40.0f - 320.0f
@@ -60,7 +58,7 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
 - (SCNote*)noteAfter:(SCNote*)noteBefore {
     SCNote* nextNote = nil;
     BOOL isNext = NO;
-    for (SCNote* note in [notes sortedArrayUsingComparator:noteSortComparator]) {
+    for (SCNote* note in [self.notes sortedArrayUsingComparator:noteSortComparator]) {
         if (isNext) return note;
         if (note == noteBefore) isNext = YES;
     }

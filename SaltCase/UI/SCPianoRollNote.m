@@ -67,7 +67,6 @@ typedef enum {
 @end
 
 @implementation SCPianoRollNote
-@synthesize delegate;
 
 - (id)initWithFrame:(NSRect)frame
 {

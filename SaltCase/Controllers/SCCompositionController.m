@@ -32,22 +32,6 @@
 @end
 
 @implementation SCCompositionController
-@synthesize composition;
-@synthesize playButton;
-@synthesize stopButton;
-@synthesize timeLabel;
-@synthesize settingsButton;
-@synthesize progressBar;
-@synthesize progressPanel;
-@synthesize settingsSheet;
-@synthesize window;
-@synthesize tempoSlider;
-@synthesize tempoLabel;
-@synthesize barsText;
-@synthesize barsStepper;
-@synthesize scrollView;
-@synthesize keyboardScroll;
-@synthesize metronome;
 @synthesize events = events_;
 
 - (void)awakeFromNib {
@@ -58,15 +42,15 @@
     float maxHeight = kSCNumOfRows * kSCNoteLineHeight;
     pianoRoll = [[SCPianoRoll alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 2000.f, maxHeight)];
     pianoRoll.delegate = self;
-    if (composition.notes) [pianoRoll loadNotes:composition.notes];
-    scrollView.documentView = pianoRoll;
+    if (self.composition.notes) [pianoRoll loadNotes:self.composition.notes];
+    self.scrollView.documentView = pianoRoll;
     
-    SCKeyboardView* keyboard = [[SCKeyboardView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, keyboardScroll.contentView.frame.size.width, maxHeight)];
-    keyboardScroll.documentView = keyboard;
+    SCKeyboardView* keyboard = [[SCKeyboardView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, self.keyboardScroll.contentView.frame.size.width, maxHeight)];
+    self.keyboardScroll.documentView = keyboard;
     
-    float pianoSliderHeight = scrollView.horizontalScroller.frame.size.height;
+    float pianoSliderHeight = self.scrollView.horizontalScroller.frame.size.height;
     
-    pianoRollXScaleSlider = [[NSSlider alloc] initWithFrame:CGRectMake(0.0f, 0.0f, keyboardScroll.frame.size.width, pianoSliderHeight)];
+    pianoRollXScaleSlider = [[NSSlider alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.keyboardScroll.frame.size.width, pianoSliderHeight)];
     pianoRollXScaleSlider.maxValue = kSCPianoRollHorizontalMaxGridInterval;
     pianoRollXScaleSlider.minValue = kSCPianoRollHorizontalMinGridInterval;
     [pianoRollXScaleSlider setFloatValue:kSCPianoRollHorizontalGridInterval]; // TODO: Restore setting.
@@ -74,19 +58,19 @@
     [pianoRollXScaleSlider setTarget:self];
     [pianoRollXScaleSlider setAction:@selector(pianoRollXScaleSliderDidUpdate:)];
     
-    keyboardScroll.frame = CGRectMake(0.0f, keyboardScroll.frame.origin.y + pianoSliderHeight, keyboardScroll.frame.size.width, keyboardScroll.frame.size.height - pianoSliderHeight);
+    self.keyboardScroll.frame = CGRectMake(0.0f, self.keyboardScroll.frame.origin.y + pianoSliderHeight, self.keyboardScroll.frame.size.width, self.keyboardScroll.frame.size.height - pianoSliderHeight);
     
     // Synchronize scrolling between the piano roll and the keyboard view.
     // http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/NSScrollViewGuide/Articles/SynchroScroll.html
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pianoRollDidScroll:) name:NSViewBoundsDidChangeNotification object:scrollView.contentView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardViewDidScroll:) name:NSViewBoundsDidChangeNotification object:keyboardScroll.contentView];    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pianoRollDidScroll:) name:NSViewBoundsDidChangeNotification object:self.scrollView.contentView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardViewDidScroll:) name:NSViewBoundsDidChangeNotification object:self.keyboardScroll.contentView];
     NSString* sampleVoiceDirectory = [[NSBundle mainBundle] pathForResource:@"sample" ofType:nil];
     vocalLine = [[SCMultiSampler alloc] initWithContentsOfDirectoryAtPath:sampleVoiceDirectory];
     keyboard.vocalLine = vocalLine;
     
     // Scroll to initial point.
     dispatch_async(dispatch_get_main_queue(), ^{
-        [keyboardScroll.contentView scrollToPoint:NSMakePoint(0.0f, kSCNoteLineHeight * 12)];
+        [self.keyboardScroll.contentView scrollToPoint:NSMakePoint(0.0f, kSCNoteLineHeight * 12)];
     });
     
 
@@ -107,7 +91,7 @@
             float timeIntervalPerBeat = (60.0f / self.composition.tempo);
             int beats = (int)floor(player.timeElapsed / timeIntervalPerBeat);
             
-            [timeLabel setStringValue:[NSString stringWithFormat:@"%02d:%06.3f - %03d/%d %.2f|%.2f", (int)floor(player.timeElapsed / 60), player.timeElapsed - (int)floor(player.timeElapsed / 60) * 60 , beats / 4, beats % 4,
+            [self.timeLabel setStringValue:[NSString stringWithFormat:@"%02d:%06.3f - %03d/%d %.2f|%.2f", (int)floor(player.timeElapsed / 60), player.timeElapsed - (int)floor(player.timeElapsed / 60) * 60 , beats / 4, beats % 4,
                                        [player levelForChannel:0], [player levelForChannel:1]]];
             
             [pianoRoll moveBarToTiming:player.timeElapsed / timeIntervalPerBeat];
@@ -119,27 +103,27 @@
     NSClipView *changedContentView = note.object;
     NSPoint changedBoundsOrigin = changedContentView.documentVisibleRect.origin;
     changedBoundsOrigin.x = 0.0f;
-    [keyboardScroll.contentView scrollToPoint:changedBoundsOrigin];
-    [keyboardScroll reflectScrolledClipView:keyboardScroll.contentView];
+    [self.keyboardScroll.contentView scrollToPoint:changedBoundsOrigin];
+    [self.keyboardScroll reflectScrolledClipView:self.keyboardScroll.contentView];
 }
 - (void)keyboardViewDidScroll:(NSNotification*)note {
     NSClipView *changedContentView = note.object;
     NSPoint changedBoundsOrigin = changedContentView.documentVisibleRect.origin;
-    changedBoundsOrigin.x = scrollView.contentView.bounds.origin.x;
-    [scrollView.contentView scrollToPoint:changedBoundsOrigin];
-    [scrollView reflectScrolledClipView:scrollView.contentView];
+    changedBoundsOrigin.x = self.scrollView.contentView.bounds.origin.x;
+    [self.scrollView.contentView scrollToPoint:changedBoundsOrigin];
+    [self.scrollView reflectScrolledClipView:self.scrollView.contentView];
 }
 
 #pragma mark -
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem {
-    if (theItem == playButton) {
+    if (theItem == self.playButton) {
         return ([SCAppController sharedInstance].currentlyPlaying == nil);
     }
-    if (theItem == stopButton) {
+    if (theItem == self.stopButton) {
         return ([SCAppController sharedInstance].currentlyPlaying != nil);
     }
-    if (theItem == settingsButton) {
+    if (theItem == self.settingsButton) {
         // Disabled while the song is playing.
         return ([SCAppController sharedInstance].currentlyPlaying != self);
     }
@@ -224,14 +208,14 @@
 }
 - (IBAction)playComposition:(id)sender {
     [self.metronome reset];
-    self.metronome.tempo = composition.tempo;
+    self.metronome.tempo = self.composition.tempo;
     
     [self prepareForPlay];
     
     if ([[SCAppController sharedInstance] playComposition:self]) {
-        NSLog(@"Started playing %@", composition);
+        NSLog(@"Started playing %@", self.composition);
     } else {
-        NSLog(@"Failed to start playing %@.\nCurrently playing: %@", composition, [SCAppController sharedInstance].currentlyPlaying);
+        NSLog(@"Failed to start playing %@.\nCurrently playing: %@", self.composition, [SCAppController sharedInstance].currentlyPlaying);
     }
 }
 - (IBAction)stopComposition:(id)sender {
@@ -246,19 +230,19 @@
         if (result == NSFileHandlingPanelOKButton) {
             SCExporter* exporter = [[SCExporter alloc] initWithURL:savePanel.URL style:style];
             exporter.renderer = self;
-            exporter.numOfFrames = [SCAppController sharedInstance].synth.samplingFrameRate * composition.lengthInSeconds;
+            exporter.numOfFrames = [SCAppController sharedInstance].synth.samplingFrameRate * self.composition.lengthInSeconds;
             [self prepareForPlay];
             [exporter exportWithSynth:[SCAppController sharedInstance].synth completionHandler:^{
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSApplication sharedApplication] endSheet:progressPanel];
+                    [[NSApplication sharedApplication] endSheet:self.progressPanel];
                 });
             } updateHandler:^(int framesWrote) {
-                progressBar.maxValue = exporter.numOfFrames;
-                progressBar.doubleValue = framesWrote;
+                self.progressBar.maxValue = exporter.numOfFrames;
+                self.progressBar.doubleValue = framesWrote;
             }];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSApplication sharedApplication] beginSheet:progressPanel modalForWindow:window modalDelegate:self didEndSelector:@selector(exportProgressPanelDidEnd:returnCode:contextInfo:) contextInfo:nil];
+                [[NSApplication sharedApplication] beginSheet:self.progressPanel modalForWindow:self.window modalDelegate:self didEndSelector:@selector(exportProgressPanelDidEnd:returnCode:contextInfo:) contextInfo:nil];
             });   
         }
     }];
@@ -269,18 +253,18 @@
 
 #pragma mark Settings
 - (IBAction)openSettings:(id)sender {
-    [tempoSlider setFloatValue:composition.tempo];
-    [tempoLabel takeFloatValueFrom:tempoSlider];
+    [self.tempoSlider setFloatValue:self.composition.tempo];
+    [self.tempoLabel takeFloatValueFrom:self.tempoSlider];
     
-    [barsText setIntegerValue:composition.bars];
-    [barsStepper takeIntegerValueFrom:barsText];
+    [self.barsText setIntegerValue:self.composition.bars];
+    [self.barsStepper takeIntegerValueFrom:self.barsText];
     
-    [[NSApplication sharedApplication] beginSheet:settingsSheet modalForWindow:window modalDelegate:self didEndSelector:@selector(settingsSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    [[NSApplication sharedApplication] beginSheet:self.settingsSheet modalForWindow:self.window modalDelegate:self didEndSelector:@selector(settingsSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 - (IBAction)closeSettings:(id)sender {
-    composition.tempo = tempoSlider.floatValue;
-    composition.bars = barsStepper.integerValue;
-    [[NSApplication sharedApplication] endSheet:settingsSheet];
+    self.composition.tempo = self.tempoSlider.floatValue;
+    self.composition.bars = self.barsStepper.integerValue;
+    [[NSApplication sharedApplication] endSheet:self.settingsSheet];
     
     [self resizePianoRoll];
 }
@@ -290,7 +274,7 @@
 
 #pragma mark Editor
 - (void)pianoRollDidUpdate:(id)sender {
-    composition.notes = ((SCPianoRoll*)sender).notes;
+    self.composition.notes = ((SCPianoRoll*)sender).notes;
 }
 - (void)pianoRollXScaleSliderDidUpdate:(id)sender {
     pianoRoll.gridHorizontalInterval = [sender floatValue];
@@ -298,7 +282,7 @@
 }
 - (void)resizePianoRoll {
     CGRect originalFrame = pianoRoll.frame;
-    originalFrame.size.width = pianoRoll.gridHorizontalInterval * 4 * composition.bars;
+    originalFrame.size.width = pianoRoll.gridHorizontalInterval * 4 * self.composition.bars;
     pianoRoll.frame = originalFrame;
 }
 @end

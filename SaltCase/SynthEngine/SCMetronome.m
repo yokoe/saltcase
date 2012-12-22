@@ -20,11 +20,10 @@
 @end
 
 @implementation SCMetronome
-@synthesize tempo;
 - (void)renderToBuffer:(float*)buffer numOfPackets:(UInt32)numOfPackets player:(SCSynth*)player {
     int currentPacket = player.renderedPackets;
     
-    int packetsInterval = (60.0f / tempo) * player.samplingFrameRate;
+    int packetsInterval = (60.0f / self.tempo) * player.samplingFrameRate;
     
     float *buf = buffer;
     
@@ -49,6 +48,6 @@
 
 - (void)reset {
     nextPacket = 0;
-    tempo = 120.0f;
+    self.tempo = 120.0f;
 }
 @end

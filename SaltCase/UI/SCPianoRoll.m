@@ -21,11 +21,11 @@
 @end
 
 @implementation SCPianoRoll
-@synthesize delegate, gridHorizontalInterval = gridHorizontalInterval_, noteViews, selectedNote, timingBar;
+@synthesize gridHorizontalInterval = gridHorizontalInterval_;
 
 - (NSArray*)notes {
     NSMutableArray* notes = [NSMutableArray array];
-    for (SCPianoRollNote* noteView in noteViews) {
+    for (SCPianoRollNote* noteView in self.noteViews) {
         SCNote* note = [[SCNote alloc] init];
         note.startsAt = noteView.frame.origin.x / self.gridHorizontalInterval;
         note.length = noteView.frame.size.width / self.gridHorizontalInterval;
@@ -135,7 +135,7 @@
 }
 - (void)noteToBeRemoved:(SCPianoRollNote *)note {
     [note removeFromSuperview];
-    [noteViews removeObject:note];
+    [self.noteViews removeObject:note];
 }
 
 #pragma mark Mouse events

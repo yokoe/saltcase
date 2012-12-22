@@ -9,8 +9,6 @@
 #import "SCNote.h"
 
 @implementation SCNote
-@synthesize startsAt, length, pitch, text;
-
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
@@ -23,17 +21,17 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation {
-    return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:startsAt], @"startsAt", 
-            [NSNumber numberWithFloat:length], @"length", 
-            [NSNumber numberWithInt:pitch], @"pitch", 
+    return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:self.startsAt], @"startsAt", 
+            [NSNumber numberWithFloat:self.length], @"length", 
+            [NSNumber numberWithInt:self.pitch], @"pitch", 
             self.text ? self.text : @"", @"text", nil];
 }
 - (NSString*)description { return [[self dictionaryRepresentation] description]; }
 
 - (NSTimeInterval)startsAtSecondsInTempo:(float)tempo {
-    return startsAt * 60.0f / tempo;
+    return self.startsAt * 60.0f / tempo;
 }
 - (NSTimeInterval)endsAtSecondsInTempo:(float)tempo {
-    return (startsAt + length) * 60.0f / tempo;
+    return (self.startsAt + self.length) * 60.0f / tempo;
 }
 @end

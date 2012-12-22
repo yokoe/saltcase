@@ -14,8 +14,6 @@
 @end
 
 @implementation SCPitchUtil
-@synthesize keyCofficients, keyNames;
-
 + (SCPitchUtil*)sharedInstance
 {
     static dispatch_once_t once;

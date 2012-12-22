@@ -23,7 +23,6 @@
 @end
 
 @implementation SCKeyboardView
-@synthesize keyCofficients, keyNames, vocalLine;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -64,8 +63,8 @@
 
 - (void)deselectKey {
     [self selectKey:-1];
-    if (vocalLine && [vocalLine isKindOfClass:[SCVocalInstrument class]]) {
-        [vocalLine off];
+    if (self.vocalLine && [self.vocalLine isKindOfClass:[SCVocalInstrument class]]) {
+        [self.vocalLine off];
     }
     if ([SCAppController sharedInstance].currentlyPlaying == self) {
         [[SCAppController sharedInstance] stopComposition:self];
@@ -99,8 +98,8 @@
 }
 
 - (void)renderBuffer:(float *)buffer numOfPackets:(UInt32)numOfPackets sender:(SCSynth *)sender {
-    if (vocalLine && [vocalLine isKindOfClass:[SCVocalInstrument class]]) {
-        SCVocalInstrument* generator = vocalLine;
+    if (self.vocalLine && [self.vocalLine isKindOfClass:[SCVocalInstrument class]]) {
+        SCVocalInstrument* generator = self.vocalLine;
         generator.frequency = [SCPitchUtil frequencyOfPitch:selectedKey];
         [generator onWithVelocity:0.5f];
         [generator renderToBuffer:buffer numOfPackets:numOfPackets sender:sender];

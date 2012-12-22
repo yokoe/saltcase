@@ -30,8 +30,6 @@ const float fadeOutDelta = -0.0001f;
 @end
 
 @implementation SCSimpleSampler
-@synthesize baseFrequency;
-
 - (id)initWithFile:(NSString*)filePath baseFrequency:(float)frequency {
     self = [super init];
     if (self) {
@@ -42,7 +40,7 @@ const float fadeOutDelta = -0.0001f;
             self = nil;
             return nil;
         }
-        baseFrequency = frequency;
+        self.baseFrequency = frequency;
     }
     return self;
 }
@@ -71,7 +69,7 @@ const float fadeOutDelta = -0.0001f;
 - (void)renderToBuffer:(float *)buffer numOfPackets:(int)numOfPackets sender:(SCSynth *)sender {
     float* buf = buffer;
     float* samples = audioFile.signal;
-    float delta = targetFrequency / baseFrequency;
+    float delta = targetFrequency / self.baseFrequency;
     
     // TODO: Optimize
     int quarterSamples = (int)round((float)audioFile.frames / 4.0f);

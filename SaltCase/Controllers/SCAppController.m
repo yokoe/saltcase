@@ -6,7 +6,6 @@
 @end
 
 @implementation SCAppController
-@synthesize currentlyPlaying, synth;
 + (SCAppController*)sharedInstance
 {
     static dispatch_once_t once;
