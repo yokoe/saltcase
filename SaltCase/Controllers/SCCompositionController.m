@@ -224,7 +224,7 @@
 #pragma mark Export
 - (void)exportWithStyle:(SCExportStyle)style {
     NSSavePanel* savePanel = [NSSavePanel savePanel];
-    savePanel.allowedFileTypes = [NSArray arrayWithObjects:@"wav", @"aiff", @"m4a", nil];
+    savePanel.allowedFileTypes = @[@"wav", @"aiff", @"m4a"];
     [savePanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             SCExporter* exporter = [[SCExporter alloc] initWithURL:savePanel.URL style:style];

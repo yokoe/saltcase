@@ -170,16 +170,16 @@ NSComparisonResult (^eventSortComparator)(id,id) = ^(id obj1, id obj2) {
 - (NSData*)dataOfType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
     NSMutableDictionary* dictionary = [NSMutableDictionary dictionary];
     NSMutableDictionary* header = [NSMutableDictionary dictionary];
-    [dictionary setObject:header forKey:@"header"];
+    dictionary[@"header"] = header;
     
-    [header setObject:[NSNumber numberWithFloat:self.tempo] forKey:@"tempo"];
-    [header setObject:[NSNumber numberWithInt:self.bars] forKey:@"bars"];
+    header[@"tempo"] = @(self.tempo);
+    header[@"bars"] = @(self.bars);
     
     NSMutableArray* noteDictionaries = [NSMutableArray array];
     for (SCNote* note in self.notes) {
         [noteDictionaries addObject:[note dictionaryRepresentation]];
     }
-    [dictionary setObject:noteDictionaries forKey:@"notes"];
+    dictionary[@"notes"] = noteDictionaries;
     
     NSError* error = nil;
     NSData* data = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];

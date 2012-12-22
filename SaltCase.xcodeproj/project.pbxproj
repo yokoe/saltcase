@@ -405,7 +405,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SC;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Pankaku Inc.";
 			};
 			buildConfigurationList = 196B167A15A93CDF008E59D0 /* Build configuration list for PBXProject "SaltCase" */;
@@ -626,6 +626,7 @@
 		196B16B915A93CE0008E59D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SaltCase/SaltCase-Prefix.pch";
 				INFOPLIST_FILE = "SaltCase/SaltCase-Info.plist";
@@ -637,6 +638,7 @@
 		196B16BA15A93CE0008E59D0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SaltCase/SaltCase-Prefix.pch";
 				INFOPLIST_FILE = "SaltCase/SaltCase-Info.plist";
@@ -649,6 +651,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SaltCase.app/Contents/MacOS/SaltCase";
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SaltCase/SaltCase-Prefix.pch";
@@ -663,6 +666,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SaltCase.app/Contents/MacOS/SaltCase";
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SaltCase/SaltCase-Prefix.pch";

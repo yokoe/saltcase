@@ -21,10 +21,10 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation {
-    return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:self.startsAt], @"startsAt", 
-            [NSNumber numberWithFloat:self.length], @"length", 
-            [NSNumber numberWithInt:self.pitch], @"pitch", 
-            self.text ? self.text : @"", @"text", nil];
+    return @{@"startsAt": @(self.startsAt), 
+            @"length": @(self.length), 
+            @"pitch": @(self.pitch), 
+            @"text": self.text ? self.text : @""};
 }
 - (NSString*)description { return [[self dictionaryRepresentation] description]; }
 
