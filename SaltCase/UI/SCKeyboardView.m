@@ -43,7 +43,7 @@
     float y = 0.0f;
     int i = 0;
     while (y <= self.frame.size.height) {
-        NSString* keyName = [self.keyNames objectAtIndex:i % self.keyNames.count]; // A, B, C, C#...
+        NSString* keyName = self.keyNames[i % self.keyNames.count]; // A, B, C, C#...
         int octave = i / self.keyNames.count;
         if (i == selectedKey) {
             [[NSColor whiteColor] set];

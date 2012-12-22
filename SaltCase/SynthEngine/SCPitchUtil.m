@@ -46,7 +46,7 @@
     if (pitch < 0) return 0.0f;
     NSArray* keyCofficients = [self keyCofficients];
     int octave = (pitch / keyCofficients.count) + kSCDefaultOctaveOffset;
-    return kSCLowestCFrequency * [[keyCofficients objectAtIndex:pitch % keyCofficients.count] floatValue] * pow(2, octave);
+    return kSCLowestCFrequency * [keyCofficients[pitch % keyCofficients.count] floatValue] * pow(2, octave);
 }
 + (NSArray*)keyCofficients { return [self sharedInstance].keyCofficients; }
 + (NSArray*)keyNames { return [self sharedInstance].keyNames; }

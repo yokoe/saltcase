@@ -132,7 +132,7 @@
 #pragma mark Audio
 - (SCAudioEvent*)nextEvent {
     if (nextEventIndex < self.events.count) {
-        return [self.events objectAtIndex:nextEventIndex];
+        return self.events[nextEventIndex];
     } else {
         return nil;
     }
